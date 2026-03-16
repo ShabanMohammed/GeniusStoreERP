@@ -1,0 +1,77 @@
+<Window x:Class="GeniusStoreERP.UI.Views.MessageBoxView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GeniusStoreERP.UI.Views"
+        mc:Ignorable="d"
+        FlowDirection="RightToLeft"
+        Title="{Binding Title}" 
+        Height="Auto" 
+        Width="400"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen" 
+        SizeToContent="Height" 
+        ShowInTaskbar="False">
+    
+    <Border Style="{StaticResource UnifiedCardStyle}" Margin="20">
+        <StackPanel>
+            <!-- Header Section -->
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Path Data="{Binding IconKey, Converter={StaticResource ResourceKeyToDataConverter}}" 
+                      Fill="{Binding StatusBrushKey, Converter={StaticResource ResourceKeyToBrushConverter}}"
+                      Width="40" Height="40" Stretch="Uniform" VerticalAlignment="Center"/>
+                
+                <TextBlock Grid.Column="1" Text="{Binding Title}" 
+                           Style="{StaticResource MainHeaderStyle}" 
+                           Margin="15,0,0,0" VerticalAlignment="Center" FontSize="20"/>
+            </Grid>
+
+            <!-- Message Content -->
+            <TextBlock Text="{Binding Message}" 
+                       Style="{StaticResource SubHeaderStyle}" 
+                       Foreground="{StaticResource MainContentTextBrush}"
+                       TextWrapping="Wrap" Margin="0,0,0,25" FontSize="15" LineHeight="22"/>
+
+            <!-- Buttons Section -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsConfirmation}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <Button Content="تم" Command="{Binding OkCommand}" 
+                        Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="100"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsConfirmation}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <Button Content="لا" Command="{Binding NoCommand}" 
+                        Background="#E0E0E0" Foreground="#2D3436"
+                        Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="100" Margin="0,0,10,0"/>
+                <Button Content="نعم" Command="{Binding YesCommand}" 
+                        Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="100"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>

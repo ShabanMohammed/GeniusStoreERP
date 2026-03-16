@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application x:Class="GeniusStoreERP.UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GeniusStoreERP.UI"
+             xmlns:common="clr-namespace:GeniusStoreERP.UI.Common">
+    <Application.Resources>
+        <ResourceDictionary>
+            <common:ResourceKeyToDataConverter x:Key="ResourceKeyToDataConverter" />
+            <common:ResourceKeyToBrushConverter x:Key="ResourceKeyToBrushConverter" />
+            
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="Styles/ColorsDictionary.xaml" />
+                <ResourceDictionary Source="Styles/IconsDictionary.xaml" />
+                <ResourceDictionary Source="Styles/SharedStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

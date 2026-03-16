@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="GeniusStoreERP.Application/GeniusStoreERP.Application.csproj" />
+  <Project Path="GeniusStoreERP.Domain/GeniusStoreERP.Domain.csproj" />
+  <Project Path="GeniusStoreERP.Infrastructure/GeniusStoreERP.Infrastructure.csproj" />
+  <Project Path="GeniusStoreERP.UI/GeniusStoreERP.UI.csproj" />
+</Solution>

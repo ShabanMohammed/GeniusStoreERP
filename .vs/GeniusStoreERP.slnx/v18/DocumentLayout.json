@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8BEF4A14-0DB3-DD55-86A6-A8BC70864D22}|GeniusStoreERP.UI\\GeniusStoreERP.UI.csproj|e:\\c#\\geniusstoreerp\\geniusstoreerp\\geniusstoreerp.ui\\common\\resourceconverters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BEF4A14-0DB3-DD55-86A6-A8BC70864D22}|GeniusStoreERP.UI\\GeniusStoreERP.UI.csproj|solutionrelative:geniusstoreerp.ui\\common\\resourceconverters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BEF4A14-0DB3-DD55-86A6-A8BC70864D22}|GeniusStoreERP.UI\\GeniusStoreERP.UI.csproj|e:\\c#\\geniusstoreerp\\geniusstoreerp\\geniusstoreerp.ui\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BEF4A14-0DB3-DD55-86A6-A8BC70864D22}|GeniusStoreERP.UI\\GeniusStoreERP.UI.csproj|solutionrelative:geniusstoreerp.ui\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 224,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ResourceConverters.cs",
+              "DocumentMoniker": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.UI\\Common\\ResourceConverters.cs",
+              "RelativeDocumentMoniker": "GeniusStoreERP.UI\\Common\\ResourceConverters.cs",
+              "ToolTip": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.UI\\Common\\ResourceConverters.cs",
+              "RelativeToolTip": "GeniusStoreERP.UI\\Common\\ResourceConverters.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-16T00:12:33.47Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.UI\\App.xaml.cs",
+              "RelativeDocumentMoniker": "GeniusStoreERP.UI\\App.xaml.cs",
+              "ToolTip": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.UI\\App.xaml.cs",
+              "RelativeToolTip": "GeniusStoreERP.UI\\App.xaml.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAgwCEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-15T23:59:29.756Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
