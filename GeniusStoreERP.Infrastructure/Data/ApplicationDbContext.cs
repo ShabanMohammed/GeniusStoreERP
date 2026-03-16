@@ -1,3 +1,4 @@
+using GeniusStoreERP.Application.Common.Interfaces;
 using GeniusStoreERP.Domain.Common;
 using GeniusStoreERP.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -5,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GeniusStoreERP.Infrastructure.Data;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -17,7 +18,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Order> Orders { get; set; }
 
-    public new DbSet<ApplicationUser> Users => Set<ApplicationUser>();
+    public new DbSet<ApplicationUser> Users { get; set; }
+
 
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

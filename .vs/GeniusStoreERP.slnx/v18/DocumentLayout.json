@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8BEF4A14-0DB3-DD55-86A6-A8BC70864D22}|GeniusStoreERP.UI\\GeniusStoreERP.UI.csproj|e:\\c#\\geniusstoreerp\\geniusstoreerp\\geniusstoreerp.ui\\common\\resourceconverters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BEF4A14-0DB3-DD55-86A6-A8BC70864D22}|GeniusStoreERP.UI\\GeniusStoreERP.UI.csproj|solutionrelative:geniusstoreerp.ui\\common\\resourceconverters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BDB10DDB-BD47-5C38-5414-F6B871EB9107}|GeniusStoreERP.Application\\GeniusStoreERP.Application.csproj|e:\\c#\\geniusstoreerp\\geniusstoreerp\\geniusstoreerp.application\\categories\\commands\\createcategory\\createcategorycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDB10DDB-BD47-5C38-5414-F6B871EB9107}|GeniusStoreERP.Application\\GeniusStoreERP.Application.csproj|solutionrelative:geniusstoreerp.application\\categories\\commands\\createcategory\\createcategorycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BEF4A14-0DB3-DD55-86A6-A8BC70864D22}|GeniusStoreERP.UI\\GeniusStoreERP.UI.csproj|e:\\c#\\geniusstoreerp\\geniusstoreerp\\geniusstoreerp.ui\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BEF4A14-0DB3-DD55-86A6-A8BC70864D22}|GeniusStoreERP.UI\\GeniusStoreERP.UI.csproj|solutionrelative:geniusstoreerp.ui\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC454690-5915-C90B-FCEE-68A2D189BD98}|GeniusStoreERP.Domain\\GeniusStoreERP.Domain.csproj|e:\\c#\\geniusstoreerp\\geniusstoreerp\\geniusstoreerp.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC454690-5915-C90B-FCEE-68A2D189BD98}|GeniusStoreERP.Domain\\GeniusStoreERP.Domain.csproj|solutionrelative:geniusstoreerp.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC454690-5915-C90B-FCEE-68A2D189BD98}|GeniusStoreERP.Domain\\GeniusStoreERP.Domain.csproj|e:\\c#\\geniusstoreerp\\geniusstoreerp\\geniusstoreerp.domain\\common\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC454690-5915-C90B-FCEE-68A2D189BD98}|GeniusStoreERP.Domain\\GeniusStoreERP.Domain.csproj|solutionrelative:geniusstoreerp.domain\\common\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 224,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,28 +30,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ResourceConverters.cs",
-              "DocumentMoniker": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.UI\\Common\\ResourceConverters.cs",
-              "RelativeDocumentMoniker": "GeniusStoreERP.UI\\Common\\ResourceConverters.cs",
-              "ToolTip": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.UI\\Common\\ResourceConverters.cs",
-              "RelativeToolTip": "GeniusStoreERP.UI\\Common\\ResourceConverters.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAjAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "BaseEntity.cs",
+              "DocumentMoniker": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.Domain\\Common\\BaseEntity.cs",
+              "RelativeDocumentMoniker": "GeniusStoreERP.Domain\\Common\\BaseEntity.cs",
+              "ToolTip": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.Domain\\Common\\BaseEntity.cs",
+              "RelativeToolTip": "GeniusStoreERP.Domain\\Common\\BaseEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-16T00:12:33.47Z",
+              "WhenOpened": "2026-03-16T16:55:24.586Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.UI\\App.xaml.cs",
-              "RelativeDocumentMoniker": "GeniusStoreERP.UI\\App.xaml.cs",
-              "ToolTip": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.UI\\App.xaml.cs",
-              "RelativeToolTip": "GeniusStoreERP.UI\\App.xaml.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAgwCEAAAAAAAAAAAAAAA==",
+              "Title": "Category.cs",
+              "DocumentMoniker": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.Domain\\Entities\\Category.cs",
+              "RelativeDocumentMoniker": "GeniusStoreERP.Domain\\Entities\\Category.cs",
+              "ToolTip": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.Domain\\Entities\\Category.cs",
+              "RelativeToolTip": "GeniusStoreERP.Domain\\Entities\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T23:59:29.756Z",
+              "WhenOpened": "2026-03-16T01:56:50.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CreateCategoryCommand.cs",
+              "DocumentMoniker": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.Application\\Categories\\Commands\\CreateCategory\\CreateCategoryCommand.cs",
+              "RelativeDocumentMoniker": "GeniusStoreERP.Application\\Categories\\Commands\\CreateCategory\\CreateCategoryCommand.cs",
+              "ToolTip": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.Application\\Categories\\Commands\\CreateCategory\\CreateCategoryCommand.cs",
+              "RelativeToolTip": "GeniusStoreERP.Application\\Categories\\Commands\\CreateCategory\\CreateCategoryCommand.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAADwvyIAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-16T01:55:46.153Z",
               "EditorCaption": ""
             }
           ]

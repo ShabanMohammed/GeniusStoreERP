@@ -1,7 +1,8 @@
 using GeniusStoreERP.UI.Common;
+using GeniusStoreERP.UI.Views;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GeniusStoreERP.UI.ViewModels;
 
@@ -46,18 +47,18 @@ public class MainViewModel : BaseViewModel
 
     public MainViewModel()
     {
-        LogoutCommand = new RelayCommand(_ => 
+        LogoutCommand = new RelayCommand(_ =>
         {
-            var loginView = App.ServiceProvider.GetRequiredService<Views.LoginView>();
+            var loginView = App.ServiceProvider.GetRequiredService<LoginView>();
             loginView.Show();
-            
+
             var currentWindow = System.Windows.Application.Current.MainWindow;
             System.Windows.Application.Current.MainWindow = loginView;
-            
+
             currentWindow?.Close();
         });
 
-        SelectNavItemCommand = new RelayCommand(p => 
+        SelectNavItemCommand = new RelayCommand(p =>
         {
             if (p is NavItem item)
             {
@@ -74,14 +75,14 @@ public class MainViewModel : BaseViewModel
     {
         var dashboardVm = App.ServiceProvider.GetRequiredService<DashboardViewModel>();
 
-        NavItems.Add(new NavItem 
-        { 
-            Title = "الرئيسية", 
-            IconKey = "IconHome", 
+        NavItems.Add(new NavItem
+        {
+            Title = "الرئيسية",
+            IconKey = "IconHome",
             IsSelected = true,
             TargetViewModel = dashboardVm
         });
-        
+
         NavItems.Add(new NavItem { Title = "المبيعات", IconKey = "IconSuccess" });
         NavItems.Add(new NavItem { Title = "المخازن", IconKey = "IconInformation" });
         NavItems.Add(new NavItem { Title = "المشتريات", IconKey = "IconSettings" });

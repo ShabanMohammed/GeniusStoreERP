@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Alit8RcFN4E=",
+  "dgSpecHash": "cbi00EZFUTY=",
   "success": true,
   "projectFilePath": "E:\\c#\\GeniusStoreERP\\GeniusStoreERP\\GeniusStoreERP.UI\\GeniusStoreERP.UI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\shaban\\.nuget\\packages\\automapper\\16.1.1\\automapper.16.1.1.nupkg.sha512",
     "C:\\Users\\shaban\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512",
     "C:\\Users\\shaban\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\12.1.1\\fluentvalidation.dependencyinjectionextensions.12.1.1.nupkg.sha512",
     "C:\\Users\\shaban\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

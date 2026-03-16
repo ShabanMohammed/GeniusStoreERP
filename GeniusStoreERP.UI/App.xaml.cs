@@ -1,8 +1,10 @@
 using FluentValidation;
 using GeniusStoreERP.Application.Behaviors;
+using GeniusStoreERP.Application.Common.Interfaces;
 using GeniusStoreERP.Application.Users.Commands.CreateUser;
 using GeniusStoreERP.Domain.Entities;
 using GeniusStoreERP.Infrastructure.Data;
+using GeniusStoreERP.UI.ViewModels;
 using GeniusStoreERP.UI.Views;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -35,6 +37,8 @@ namespace GeniusStoreERP.UI
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+
             // Identity registration
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -47,13 +51,13 @@ namespace GeniusStoreERP.UI
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             services.AddSingleton<LoginView>();
-            services.AddTransient<ViewModels.LoginViewModel>();
-            
-            services.AddSingleton<MainView>();
-            services.AddTransient<ViewModels.MainViewModel>();
+            services.AddTransient<LoginViewModel>();
 
-            services.AddTransient<Views.DashboardView>();
-            services.AddTransient<ViewModels.DashboardViewModel>();
+            services.AddSingleton<MainView>();
+            services.AddTransient<MainViewModel>();
+
+            services.AddTransient<DashboardView>();
+            services.AddTransient<DashboardViewModel>();
 
 
             // 7. بناء الـ ServiceProvider النهائي
