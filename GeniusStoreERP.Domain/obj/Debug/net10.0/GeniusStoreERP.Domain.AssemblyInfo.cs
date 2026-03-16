@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GeniusStoreERP.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f4cd001336841388548146055101385df2252499")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6dde8fbe8aca154fec78fc4ea9bb0d2adb012eac")]
 [assembly: System.Reflection.AssemblyProductAttribute("GeniusStoreERP.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GeniusStoreERP.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

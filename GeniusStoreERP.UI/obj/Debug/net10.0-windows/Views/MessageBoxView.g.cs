@@ -52,7 +52,7 @@ namespace GeniusStoreERP.UI.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GeniusStoreERP.UI;component/views/messageboxview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GeniusStoreERP.UI;V1.0.0.0;component/views/messageboxview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\MessageBoxView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

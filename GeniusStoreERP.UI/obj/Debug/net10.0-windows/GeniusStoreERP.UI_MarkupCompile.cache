@@ -1,5 +1,5 @@
 ﻿GeniusStoreERP.UI
-
+1.0.0.0
 
 winexe
 C#
@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_O
 E:\c#\GeniusStoreERP\GeniusStoreERP\GeniusStoreERP.UI\App.xaml
 7-2045776646
 
-171844625178
-277-1458536340
+19-1700551620
+278-254425075
 Styles\ColorsDictionary.xaml;Styles\IconsDictionary.xaml;Styles\SharedStyles.xaml;Views\DashboardView.xaml;Views\LoginView.xaml;Views\MainView.xaml;Views\MessageBoxView.xaml;
 
-False
+True
 
