@@ -2,8 +2,24 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Typography -->
+    <FontFamily x:Key="MainFontFamily">pack://application:,,,/Resources/Fonts/Cairo-Regular.ttf#Cairo</FontFamily>
+
+    <!-- Global Defaults -->
+    <Style TargetType="Window">
+        <Setter Property="FontFamily" Value="{StaticResource MainFontFamily}"/>
+    </Style>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource MainFontFamily}"/>
+    </Style>
+
+    <Style TargetType="Control">
+        <Setter Property="FontFamily" Value="{StaticResource MainFontFamily}"/>
+    </Style>
+
     <Style x:Key="MainHeaderStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontFamily" Value="{StaticResource MainFontFamily}"/>
+        <Setter Property="FontSize" Value="28"/>
         <Setter Property="FontWeight" Value="ExtraBold"/>
         <Setter Property="Foreground" Value="{StaticResource PrimaryHeaderBrush}"/>
         <Setter Property="Margin" Value="0,0,0,5"/>
@@ -16,7 +32,7 @@
     </Style>
 
     <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{StaticResource MainContentTextBrush}"/>
         <Setter Property="Margin" Value="0,0,0,8"/>
@@ -41,7 +57,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="10,12"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{StaticResource MainContentTextBrush}"/>
     </Style>
@@ -51,7 +67,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="10,12"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{StaticResource MainContentTextBrush}"/>
     </Style>
@@ -60,8 +76,8 @@
     <Style x:Key="UnifiedPrimaryButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource AccentActionBrush}"/>
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Height" Value="45"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Height" Value="48"/>
+        <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -96,5 +112,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <DropShadowEffect x:Key="UnifiedCardStyle_ShadowOnly" BlurRadius="15" Color="Black" Opacity="0.05" ShadowDepth="2"/>
 
 </ResourceDictionary>

@@ -1,4 +1,4 @@
 namespace GeniusStoreERP.Application.Users.Commands.Login;
 
-public record LoginResponse(string Id, string UserName, string FullName);
+public record LoginResponse(string Id, string UserName, string FullName, string Role);
 

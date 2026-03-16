@@ -48,6 +48,12 @@ namespace GeniusStoreERP.UI
 
             services.AddSingleton<LoginView>();
             services.AddTransient<ViewModels.LoginViewModel>();
+            
+            services.AddSingleton<MainView>();
+            services.AddTransient<ViewModels.MainViewModel>();
+
+            services.AddTransient<Views.DashboardView>();
+            services.AddTransient<ViewModels.DashboardViewModel>();
 
 
             // 7. بناء الـ ServiceProvider النهائي

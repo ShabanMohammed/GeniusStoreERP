@@ -28,6 +28,7 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Resource Include="Resources\Fonts\*.ttf" />
   </ItemGroup>
 
 </Project>

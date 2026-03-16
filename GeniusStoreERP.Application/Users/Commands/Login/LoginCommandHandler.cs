@@ -18,7 +18,10 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponse>
         {
            throw new UnauthorizedAccessException("يوجد خطأ في اسم المستخدم أو كلمة المرور");
         }
-       return new LoginResponse(user.Id, user.UserName!, user.FullName);
+        var roles = await _userManager.GetRolesAsync(user);
+        var role = roles.FirstOrDefault() ?? "مستخدم";
+        
+        return new LoginResponse(user.Id, user.UserName!, user.FullName, role);
 
     }
 }

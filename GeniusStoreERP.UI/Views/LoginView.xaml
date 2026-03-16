@@ -10,6 +10,7 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         FlowDirection="RightToLeft"
+        FontFamily="{StaticResource MainFontFamily}"
         AllowsTransparency="True"
         Background="Transparent">
     
@@ -25,6 +26,7 @@
                     Foreground="{StaticResource MainContentTextBrush}"
                     FontSize="18"
                     Cursor="Hand"
+                    IsCancel="True"
                     Click="Close_Click"/>
 
             <StackPanel VerticalAlignment="Center" Margin="40,0">
@@ -72,6 +74,7 @@
                         <Button Content="دخول إلى النظام" 
                                 Style="{StaticResource UnifiedPrimaryButtonStyle}"
                                 Command="{Binding LoginCommand}"
+                                IsDefault="True"
                                 Margin="0,15,0,0"/>
                     </StackPanel>
                 </Border>

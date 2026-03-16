@@ -1,0 +1,63 @@
+<UserControl x:Class="GeniusStoreERP.UI.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             FlowDirection="RightToLeft">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Stats Cards -->
+        <UniformGrid Grid.Row="0" Columns="4" Margin="0,0,0,25">
+            <!-- Sales Card -->
+            <Border Margin="10" Style="{StaticResource UnifiedCardStyle}" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="مبيعات اليوم" Foreground="#7F8C8D" FontSize="12" FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding TodaySales}" Foreground="#2C3E50" FontSize="20" FontWeight="Bold" Margin="0,10,0,0"/>
+                    <TextBlock Text="+15% عن أمس" Foreground="#27AE60" FontSize="10" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Orders Card -->
+            <Border Margin="10" Style="{StaticResource UnifiedCardStyle}" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="الطلبات النشطة" Foreground="#7F8C8D" FontSize="12" FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding ActiveOrders}" Foreground="#2C3E50" FontSize="20" FontWeight="Bold" Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Stock Card -->
+            <Border Margin="10" Style="{StaticResource UnifiedCardStyle}" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="نواقص المخزن" Foreground="#7F8C8D" FontSize="12" FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding LowStockItems}" Foreground="#E74C3C" FontSize="20" FontWeight="Bold" Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Customers Card -->
+            <Border Margin="10" Style="{StaticResource UnifiedCardStyle}" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="إجمالي العملاء" Foreground="#7F8C8D" FontSize="12" FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding TotalCustomers}" Foreground="#2C3E50" FontSize="20" FontWeight="Bold" Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+
+        <!-- Placeholder for Chart/Recent Activities -->
+        <Border Grid.Row="1" Margin="10" Style="{StaticResource UnifiedCardStyle}">
+            <Grid>
+                <TextBlock Text="إحصائيات المبيعات الأسبوعية" Style="{StaticResource FieldLabelStyle}" HorizontalAlignment="Right"/>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="📊" FontSize="50" HorizontalAlignment="Center" Opacity="0.3"/>
+                    <TextBlock Text="سيتم عرض الرسوم البيانية هنا قريباً" Foreground="#BDC3C7" Margin="0,10"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

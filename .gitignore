@@ -1,0 +1,67 @@
+# ============================================================
+#   .NET / WPF / C# - .gitignore
+# ============================================================
+
+# مجلدات الـ Build الناتجة عن المترجم
+bin/
+obj/
+
+# ملفات المترجم الثنائية
+*.dll
+*.pdb
+*.exe
+*.ilk
+*.exp
+*.lib
+
+# ملفات المستخدم الخاصة بـ Visual Studio
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# مجلدات Visual Studio
+.vs/
+.vscode/
+
+# ملفات NuGet
+*.nupkg
+**/packages/
+!**/packages/build/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Entity Framework Migrations (وقت التشغيل فقط)
+# اذا اردت تتبع الـ Migrations احذف السطر التالي
+# **/Migrations/
+
+# ملفات قاعدة البيانات SQLite المحلية
+*.db
+*.db-shm
+*.db-wal
+
+# ملفات الإعدادات الحساسة (لا تضعها في Git أبداً!)
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+# ملفات النظام
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# ملفات مؤقتة
+*.tmp
+*.temp
+*.log
+*.cache
+
+# ملفات التغطية والاختبار
+coverage/
+TestResults/
+*.coverage
+*.coveragexml
+
+# ملفات النشر
+publish/

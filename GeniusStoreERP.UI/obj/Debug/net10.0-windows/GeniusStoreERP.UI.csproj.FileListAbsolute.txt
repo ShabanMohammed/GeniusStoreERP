@@ -411,3 +411,7 @@ E:\c#\GeniusStoreERP\GeniusStoreERP\GeniusStoreERP.UI\obj\Debug\net10.0-windows\
 E:\c#\GeniusStoreERP\GeniusStoreERP\GeniusStoreERP.UI\obj\Debug\net10.0-windows\Views\MessageBoxView.g.cs
 E:\c#\GeniusStoreERP\GeniusStoreERP\GeniusStoreERP.UI\obj\Debug\net10.0-windows\GeneratedInternalTypeHelper.g.cs
 E:\c#\GeniusStoreERP\GeniusStoreERP\GeniusStoreERP.UI\obj\Debug\net10.0-windows\Views\MessageBoxView.baml
+E:\c#\GeniusStoreERP\GeniusStoreERP\GeniusStoreERP.UI\obj\Debug\net10.0-windows\Views\MainView.g.cs
+E:\c#\GeniusStoreERP\GeniusStoreERP\GeniusStoreERP.UI\obj\Debug\net10.0-windows\Views\MainView.baml
+E:\c#\GeniusStoreERP\GeniusStoreERP\GeniusStoreERP.UI\obj\Debug\net10.0-windows\Views\DashboardView.baml
+E:\c#\GeniusStoreERP\GeniusStoreERP\GeniusStoreERP.UI\obj\Debug\net10.0-windows\Views\DashboardView.g.cs

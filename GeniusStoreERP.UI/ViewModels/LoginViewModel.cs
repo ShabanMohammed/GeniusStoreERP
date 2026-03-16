@@ -3,6 +3,7 @@ using GeniusStoreERP.UI.Common;
 using MediatR;
 using FluentValidation;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GeniusStoreERP.UI.ViewModels;
 
@@ -38,6 +39,20 @@ public class LoginViewModel : BaseViewModel
         {
             var command = new LoginCommand(UserName, Password);
             var result = await _mediator.Send(command, token);
+            
+            // نجاح تسجيل الدخول
+            var mainView = App.ServiceProvider.GetRequiredService<Views.MainView>();
+            if (mainView.DataContext is MainViewModel mainVm)
+            {
+                mainVm.FullName = result.FullName;
+                mainVm.UserRole = result.Role;
+            }
+            
+            mainView.Show();
+            
+            // إغلاق شاشة تسجيل الدخول
+            System.Windows.Application.Current.MainWindow.Close();
+            System.Windows.Application.Current.MainWindow = mainView;
         }
         catch (UnauthorizedAccessException ex)
         {
