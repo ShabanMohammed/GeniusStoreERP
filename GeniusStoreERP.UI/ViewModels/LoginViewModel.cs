@@ -4,6 +4,7 @@ using MediatR;
 using FluentValidation;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
+using GeniusStoreERP.UI.Services;
 
 namespace GeniusStoreERP.UI.ViewModels;
 

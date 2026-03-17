@@ -16,8 +16,4 @@
     <ProjectReference Include="..\GeniusStoreERP.Application\GeniusStoreERP.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Configurations\" />
-  </ItemGroup>
-
 </Project>
