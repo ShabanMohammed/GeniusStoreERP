@@ -15,66 +15,15 @@
         FontFamily="{StaticResource MainFontFamily}">
 
     <Window.Resources>
-        <!-- Sidebar Nav Item Style -->
-        <Style x:Key="SidebarNavItemStyle" TargetType="ListBoxItem">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="Margin" Value="8,2"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Border x:Name="ItemBorder"
-                                Background="Transparent"
-                                CornerRadius="10"
-                                Padding="14,11">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="28"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Icon (Vector Path) -->
-                                <Viewbox Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Path x:Name="ItemIcon"
-                                          Data="{Binding IconKey, Converter={StaticResource ResourceKeyToDataConverter}}"
-                                          Fill="#9FA8DA"
-                                          Stretch="Uniform"/>
-                                </Viewbox>
-
-                                <!-- Label -->
-                                <TextBlock x:Name="ItemLabel"
-                                           Grid.Column="1"
-                                           Text="{Binding Title}"
-                                           FontSize="13"
-                                           FontWeight="SemiBold"
-                                           FontFamily="{StaticResource MainFontFamily}"
-                                           Foreground="#9FA8DA"
-                                           Margin="12,0,0,0"
-                                           VerticalAlignment="Center"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ItemBorder" Property="Background" Value="#263594"/>
-                                <Setter TargetName="ItemIcon" Property="Fill" Value="White"/>
-                                <Setter TargetName="ItemLabel" Property="Foreground" Value="White"/>
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="ItemBorder" Property="Background" Value="{StaticResource AccentActionBrush}"/>
-                                <Setter TargetName="ItemIcon" Property="Fill" Value="White"/>
-                                <Setter TargetName="ItemLabel" Property="Foreground" Value="White"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <!-- DataTemplates for Navigation -->
         <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
             <local:DashboardView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CategoryListViewModel}">
+            <local:CategoryListView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CategoryEditViewModel}">
+            <local:CategoryEditView/>
         </DataTemplate>
     </Window.Resources>
 

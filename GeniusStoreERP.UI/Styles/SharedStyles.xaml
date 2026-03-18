@@ -1,6 +1,10 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ConvertersDictionary.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <!-- Typography -->
     <FontFamily x:Key="MainFontFamily">pack://application:,,,/Resources/Fonts/Cairo-Regular.ttf#Cairo</FontFamily>
 
@@ -19,20 +23,20 @@
 
     <Style x:Key="MainHeaderStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource MainFontFamily}"/>
-        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="FontSize" Value="22"/>
         <Setter Property="FontWeight" Value="ExtraBold"/>
         <Setter Property="Foreground" Value="{StaticResource PrimaryHeaderBrush}"/>
         <Setter Property="Margin" Value="0,0,0,5"/>
     </Style>
 
     <Style x:Key="SubHeaderStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="#7F8C8D"/>
         <Setter Property="Margin" Value="0,0,0,20"/>
     </Style>
 
     <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{StaticResource MainContentTextBrush}"/>
         <Setter Property="Margin" Value="0,0,0,8"/>
@@ -56,8 +60,8 @@
     <Style x:Key="UnifiedTextBoxStyle" TargetType="TextBox">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="10,12"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Padding" Value="8,10"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{StaticResource MainContentTextBrush}"/>
     </Style>
@@ -66,8 +70,8 @@
     <Style x:Key="UnifiedPasswordBoxStyle" TargetType="PasswordBox">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="10,12"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Padding" Value="8,10"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{StaticResource MainContentTextBrush}"/>
     </Style>
@@ -76,8 +80,8 @@
     <Style x:Key="UnifiedPrimaryButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource AccentActionBrush}"/>
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Height" Value="48"/>
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -105,7 +109,7 @@
     <Style x:Key="UnifiedCardStyle" TargetType="Border">
         <Setter Property="Background" Value="White"/>
         <Setter Property="CornerRadius" Value="15"/>
-        <Setter Property="Padding" Value="30"/>
+        <Setter Property="Padding" Value="25"/>
         <Setter Property="Effect">
             <Setter.Value>
                 <DropShadowEffect BlurRadius="25" Color="Black" Opacity="0.1" ShadowDepth="5"/>
@@ -114,5 +118,138 @@
     </Style>
 
     <DropShadowEffect x:Key="UnifiedCardStyle_ShadowOnly" BlurRadius="15" Color="Black" Opacity="0.05" ShadowDepth="2"/>
+
+    <!-- Sidebar Nav Item Style (moved from MainView.xaml) -->
+    <Style x:Key="SidebarNavItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="8,2"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <StackPanel>
+                        <Border x:Name="ItemBorder"
+                                Background="Transparent"
+                                CornerRadius="10"
+                                Padding="14,11">
+                            <Border.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" 
+                                              Command="{Binding DataContext.SelectNavItemCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                              CommandParameter="{Binding}"/>
+                            </Border.InputBindings>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="28"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Icon (Vector Path) -->
+                                <Viewbox Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Path x:Name="ItemIcon"
+                                          Data="{Binding IconKey, Converter={StaticResource ResourceKeyToDataConverter}}"
+                                          Fill="#9FA8DA"
+                                          Stretch="Uniform"/>
+                                </Viewbox>
+
+                                <!-- Label -->
+                                <TextBlock x:Name="ItemLabel"
+                                           Grid.Column="1"
+                                           Text="{Binding Title}"
+                                           FontSize="13"
+                                           FontWeight="SemiBold"
+                                           FontFamily="{StaticResource MainFontFamily}"
+                                           Foreground="#9FA8DA"
+                                           Margin="12,0,0,0"
+                                           VerticalAlignment="Center"/>
+
+                                <!-- Expand/Collapse Icon -->
+                                <Viewbox x:Name="ExpandIcon" Grid.Column="2" Width="10" Height="10" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5">
+                                    <Viewbox.RenderTransform>
+                                        <RotateTransform Angle="0"/>
+                                    </Viewbox.RenderTransform>
+                                    <Path Data="M7,10L12,15L17,10H7Z" Fill="#9FA8DA" Stretch="Uniform"/>
+                                </Viewbox>
+                            </Grid>
+                        </Border>
+
+                        <!-- SubItems List -->
+                        <ItemsControl x:Name="SubItemsControl" 
+                                      ItemsSource="{Binding SubItems}" 
+                                      Visibility="Collapsed"
+                                      Margin="20,0,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border x:Name="SubItemBorder"
+                                            Background="Transparent"
+                                            CornerRadius="8"
+                                            Padding="14,9"
+                                            Margin="0,1"
+                                            Cursor="Hand">
+                                        <Border.InputBindings>
+                                            <MouseBinding MouseAction="LeftClick" 
+                                                          Command="{Binding DataContext.SelectNavItemCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                                          CommandParameter="{Binding}"/>
+                                        </Border.InputBindings>
+                                        <TextBlock x:Name="SubItemLabel"
+                                                   Text="{Binding Title}"
+                                                   FontSize="12"
+                                                   FontWeight="Medium"
+                                                   FontFamily="{StaticResource MainFontFamily}"
+                                                   Foreground="#9FA8DA"
+                                                   VerticalAlignment="Center"/>
+                                    </Border>
+                                    <DataTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="SubItemBorder" Property="Background" Value="#263594"/>
+                                            <Setter TargetName="SubItemLabel" Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                            <Setter TargetName="SubItemBorder" Property="Background" Value="{StaticResource AccentActionBrush}"/>
+                                            <Setter TargetName="SubItemLabel" Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <ControlTemplate.Triggers>
+                        <!-- Main Item Mouse Over -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ItemBorder" Property="Background" Value="#263594"/>
+                            <Setter TargetName="ItemIcon" Property="Fill" Value="White"/>
+                            <Setter TargetName="ItemLabel" Property="Foreground" Value="White"/>
+                            <Setter TargetName="ExpandIcon" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+
+                        <!-- If has subitems, show expand icon -->
+                        <DataTrigger Binding="{Binding SubItems.Count, Converter={StaticResource NumericToVisibilityConverter}}" Value="Visible">
+                             <Setter TargetName="ExpandIcon" Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+
+                        <!-- Expansion State -->
+                        <DataTrigger Binding="{Binding IsExpanded}" Value="True">
+                            <Setter TargetName="SubItemsControl" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ExpandIcon" Property="RenderTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="180"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+
+                        <!-- Selection -->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="ItemBorder" Property="Background" Value="{StaticResource AccentActionBrush}"/>
+                            <Setter TargetName="ItemIcon" Property="Fill" Value="White"/>
+                            <Setter TargetName="ItemLabel" Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>

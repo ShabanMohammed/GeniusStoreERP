@@ -1,13 +1,17 @@
 using GeniusStoreERP.UI.Common;
+using GeniusStoreERP.UI.Services;
 using GeniusStoreERP.UI.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace GeniusStoreERP.UI.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
+    private readonly INavigationService _navigationService;
+
     private string _fullName = string.Empty;
     public string FullName
     {
@@ -29,16 +33,10 @@ public class MainViewModel : BaseViewModel
     public NavItem? SelectedNavItem
     {
         get => _selectedNavItem;
-        set
-        {
-            if (SetProperty(ref _selectedNavItem, value))
-            {
-                OnPropertyChanged(nameof(CurrentViewModel));
-            }
-        }
+        set => SetProperty(ref _selectedNavItem, value);
     }
 
-    public object? CurrentViewModel => SelectedNavItem?.TargetViewModel;
+    public BaseViewModel? CurrentViewModel => _navigationService.CurrentViewModel;
 
     public ObservableCollection<NavItem> NavItems { get; } = new();
 
@@ -46,7 +44,16 @@ public class MainViewModel : BaseViewModel
     public ICommand LogoutCommand { get; }
 
     public MainViewModel()
+        : this(App.ServiceProvider.GetRequiredService<INavigationService>())
     {
+    }
+
+    public MainViewModel(INavigationService navigationService)
+    {
+        _navigationService = navigationService;
+
+        _navigationService.Navigated += _ => OnPropertyChanged(nameof(CurrentViewModel));
+
         LogoutCommand = new RelayCommand(_ =>
         {
             var loginView = App.ServiceProvider.GetRequiredService<LoginView>();
@@ -62,9 +69,33 @@ public class MainViewModel : BaseViewModel
         {
             if (p is NavItem item)
             {
-                foreach (var i in NavItems) i.IsSelected = false;
+                // إذا كان للعنصر عناصر فرعية، نقوم بتبديل حالة التوسيع فقط
+                if (item.SubItems.Any())
+                {
+                    item.IsExpanded = !item.IsExpanded;
+                    return;
+                }
+
+                // إلغاء تحديد الكل (بما في ذلك العناصر الفرعية)
+                foreach (var i in NavItems)
+                {
+                    i.IsSelected = false;
+                    foreach (var sub in i.SubItems) sub.IsSelected = false;
+                }
+
                 item.IsSelected = true;
                 SelectedNavItem = item;
+
+                // التنقل
+                switch (item.Title)
+                {
+                    case "الرئيسية":
+                        _navigationService.NavigateTo<DashboardViewModel>();
+                        break;
+                    case "التصنيفات":
+                        _navigationService.NavigateTo<CategoryListViewModel>();
+                        break;
+                }
             }
         });
 
@@ -73,22 +104,29 @@ public class MainViewModel : BaseViewModel
 
     private void InitializeNavItems()
     {
-        var dashboardVm = App.ServiceProvider.GetRequiredService<DashboardViewModel>();
-
         NavItems.Add(new NavItem
         {
             Title = "الرئيسية",
             IconKey = "IconHome",
             IsSelected = true,
-            TargetViewModel = dashboardVm
+            TargetViewModel = null
+        });
+
+        NavItems.Add(new NavItem
+        {
+            Title = "المخازن",
+            IconKey = "IconInformation",
+            SubItems = { new NavItem { Title = "التصنيفات", IconKey = "IconSettings" } }
         });
 
         NavItems.Add(new NavItem { Title = "المبيعات", IconKey = "IconSuccess" });
-        NavItems.Add(new NavItem { Title = "المخازن", IconKey = "IconInformation" });
         NavItems.Add(new NavItem { Title = "المشتريات", IconKey = "IconSettings" });
         NavItems.Add(new NavItem { Title = "العملاء", IconKey = "IconUsers" });
         NavItems.Add(new NavItem { Title = "الإعدادات", IconKey = "IconSettings" });
 
         SelectedNavItem = NavItems[0];
+
+        // ضبط الشاشة الافتراضية عند بدء النظام
+        _navigationService.NavigateTo<DashboardViewModel>();
     }
 }

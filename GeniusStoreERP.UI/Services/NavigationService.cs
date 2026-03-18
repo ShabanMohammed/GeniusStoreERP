@@ -12,7 +12,7 @@ namespace GeniusStoreERP.UI.Services
             _serviceProvider = serviceProvider;
         }
 
-        public BaseViewModel CurrentViewModel { get; private set; }
+        public BaseViewModel? CurrentViewModel { get; private set; }
 
         // جديد: حدث يُطلق عند التنقل ليستطيع MainWindowViewModel (أو أي مستمع) التحديث
         public event Action<BaseViewModel>? Navigated;

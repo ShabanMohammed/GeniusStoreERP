@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using GeniusStoreERP.Application.Common;
 using GeniusStoreERP.Application.Common.Interfaces;
@@ -28,9 +28,11 @@ public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, Pag
 
         var totalItems = await query.CountAsync(cancellationToken);
         var categories = await query
+            .OrderBy(c => c.Name)
             .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)
-            .ProjectTo<CategoryDto>(mapper.ConfigurationProvider).OrderBy(c => c.Name).ToListAsync(cancellationToken);
+            .ProjectTo<CategoryDto>(mapper.ConfigurationProvider)
+            .ToListAsync(cancellationToken);
         return new PagedResponse<CategoryDto>(categories, totalItems, request.PageNumber, request.PageSize);
     }
 }

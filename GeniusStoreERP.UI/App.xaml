@@ -6,11 +6,8 @@
              xmlns:common="clr-namespace:GeniusStoreERP.UI.Common">
     <Application.Resources>
         <ResourceDictionary>
-            <common:ResourceKeyToDataConverter x:Key="ResourceKeyToDataConverter" />
-            <common:ResourceKeyToBrushConverter x:Key="ResourceKeyToBrushConverter" />
-            
             <ResourceDictionary.MergedDictionaries>
-
+                <ResourceDictionary Source="Styles/ConvertersDictionary.xaml" />
                 <ResourceDictionary Source="Styles/ColorsDictionary.xaml" />
                 <ResourceDictionary Source="Styles/IconsDictionary.xaml" />
                 <ResourceDictionary Source="Styles/SharedStyles.xaml" />

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GeniusStoreERP.UI.Views"
         mc:Ignorable="d"
         Title="تسجيل الدخول - Genius Store ERP" 
-        Height="550" Width="450"
+        Height="500" Width="400"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         FlowDirection="RightToLeft"
@@ -29,16 +29,16 @@
                     IsCancel="True"
                     Click="Close_Click"/>
 
-            <StackPanel VerticalAlignment="Center" Margin="40,0">
+            <StackPanel VerticalAlignment="Center" Margin="30,0">
                 
                 <!-- Logo/Header Area -->
-                <Border Width="80" Height="80" 
+                <Border Width="60" Height="60" 
                         Background="{StaticResource PrimaryHeaderBrush}" 
-                        CornerRadius="20"
+                        CornerRadius="15"
                         Margin="0,0,0,20">
                     <TextBlock Text="G" 
                                Foreground="White" 
-                               FontSize="40" 
+                               FontSize="30" 
                                FontWeight="Bold" 
                                HorizontalAlignment="Center" 
                                VerticalAlignment="Center"/>
