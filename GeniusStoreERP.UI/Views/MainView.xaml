@@ -73,7 +73,6 @@
                 <!-- Navigation Items -->
                 <ListBox Grid.Row="1" 
                          ItemsSource="{Binding NavItems}"
-                         SelectedItem="{Binding SelectedNavItem}"
                          ItemContainerStyle="{StaticResource SidebarNavItemStyle}"
                          Background="Transparent"
                          BorderThickness="0"

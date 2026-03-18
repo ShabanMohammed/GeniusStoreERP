@@ -1,3 +1,4 @@
+using GeniusStoreERP.Application.Categories.Commands.DeleteCategory;
 using GeniusStoreERP.Application.Categories.Queries.GetCategories;
 using GeniusStoreERP.Application.Dtos;
 using GeniusStoreERP.UI.Common;
@@ -143,9 +144,24 @@ public class CategoryListViewModel : BaseViewModel
         }
     }
 
-    private void DeleteCategory(CategoryDto? category)
+    private async Task DeleteCategory(CategoryDto? category)
     {
         if (category == null) return;
-        // logic for deletion
+        var result = MessageBoxService.ShowConfirmation($"هل أنت متأكد أنك تريد حذف التصنيف '{category.Name}'؟\n فى حالة الحذف لن تتمكن من اضافة تنصيف بنفس الاسم مرة اخرى");
+        if (result == System.Windows.MessageBoxResult.Yes)
+        {
+            var command = new DeleteCategoryCommand(category.Id);
+            try
+            {
+                await _mediator.Send(command);
+                await LoadCategoriesAsync();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBoxService.ShowError(ex.Message);
+            }
+
+        }
     }
 }

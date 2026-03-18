@@ -86,7 +86,7 @@ public class MainViewModel : BaseViewModel
                 item.IsSelected = true;
                 SelectedNavItem = item;
 
-                // التنقل
+                // التنقل بناءً على العنوان أو نوع ViewModel المستهدف
                 switch (item.Title)
                 {
                     case "الرئيسية":
