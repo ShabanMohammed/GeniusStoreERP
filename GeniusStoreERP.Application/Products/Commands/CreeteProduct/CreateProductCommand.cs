@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace GeniusStoreERP.Application.Products.Commands;
+namespace GeniusStoreERP.Application.Products.Commands.CreeteProduct;
 
 public record CreateProductCommand(
     string Name,

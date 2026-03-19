@@ -107,7 +107,7 @@ public class CategoryListViewModel : BaseViewModel
                 _navigationService.NavigateTo<CategoryEditViewModel>(category);
             }
         });
-        DeleteCommand = new RelayCommand(p => DeleteCategory(p as CategoryDto));
+        DeleteCommand = new AsyncRelayCommand((p,_) => DeleteCategory(p as CategoryDto));
         NextPageCommand = new AsyncRelayCommand((_, _) => { if (CurrentPage < TotalPages) CurrentPage++; return Task.CompletedTask; }, _ => CurrentPage < TotalPages);
         PreviousPageCommand = new AsyncRelayCommand((_, _) => { if (CurrentPage > 1) CurrentPage--; return Task.CompletedTask; }, _ => CurrentPage > 1);
         FirstPageCommand = new AsyncRelayCommand((_, _) => { CurrentPage = 1; return Task.CompletedTask; }, _ => CurrentPage > 1);

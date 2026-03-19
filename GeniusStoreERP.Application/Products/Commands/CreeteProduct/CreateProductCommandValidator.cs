@@ -2,7 +2,7 @@
 using GeniusStoreERP.Application.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace GeniusStoreERP.Application.Products.Commands;
+namespace GeniusStoreERP.Application.Products.Commands.CreeteProduct;
 
 public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {

@@ -1,4 +1,5 @@
 ﻿using GeniusStoreERP.Application.Common.Interfaces;
+using GeniusStoreERP.Application.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,10 +15,10 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
 
     public async Task Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
-        var category = await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+        var category = await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == request.Id && !c.IsDeleted, cancellationToken);
         if (category == null)
         {
-            throw new Exception("التصنيف غير موجود");
+            throw new NotFoundException("التصنيف غير موجود");
         }
         category.Name = request.Name;
         category.Description = request.Description;

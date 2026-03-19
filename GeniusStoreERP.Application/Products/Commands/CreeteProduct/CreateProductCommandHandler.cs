@@ -2,7 +2,7 @@
 using GeniusStoreERP.Domain.Entities;
 using MediatR;
 
-namespace GeniusStoreERP.Application.Products.Commands;
+namespace GeniusStoreERP.Application.Products.Commands.CreeteProduct;
 
 public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, int>
 {

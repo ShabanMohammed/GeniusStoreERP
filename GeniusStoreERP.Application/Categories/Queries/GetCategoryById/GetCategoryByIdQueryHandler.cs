@@ -18,9 +18,14 @@ public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery,
         this.dbContext = dbContext;
         this.mapper = mapper;
     }
-    public async Task<CategoryDto> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
+
+    public async Task<CategoryDto> Handle(
+        GetCategoryByIdQuery request,
+        CancellationToken cancellationToken
+    )
     {
-        var category = await dbContext.Categories.AsNoTracking()
+        var category = await dbContext
+            .Categories.AsNoTracking()
             .Where(c => !c.IsDeleted && c.Id == request.Id)
             .ProjectTo<CategoryDto>(mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);

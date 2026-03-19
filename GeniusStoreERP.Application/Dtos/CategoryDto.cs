@@ -3,12 +3,7 @@ using GeniusStoreERP.Domain.Entities;
 
 namespace GeniusStoreERP.Application.Dtos;
 
-public record CategoryDto(
-    int Id,
-    string Name,
-    string? Description = null
-
-);
+public record CategoryDto(int Id, string Name, string? Description = null);
 
 public class CategoryDtoProfile : Profile
 {
@@ -18,4 +13,3 @@ public class CategoryDtoProfile : Profile
         CreateMap<CategoryDto, Category>();
     }
 }
-
