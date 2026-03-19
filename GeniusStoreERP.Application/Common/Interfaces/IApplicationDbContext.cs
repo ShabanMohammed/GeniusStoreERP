@@ -1,4 +1,5 @@
 ﻿using GeniusStoreERP.Domain.Entities;
+using GeniusStoreERP.Domain.Entities.Stock;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeniusStoreERP.Application.Common.Interfaces

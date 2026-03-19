@@ -1,4 +1,4 @@
-﻿using GeniusStoreERP.Domain.Entities;
+﻿using GeniusStoreERP.Domain.Entities.Stock;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

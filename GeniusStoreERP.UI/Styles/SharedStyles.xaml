@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="ConvertersDictionary.xaml" />
+        <ResourceDictionary Source="ConvertersDictionary.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Typography -->
@@ -10,94 +10,163 @@
 
     <!-- Global Defaults -->
     <Style TargetType="Window">
-        <Setter Property="FontFamily" Value="{StaticResource MainFontFamily}"/>
+        <Setter Property="FontFamily"
+                Value="{StaticResource MainFontFamily}"/>
     </Style>
 
     <Style TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource MainFontFamily}"/>
+        <Setter Property="FontFamily"
+                Value="{StaticResource MainFontFamily}"/>
     </Style>
 
     <Style TargetType="Control">
-        <Setter Property="FontFamily" Value="{StaticResource MainFontFamily}"/>
+        <Setter Property="FontFamily"
+                Value="{StaticResource MainFontFamily}"/>
     </Style>
 
-    <Style x:Key="MainHeaderStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource MainFontFamily}"/>
-        <Setter Property="FontSize" Value="22"/>
-        <Setter Property="FontWeight" Value="ExtraBold"/>
-        <Setter Property="Foreground" Value="{StaticResource PrimaryHeaderBrush}"/>
-        <Setter Property="Margin" Value="0,0,0,5"/>
+    <Style x:Key="MainHeaderStyle"
+            TargetType="TextBlock">
+        <Setter Property="FontFamily"
+                Value="{StaticResource MainFontFamily}"/>
+        <Setter Property="FontSize"
+                Value="22"/>
+        <Setter Property="FontWeight"
+                Value="ExtraBold"/>
+        <Setter Property="Foreground"
+                Value="{StaticResource PrimaryHeaderBrush}"/>
+        <Setter Property="Margin"
+                Value="0,0,0,5"/>
     </Style>
 
-    <Style x:Key="SubHeaderStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="#7F8C8D"/>
-        <Setter Property="Margin" Value="0,0,0,20"/>
+    <Style x:Key="SubHeaderStyle"
+            TargetType="TextBlock">
+        <Setter Property="FontSize"
+                Value="12"/>
+        <Setter Property="Foreground"
+                Value="#7F8C8D"/>
+        <Setter Property="Margin"
+                Value="0,0,0,20"/>
     </Style>
 
-    <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="{StaticResource MainContentTextBrush}"/>
-        <Setter Property="Margin" Value="0,0,0,8"/>
+    <Style x:Key="FieldLabelStyle"
+            TargetType="TextBlock">
+        <Setter Property="FontSize"
+                Value="12"/>
+        <Setter Property="FontWeight"
+                Value="SemiBold"/>
+        <Setter Property="Foreground"
+                Value="{StaticResource MainContentTextBrush}"/>
+        <Setter Property="Margin"
+                Value="0,0,0,8"/>
     </Style>
 
     <!-- Global Input Style (Border Container) -->
-    <Style x:Key="UnifiedInputContainerStyle" TargetType="Border">
-        <Setter Property="Background" Value="#F8F9FA"/>
-        <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="BorderBrush" Value="#E0E0E0"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Margin" Value="0,0,0,15"/>
+    <Style x:Key="UnifiedInputContainerStyle"
+            TargetType="Border">
+        <Setter Property="Background"
+                Value="#F8F9FA"/>
+        <Setter Property="CornerRadius"
+                Value="8"/>
+        <Setter Property="BorderBrush"
+                Value="#E0E0E0"/>
+        <Setter Property="BorderThickness"
+                Value="1"/>
+        <Setter Property="Margin"
+                Value="0,0,0,15"/>
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="{StaticResource AccentActionBrush}"/>
+            <Trigger Property="IsMouseOver"
+                    Value="True">
+                <Setter Property="BorderBrush"
+                        Value="{StaticResource AccentActionBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <!-- Global TextBox Style -->
-    <Style x:Key="UnifiedTextBoxStyle" TargetType="TextBox">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="8,10"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="{StaticResource MainContentTextBrush}"/>
+    <Style x:Key="UnifiedTextBoxStyle"
+            TargetType="TextBox">
+        <Setter Property="Background"
+                Value="Transparent"/>
+        <Setter Property="BorderThickness"
+                Value="0"/>
+        <Setter Property="Padding"
+                Value="8,10"/>
+        <Setter Property="FontSize"
+                Value="14"/>
+        <Setter Property="VerticalContentAlignment"
+                Value="Center"/>
+        <Setter Property="Foreground"
+                Value="{StaticResource MainContentTextBrush}"/>
+    </Style>
+    <!-- Global ComboBox Style -->
+    <Style x:Key="UnifiedComboBoxStyle"
+            TargetType="ComboBox">
+        <Setter Property="Background"
+                Value="Transparent"/>
+        <Setter Property="BorderThickness"
+                Value="0"/>
+        <Setter Property="Padding"
+                Value="8,10"/>
+        <Setter Property="FontSize"
+                Value="14"/>
+        <Setter Property="VerticalContentAlignment"
+                Value="Center"/>
+        <Setter Property="Foreground"
+                Value="{StaticResource MainContentTextBrush}"/>
     </Style>
 
     <!-- Global PasswordBox Style -->
-    <Style x:Key="UnifiedPasswordBoxStyle" TargetType="PasswordBox">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="8,10"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="{StaticResource MainContentTextBrush}"/>
+    <Style x:Key="UnifiedPasswordBoxStyle"
+            TargetType="PasswordBox">
+        <Setter Property="Background"
+                Value="Transparent"/>
+        <Setter Property="BorderThickness"
+                Value="0"/>
+        <Setter Property="Padding"
+                Value="8,10"/>
+        <Setter Property="FontSize"
+                Value="14"/>
+        <Setter Property="VerticalContentAlignment"
+                Value="Center"/>
+        <Setter Property="Foreground"
+                Value="{StaticResource MainContentTextBrush}"/>
     </Style>
 
     <!-- Global Button Style -->
-    <Style x:Key="UnifiedPrimaryButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource AccentActionBrush}"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Cursor" Value="Hand"/>
+    <Style x:Key="UnifiedPrimaryButtonStyle"
+            TargetType="Button">
+        <Setter Property="Background"
+                Value="{StaticResource AccentActionBrush}"/>
+        <Setter Property="Foreground"
+                Value="White"/>
+        <Setter Property="Height"
+                Value="40"/>
+        <Setter Property="FontSize"
+                Value="14"/>
+        <Setter Property="FontWeight"
+                Value="SemiBold"/>
+        <Setter Property="BorderThickness"
+                Value="0"/>
+        <Setter Property="Cursor"
+                Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" 
+                    <Border Background="{TemplateBinding Background}"
                             CornerRadius="8">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <ContentPresenter HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.9"/>
+                        <Trigger Property="IsMouseOver"
+                                Value="True">
+                            <Setter Property="Opacity"
+                                    Value="0.9"/>
                         </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Opacity" Value="0.8"/>
+                        <Trigger Property="IsPressed"
+                                Value="True">
+                            <Setter Property="Opacity"
+                                    Value="0.8"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -106,27 +175,45 @@
     </Style>
 
     <!-- Global Card Style -->
-    <Style x:Key="UnifiedCardStyle" TargetType="Border">
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="CornerRadius" Value="15"/>
-        <Setter Property="Padding" Value="25"/>
+    <Style x:Key="UnifiedCardStyle"
+            TargetType="Border">
+        <Setter Property="Background"
+                Value="White"/>
+        <Setter Property="CornerRadius"
+                Value="15"/>
+        <Setter Property="Padding"
+                Value="25"/>
         <Setter Property="Effect">
             <Setter.Value>
-                <DropShadowEffect BlurRadius="25" Color="Black" Opacity="0.1" ShadowDepth="5"/>
+                <DropShadowEffect BlurRadius="25"
+                        Color="Black"
+                        Opacity="0.1"
+                        ShadowDepth="5"/>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <DropShadowEffect x:Key="UnifiedCardStyle_ShadowOnly" BlurRadius="15" Color="Black" Opacity="0.05" ShadowDepth="2"/>
+    <DropShadowEffect x:Key="UnifiedCardStyle_ShadowOnly"
+            BlurRadius="15"
+            Color="Black"
+            Opacity="0.05"
+            ShadowDepth="2"/>
 
     <!-- Sidebar Nav Item Style (moved from MainView.xaml) -->
-    <Style x:Key="SidebarNavItemStyle" TargetType="ListBoxItem">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="Margin" Value="8,2"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+    <Style x:Key="SidebarNavItemStyle"
+            TargetType="ListBoxItem">
+        <Setter Property="Background"
+                Value="Transparent"/>
+        <Setter Property="BorderThickness"
+                Value="0"/>
+        <Setter Property="Padding"
+                Value="0"/>
+        <Setter Property="Margin"
+                Value="8,2"/>
+        <Setter Property="Cursor"
+                Value="Hand"/>
+        <Setter Property="IsSelected"
+                Value="{Binding IsSelected, Mode=TwoWay}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
@@ -136,7 +223,7 @@
                                 CornerRadius="10"
                                 Padding="14,11">
                             <Border.InputBindings>
-                                <MouseBinding MouseAction="LeftClick" 
+                                <MouseBinding MouseAction="LeftClick"
                                               Command="{Binding DataContext.SelectNavItemCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                               CommandParameter="{Binding}"/>
                             </Border.InputBindings>
@@ -148,7 +235,10 @@
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Icon (Vector Path) -->
-                                <Viewbox Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Viewbox Width="18"
+                                        Height="18"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
                                     <Path x:Name="ItemIcon"
                                           Data="{Binding IconKey, Converter={StaticResource ResourceKeyToDataConverter}}"
                                           Fill="#9FA8DA"
@@ -167,18 +257,25 @@
                                            VerticalAlignment="Center"/>
 
                                 <!-- Expand/Collapse Icon -->
-                                <Viewbox x:Name="ExpandIcon" Grid.Column="2" Width="10" Height="10" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5">
+                                <Viewbox x:Name="ExpandIcon"
+                                        Grid.Column="2"
+                                        Width="10"
+                                        Height="10"
+                                        Visibility="Collapsed"
+                                        RenderTransformOrigin="0.5,0.5">
                                     <Viewbox.RenderTransform>
                                         <RotateTransform Angle="0"/>
                                     </Viewbox.RenderTransform>
-                                    <Path Data="M7,10L12,15L17,10H7Z" Fill="#9FA8DA" Stretch="Uniform"/>
+                                    <Path Data="M7,10L12,15L17,10H7Z"
+                                            Fill="#9FA8DA"
+                                            Stretch="Uniform"/>
                                 </Viewbox>
                             </Grid>
                         </Border>
 
                         <!-- SubItems List -->
-                        <ItemsControl x:Name="SubItemsControl" 
-                                      ItemsSource="{Binding SubItems}" 
+                        <ItemsControl x:Name="SubItemsControl"
+                                      ItemsSource="{Binding SubItems}"
                                       Visibility="Collapsed"
                                       Margin="20,0,0,0">
                             <ItemsControl.ItemTemplate>
@@ -190,7 +287,7 @@
                                             Margin="0,1"
                                             Cursor="Hand">
                                         <Border.InputBindings>
-                                            <MouseBinding MouseAction="LeftClick" 
+                                            <MouseBinding MouseAction="LeftClick"
                                                           Command="{Binding DataContext.SelectNavItemCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                                           CommandParameter="{Binding}"/>
                                         </Border.InputBindings>
@@ -203,13 +300,23 @@
                                                    VerticalAlignment="Center"/>
                                     </Border>
                                     <DataTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="SubItemBorder" Property="Background" Value="#263594"/>
-                                            <Setter TargetName="SubItemLabel" Property="Foreground" Value="White"/>
+                                        <Trigger Property="IsMouseOver"
+                                                Value="True">
+                                            <Setter TargetName="SubItemBorder"
+                                                    Property="Background"
+                                                    Value="#263594"/>
+                                            <Setter TargetName="SubItemLabel"
+                                                    Property="Foreground"
+                                                    Value="White"/>
                                         </Trigger>
-                                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                            <Setter TargetName="SubItemBorder" Property="Background" Value="{StaticResource AccentActionBrush}"/>
-                                            <Setter TargetName="SubItemLabel" Property="Foreground" Value="White"/>
+                                        <DataTrigger Binding="{Binding IsSelected}"
+                                                Value="True">
+                                            <Setter TargetName="SubItemBorder"
+                                                    Property="Background"
+                                                    Value="{StaticResource AccentActionBrush}"/>
+                                            <Setter TargetName="SubItemLabel"
+                                                    Property="Foreground"
+                                                    Value="White"/>
                                         </DataTrigger>
                                     </DataTemplate.Triggers>
                                 </DataTemplate>
@@ -219,22 +326,38 @@
 
                     <ControlTemplate.Triggers>
                         <!-- Main Item Mouse Over -->
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ItemBorder" Property="Background" Value="#263594"/>
-                            <Setter TargetName="ItemIcon" Property="Fill" Value="White"/>
-                            <Setter TargetName="ItemLabel" Property="Foreground" Value="White"/>
-                            <Setter TargetName="ExpandIcon" Property="Visibility" Value="Visible"/>
+                        <Trigger Property="IsMouseOver"
+                                Value="True">
+                            <Setter TargetName="ItemBorder"
+                                    Property="Background"
+                                    Value="#263594"/>
+                            <Setter TargetName="ItemIcon"
+                                    Property="Fill"
+                                    Value="White"/>
+                            <Setter TargetName="ItemLabel"
+                                    Property="Foreground"
+                                    Value="White"/>
+                            <Setter TargetName="ExpandIcon"
+                                    Property="Visibility"
+                                    Value="Visible"/>
                         </Trigger>
 
                         <!-- If has subitems, show expand icon -->
-                        <DataTrigger Binding="{Binding SubItems.Count, Converter={StaticResource NumericToVisibilityConverter}}" Value="Visible">
-                             <Setter TargetName="ExpandIcon" Property="Visibility" Value="Visible"/>
+                        <DataTrigger Binding="{Binding SubItems.Count, Converter={StaticResource NumericToVisibilityConverter}}"
+                                Value="Visible">
+                            <Setter TargetName="ExpandIcon"
+                                    Property="Visibility"
+                                    Value="Visible"/>
                         </DataTrigger>
 
                         <!-- Expansion State -->
-                        <DataTrigger Binding="{Binding IsExpanded}" Value="True">
-                            <Setter TargetName="SubItemsControl" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="ExpandIcon" Property="RenderTransform">
+                        <DataTrigger Binding="{Binding IsExpanded}"
+                                Value="True">
+                            <Setter TargetName="SubItemsControl"
+                                    Property="Visibility"
+                                    Value="Visible"/>
+                            <Setter TargetName="ExpandIcon"
+                                    Property="RenderTransform">
                                 <Setter.Value>
                                     <RotateTransform Angle="180"/>
                                 </Setter.Value>
@@ -242,15 +365,107 @@
                         </DataTrigger>
 
                         <!-- Selection -->
-                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                            <Setter TargetName="ItemBorder" Property="Background" Value="{StaticResource AccentActionBrush}"/>
-                            <Setter TargetName="ItemIcon" Property="Fill" Value="White"/>
-                            <Setter TargetName="ItemLabel" Property="Foreground" Value="White"/>
+                        <DataTrigger Binding="{Binding IsSelected}"
+                                Value="True">
+                            <Setter TargetName="ItemBorder"
+                                    Property="Background"
+                                    Value="{StaticResource AccentActionBrush}"/>
+                            <Setter TargetName="ItemIcon"
+                                    Property="Fill"
+                                    Value="White"/>
+                            <Setter TargetName="ItemLabel"
+                                    Property="Foreground"
+                                    Value="White"/>
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!-- Global DataGrid Styles -->
+    <Style TargetType="DataGrid">
+        <Setter Property="Background"
+                Value="White"/>
+        <Setter Property="BorderThickness"
+                Value="0"/>
+        <Setter Property="RowBackground"
+                Value="White"/>
+        <Setter Property="AlternatingRowBackground"
+                Value="#F8F9FA"/>
+        <Setter Property="GridLinesVisibility"
+                Value="None"/>
+        <Setter Property="HeadersVisibility"
+                Value="Column"/>
+        <Setter Property="AutoGenerateColumns"
+                Value="False"/>
+        <Setter Property="CanUserAddRows"
+                Value="False"/>
+        <Setter Property="CanUserDeleteRows"
+                Value="False"/>
+        <Setter Property="IsReadOnly"
+                Value="True"/>
+        <Setter Property="SelectionMode"
+                Value="Single"/>
+        <Setter Property="ColumnHeaderHeight"
+                Value="45"/>
+        <Setter Property="RowHeight"
+                Value="50"/>
+        <Setter Property="FontSize"
+                Value="14"/>
+        <Setter Property="FontFamily"
+                Value="{StaticResource MainFontFamily}"/>
+    </Style>
+
+    <!-- Global DataGridColumnHeader Style - Headers Centered -->
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="Background"
+                Value="#F1F3F5"/>
+        <Setter Property="Foreground"
+                Value="{StaticResource MainContentTextBrush}"/>
+        <Setter Property="FontWeight"
+                Value="SemiBold"/>
+        <Setter Property="Padding"
+                Value="15,0"/>
+        <Setter Property="BorderThickness"
+                Value="0,0,0,1"/>
+        <Setter Property="BorderBrush"
+                Value="#E9ECEF"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Global DataGridRow Style -->
+    <Style TargetType="DataGridRow">
+        <Setter Property="BorderThickness"
+                Value="0,0,0,1"/>
+        <Setter Property="BorderBrush"
+                Value="#F1F3F5"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                    Value="True">
+                <Setter Property="Background"
+                        Value="#E9ECEF"/>
+            </Trigger>
+            <Trigger Property="IsSelected"
+                    Value="True">
+                <Setter Property="Background"
+                        Value="{StaticResource SelectionHighlightBrush}"/>
+                <Setter Property="Foreground"
+                        Value="{StaticResource MainContentTextBrush}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

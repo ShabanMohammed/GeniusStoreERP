@@ -1,3 +1,4 @@
+using System.Windows;
 using FluentValidation;
 using GeniusStoreERP.Application.Behaviors;
 using GeniusStoreERP.Application.Common.Interfaces;
@@ -6,13 +7,13 @@ using GeniusStoreERP.Domain.Entities;
 using GeniusStoreERP.Infrastructure.Data;
 using GeniusStoreERP.UI.Services;
 using GeniusStoreERP.UI.ViewModels;
+using GeniusStoreERP.UI.ViewModels.Stock;
 using GeniusStoreERP.UI.Views;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Windows;
 
 namespace GeniusStoreERP.UI
 {
@@ -21,34 +22,35 @@ namespace GeniusStoreERP.UI
         public static IServiceProvider ServiceProvider { get; private set; } = default!;
         private IConfiguration? configuration;
 
-
-
         protected override async void OnStartup(StartupEventArgs e)
         {
             try
             {
                 configuration = new ConfigurationBuilder()
-                   .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                   .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                   .Build();
-
+                    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .Build();
 
                 var services = new ServiceCollection();
 
                 services.AddLogging();
 
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlite(configuration.GetConnectionString("DefaultConnection"))
+                );
 
                 services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
                 // Identity registration
-                services.AddIdentity<ApplicationUser, IdentityRole>()
+                services
+                    .AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
                 // MediatR registration
-                services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateUserCommand).Assembly));
+                services.AddMediatR(cfg =>
+                    cfg.RegisterServicesFromAssembly(typeof(CreateUserCommand).Assembly)
+                );
                 services.AddAutoMapper(cfg => cfg.AddMaps(typeof(CreateUserCommand).Assembly));
 
                 services.AddValidatorsFromAssembly(typeof(CreateUserCommand).Assembly);
@@ -69,6 +71,10 @@ namespace GeniusStoreERP.UI
                 services.AddTransient<CategoryEditView>();
                 services.AddTransient<CategoryEditViewModel>();
 
+                services.AddTransient<ProductListView>();
+                services.AddTransient<ProductListViewModel>();
+                services.AddTransient<ProductEditView>();
+                services.AddTransient<ProductEditViewModel>();
 
                 // 7. بناء الـ ServiceProvider النهائي
                 ServiceProvider = services.BuildServiceProvider();
@@ -82,7 +88,12 @@ namespace GeniusStoreERP.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred during startup: {ex.Message}", "Startup Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(
+                    $"An error occurred during startup: {ex.Message}",
+                    "Startup Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
                 Shutdown();
             }
         }
@@ -108,7 +119,6 @@ namespace GeniusStoreERP.UI
                 {
                     UserName = "admin",
                     FullName = "Administrator",
-
                 };
 
                 var result = await userManager.CreateAsync(adminUser, "Admin@123");

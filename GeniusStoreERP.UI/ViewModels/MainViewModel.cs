@@ -1,5 +1,6 @@
 using GeniusStoreERP.UI.Common;
 using GeniusStoreERP.UI.Services;
+using GeniusStoreERP.UI.ViewModels.Stock;
 using GeniusStoreERP.UI.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
@@ -95,6 +96,9 @@ public class MainViewModel : BaseViewModel
                     case "التصنيفات":
                         _navigationService.NavigateTo<CategoryListViewModel>();
                         break;
+                    case "المنتجات":
+                        _navigationService.NavigateTo<ProductListViewModel>();
+                        break;
                 }
             }
         });
@@ -116,7 +120,11 @@ public class MainViewModel : BaseViewModel
         {
             Title = "المخازن",
             IconKey = "IconInformation",
-            SubItems = { new NavItem { Title = "التصنيفات", IconKey = "IconSettings" } }
+            SubItems =
+            {
+                new NavItem { Title = "التصنيفات", IconKey = "IconSettings" },
+                new NavItem { Title = "المنتجات", IconKey = "IconInformation" }
+            }
         });
 
         NavItems.Add(new NavItem { Title = "المبيعات", IconKey = "IconSuccess" });

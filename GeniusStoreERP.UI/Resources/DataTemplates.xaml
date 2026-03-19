@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vms="clr-namespace:GeniusStoreERP.UI.ViewModels.Stock"
+                    xmlns:vm="clr-namespace:GeniusStoreERP.UI.ViewModels"
+                    xmlns:local="clr-namespace:GeniusStoreERP.UI.Views">
+    <!-- Dashboard -->
+    <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+        <local:DashboardView/>
+    </DataTemplate>
+    <!-- Categories -->
+    <DataTemplate DataType="{x:Type vms:CategoryListViewModel}">
+        <local:CategoryListView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vms:CategoryEditViewModel}">
+        <local:CategoryEditView/>
+    </DataTemplate>
+    <!-- Products -->
+    <DataTemplate DataType="{x:Type vms:ProductListViewModel}">
+        <local:ProductListView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vms:ProductEditViewModel}">
+        <local:ProductEditView/>
+    </DataTemplate>
+</ResourceDictionary>

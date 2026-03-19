@@ -20,6 +20,7 @@ namespace GeniusStoreERP.UI.Services
         public TViewModel NavigateTo<TViewModel>() where TViewModel : BaseViewModel
         {
             var vm = _serviceProvider.GetRequiredService<TViewModel>();
+            vm.Initialize(null);
             CurrentViewModel = vm;
             Navigated?.Invoke(vm);
             return vm;

@@ -1,0 +1,226 @@
+<UserControl
+        x:Class="GeniusStoreERP.UI.Views.ProductEditView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:GeniusStoreERP.UI.Common"
+        mc:Ignorable="d"
+        d:DesignHeight="700"
+        d:DesignWidth="900"
+        FlowDirection="RightToLeft">
+
+        <UserControl.Resources>
+                <local:DecimalConverter x:Key="DecimalConverter"/>
+        </UserControl.Resources>
+
+        <Grid Background="#FFFFFF">
+                <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Header -->
+                <TextBlock Text="{Binding Title}"
+                           Style="{StaticResource MainHeaderStyle}"
+                           Margin="30,20,30,20"
+                           Grid.Row="0"/>
+
+                <!-- Content Grid with 2 Columns -->
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Auto">
+                        <Grid Margin="30,0,30,30">
+                                <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                        <!-- Name Field -->
+                                        <RowDefinition Height="Auto"/>
+                                        <!-- Category Field -->
+                                        <RowDefinition Height="Auto"/>
+                                        <!-- Price Field -->
+                                        <RowDefinition Height="Auto"/>
+                                        <!-- SKU Field -->
+                                        <RowDefinition Height="Auto"/>
+                                        <!-- Barcode Field -->
+                                        <RowDefinition Height="Auto"/>
+                                        <!-- Reorder Level Field -->
+                                        <RowDefinition Height="Auto"/>
+                                        <!-- Description Field -->
+                                        <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Name Field -->
+                                <TextBlock Text="اسم المنتج"
+                                           Style="{StaticResource FieldLabelStyle}"
+                                           Grid.Row="0"
+                                           Grid.Column="0"
+                                           VerticalAlignment="Center"
+                                           Margin="0,15,10,15"/>
+                                <Border Style="{StaticResource UnifiedInputContainerStyle}"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Margin="0,10,0,10">
+                                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                </Border>
+
+                                <!-- Category Field -->
+                                <TextBlock Text="التصنيف"
+                                           Style="{StaticResource FieldLabelStyle}"
+                                           Grid.Row="1"
+                                           Grid.Column="0"
+                                           VerticalAlignment="Center"
+                                           Margin="0,15,10,15"/>
+                                <Border Style="{StaticResource UnifiedInputContainerStyle}"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Margin="0,10,0,10">
+                                        <ComboBox ItemsSource="{Binding Categories}"
+                                                  SelectedValuePath="Id"
+                                                  DisplayMemberPath="Name"
+                                                  SelectedValue="{Binding CategoryId, UpdateSourceTrigger=PropertyChanged}"
+                                                  IsEditable="True"
+                                                  IsTextSearchEnabled="True"
+                                                  TextSearch.TextPath="Name"
+                                                  Style="{StaticResource UnifiedComboBoxStyle}"/>
+                                </Border>
+
+                                <!-- Price Field -->
+                                <TextBlock Text="السعر"
+                                           Style="{StaticResource FieldLabelStyle}"
+                                           Grid.Row="2"
+                                           Grid.Column="0"
+                                           VerticalAlignment="Center"
+                                           Margin="0,15,10,15"/>
+                                <Border Style="{StaticResource UnifiedInputContainerStyle}"
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        Margin="0,10,0,10">
+                                        <TextBox Text="{Binding Price}"
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                </Border>
+
+                                <!-- SKU Field -->
+                                <TextBlock Text="SKU"
+                                           Style="{StaticResource FieldLabelStyle}"
+                                           Grid.Row="3"
+                                           Grid.Column="0"
+                                           VerticalAlignment="Center"
+                                           Margin="0,15,10,15"/>
+                                <Border Style="{StaticResource UnifiedInputContainerStyle}"
+                                        Grid.Row="3"
+                                        Grid.Column="1"
+                                        Margin="0,10,0,10">
+                                        <TextBox Text="{Binding SKU, UpdateSourceTrigger=PropertyChanged}"
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                </Border>
+
+                                <!-- Barcode Field -->
+                                <TextBlock Text="Barcode"
+                                           Style="{StaticResource FieldLabelStyle}"
+                                           Grid.Row="4"
+                                           Grid.Column="0"
+                                           VerticalAlignment="Center"
+                                           Margin="0,15,10,15"/>
+                                <Border Style="{StaticResource UnifiedInputContainerStyle}"
+                                        Grid.Row="4"
+                                        Grid.Column="1"
+                                        Margin="0,10,0,10">
+                                        <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBox Text="{Binding Barcode, UpdateSourceTrigger=PropertyChanged}"
+                                                         Style="{StaticResource UnifiedTextBoxStyle}"
+                                                         Grid.Column="0"/>
+                                                <Button Command="{Binding GenerateBarcodeCommand}"
+                                                        Background="Transparent"
+                                                        BorderThickness="0"
+                                                        Cursor="Hand"
+                                                        Grid.Column="1"
+                                                        Margin="10,0,0,0"
+                                                        Padding="8,8,8,8"
+                                                        ToolTip="إنشاء باركود تلقائي">
+                                                        <Viewbox Width="20"
+                                                                        Height="20">
+                                                                <Path Data="{StaticResource IconBarcode}"
+                                                                      Fill="{StaticResource AccentActionBrush}"
+                                                                      Stretch="Uniform"/>
+                                                        </Viewbox>
+                                                </Button>
+                                        </Grid>
+                                </Border>
+
+                                <!-- Reorder Level Field -->
+                                <TextBlock Text="حد الطلب"
+                                           Style="{StaticResource FieldLabelStyle}"
+                                           Grid.Row="5"
+                                           Grid.Column="0"
+                                           VerticalAlignment="Center"
+                                           Margin="0,15,10,15"/>
+                                <Border Style="{StaticResource UnifiedInputContainerStyle}"
+                                        Grid.Row="5"
+                                        Grid.Column="1"
+                                        Margin="0,10,0,10">
+                                        <TextBox Text="{Binding ReorderLevel}"
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                </Border>
+
+                                <!-- Description Field -->
+                                <TextBlock Text="الوصف"
+                                           Style="{StaticResource FieldLabelStyle}"
+                                           Grid.Row="6"
+                                           Grid.Column="0"
+                                           VerticalAlignment="Top"
+                                           Margin="0,15,10,15"/>
+                                <Border Style="{StaticResource UnifiedInputContainerStyle}"
+                                        Grid.Row="6"
+                                        Grid.Column="1"
+                                        Height="120"
+                                        Margin="0,10,0,10">
+                                        <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"
+                                                 AcceptsReturn="True"
+                                                 TextWrapping="Wrap"
+                                                 VerticalContentAlignment="Top"/>
+                                </Border>
+                        </Grid>
+                </ScrollViewer>
+
+                <!-- Action Buttons -->
+                <Grid Grid.Row="2"
+                      Margin="30,20,30,20">
+                        <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Command="{Binding SaveCommand}"
+                                Content="حفظ المنتج"
+                                Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                                Grid.Column="0"
+                                Margin="0,0,10,0"/>
+
+                        <Button Command="{Binding CancelCommand}"
+                                Content="إلغاء"
+                                Background="#F5F6F7"
+                                Foreground="#7F8C8D"
+                                Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                                Grid.Column="1"
+                                Margin="10,0,0,0">
+                                <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}"
+                                                        CornerRadius="8">
+                                                        <ContentPresenter HorizontalAlignment="Center"
+                                                                          VerticalAlignment="Center"/>
+                                                </Border>
+                                        </ControlTemplate>
+                                </Button.Template>
+                        </Button>
+                </Grid>
+        </Grid>
+</UserControl>

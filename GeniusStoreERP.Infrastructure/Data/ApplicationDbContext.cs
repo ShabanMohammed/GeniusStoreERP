@@ -1,5 +1,6 @@
 using GeniusStoreERP.Application.Common.Interfaces;
 using GeniusStoreERP.Domain.Entities;
+using GeniusStoreERP.Domain.Entities.Stock;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;

@@ -1,5 +1,5 @@
 using AutoMapper;
-using GeniusStoreERP.Domain.Entities;
+using GeniusStoreERP.Domain.Entities.Stock;
 
 namespace GeniusStoreERP.Application.Products.Queries.GetProductById;
 
