@@ -4,8 +4,7 @@ using System.Windows;
 
 namespace GeniusStoreERP.UI.Services;
 
-public static class MessageBoxService
-{
+public static class MessageBoxService {
     public static void ShowSuccess(string message, string title = "نجاح")
     {
         Show(message, title, MessageBoxType.Success);
@@ -47,3 +46,4 @@ public static class MessageBoxService
         return viewModel.Result;
     }
 }
+

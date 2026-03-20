@@ -19,12 +19,12 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
 
         if (category == null)
         {
-            throw new NotFoundException(request.Id);
+            throw new NotFoundException();
         }
         var rsulte = await dbContext.Products.CountAsync(p => p.CategoryId == request.Id, cancellationToken);
         if (rsulte > 0)
         {
-            throw new BusinessException("لا يمكن حذف هذا التصنيف لأنه مرتبط بمنتجات");
+            throw new RelatedRecordsExistException();
         }
 
         category.IsDeleted = true;

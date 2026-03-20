@@ -31,7 +31,7 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, P
 
         if (product == null)
         {
-            throw new NotFoundException(request.Id);
+            throw new NotFoundException();
         }
 
         return product;

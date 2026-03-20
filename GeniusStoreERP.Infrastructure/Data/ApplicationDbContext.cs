@@ -1,5 +1,6 @@
 using GeniusStoreERP.Application.Common.Interfaces;
 using GeniusStoreERP.Domain.Entities;
+using GeniusStoreERP.Domain.Entities.Partners;
 using GeniusStoreERP.Domain.Entities.Stock;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,8 +17,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Categories { get; set; }
-    public DbSet<Customer> Customers { get; set; }
-    public DbSet<Order> Orders { get; set; }
+    public DbSet<Partner> Partners { get; set; }
 
     public new DbSet<ApplicationUser> Users { get; set; }
 

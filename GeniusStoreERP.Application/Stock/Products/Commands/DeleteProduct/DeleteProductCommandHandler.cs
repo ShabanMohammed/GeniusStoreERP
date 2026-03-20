@@ -18,7 +18,7 @@ public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand>
         var entity = _dbContext.Products.FirstOrDefault(p => p.Id == request.Id);
         if (entity == null)
         {
-            throw new NotFoundException("هذا المنتج غير موجود");
+            throw new NotFoundException();
         }
 
         entity.IsDeleted = true;

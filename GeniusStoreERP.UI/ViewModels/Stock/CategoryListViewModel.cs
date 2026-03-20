@@ -1,4 +1,5 @@
 using GeniusStoreERP.Application.Dtos;
+using GeniusStoreERP.Application.Exceptions;
 using GeniusStoreERP.Application.Stock.Categories.Commands.DeleteCategory;
 using GeniusStoreERP.Application.Stock.Categories.Queries.GetCategories;
 using GeniusStoreERP.UI.Common;
@@ -155,6 +156,15 @@ public class CategoryListViewModel : BaseViewModel
             {
                 await _mediator.Send(command);
                 await LoadCategoriesAsync();
+
+
+            catch (NotFoundException)
+            {
+                MessageBoxService.ShowError("هذا التصنيف غير موجود");
+            }
+            catch (RelatedRecordsExistException)
+            {
+                MessageBoxService.ShowError("لا يمكن حذف هذا التصنيف لانه مرتبط بصنف اخر");
             }
             catch (Exception ex)
             {

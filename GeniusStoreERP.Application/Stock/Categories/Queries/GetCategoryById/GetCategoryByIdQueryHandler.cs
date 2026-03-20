@@ -31,7 +31,7 @@ public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery,
             .FirstOrDefaultAsync(cancellationToken);
         if (category == null)
         {
-            throw new NotFoundException(request.Id);
+            throw new NotFoundException();
         }
         return category;
     }

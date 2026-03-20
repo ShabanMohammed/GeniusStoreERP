@@ -20,7 +20,7 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand>
         var product = await dbContext.Products.FirstOrDefaultAsync(p => p.Id == request.Id && !p.IsDeleted, cancellationToken);
         if (product == null)
         {
-            throw new NotFoundException("المنتج غير موجود.");
+            throw new NotFoundException();
         }
 
         product.Name = request.Name.Sanitize() ?? string.Empty;

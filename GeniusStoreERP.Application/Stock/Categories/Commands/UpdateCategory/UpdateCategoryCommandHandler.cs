@@ -19,7 +19,7 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
         var category = await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == request.Id && !c.IsDeleted, cancellationToken);
         if (category == null)
         {
-            throw new NotFoundException("التصنيف غير موجود");
+            throw new NotFoundException();
         }
         category.Name = request.Name.Sanitize() ?? string.Empty;
         category.Description = request.Description?.Sanitize();
