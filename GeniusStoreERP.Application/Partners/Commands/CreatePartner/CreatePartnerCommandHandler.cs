@@ -18,27 +18,23 @@ public class CreatePartnerCommandHandler : IRequestHandler<CreatePartnerCommand,
     public async Task<int> Handle(CreatePartnerCommand request, CancellationToken cancellationToken)
     {
         var cleanName = request.Name.Sanitize() ?? string.Empty;
-        var existingPartner = await _context.Partners.FirstOrDefaultAsync(p => p.Name == cleanName, cancellationToken);
+        var existingPartner = await _context.Partners
+            .IgnoreQueryFilters()
+            .FirstOrDefaultAsync(p => p.Name == cleanName, cancellationToken);
+
         if (existingPartner != null)
         {
-            if (existingPartner.IsCustomer && request.IsCustomer)
+            if (existingPartner.IsDeleted)
             {
-                throw new BusinessException();
-            }
-            if (existingPartner.IsSupplier && request.IsSupplier)
-            {
-                throw new BusinessException();
-            }
-            if (!existingPartner.IsCustomer && request.IsCustomer)
-            {
-                throw new EntityConflictException();
-            }
-            if (!existingPartner.IsSupplier && request.IsSupplier)
-            {
-                throw new EntityConflictException();
+                throw new EntityDeletedException(existingPartner);
             }
 
-            throw new BusinessException();
+            if ((existingPartner.IsCustomer && request.IsCustomer) || (existingPartner.IsSupplier && request.IsSupplier))
+            {
+                throw new BusinessException();
+            }
+            
+            throw new EntityConflictException(existingPartner);
         }
 
 

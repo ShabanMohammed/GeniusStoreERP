@@ -1,4 +1,4 @@
-using GeniusStoreERP.Application.Dtos;
+using GeniusStoreERP.Application.Dtos.ListItemDto;
 using GeniusStoreERP.Application.Products.Queries.GetProductById;
 using GeniusStoreERP.Application.Stock.Categories.Queries.GetCategoriesList;
 using GeniusStoreERP.Application.Stock.Products.Commands.CreeteProduct;

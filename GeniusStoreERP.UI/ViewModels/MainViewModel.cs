@@ -1,6 +1,7 @@
 using GeniusStoreERP.UI.Common;
 using GeniusStoreERP.UI.Services;
 using GeniusStoreERP.UI.ViewModels.Stock;
+using GeniusStoreERP.UI.ViewModels.Partners;
 using GeniusStoreERP.UI.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
@@ -99,7 +100,14 @@ public class MainViewModel : BaseViewModel
                     case "المنتجات":
                         _navigationService.NavigateTo<ProductListViewModel>();
                         break;
+                    case "العملاء":
+                        _navigationService.NavigateTo<PartnerListViewModel>("Customers");
+                        break;
+                    case "الموردين":
+                        _navigationService.NavigateTo<PartnerListViewModel>("Suppliers");
+                        break;
                 }
+
             }
         });
 
@@ -129,7 +137,16 @@ public class MainViewModel : BaseViewModel
 
         NavItems.Add(new NavItem { Title = "المبيعات", IconKey = "IconSuccess" });
         NavItems.Add(new NavItem { Title = "المشتريات", IconKey = "IconSettings" });
-        NavItems.Add(new NavItem { Title = "العملاء", IconKey = "IconUsers" });
+        NavItems.Add(new NavItem 
+        { 
+            Title = "الشركاء", 
+            IconKey = "IconUsers",
+            SubItems = 
+            {
+                new NavItem { Title = "العملاء", IconKey = "IconUsers" },
+                new NavItem { Title = "الموردين", IconKey = "IconUsers" }
+            }
+        });
         NavItems.Add(new NavItem { Title = "الإعدادات", IconKey = "IconSettings" });
 
         SelectedNavItem = NavItems[0];

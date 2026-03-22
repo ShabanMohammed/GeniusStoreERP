@@ -11,12 +11,18 @@ public class CreatePartnerCommandValidator : AbstractValidator<CreatePartnerComm
             .MaximumLength(100).WithMessage("لا يمكن أن يتجاوز الاسم 100 حرف.");
 
         RuleFor(x => x.Email)
-            .EmailAddress().WithMessage("تنسيق البريد الإلكتروني غير صحيح.");
+            .EmailAddress()
+                .When(x => !string.IsNullOrWhiteSpace(x.Email))
+                .WithMessage("تنسيق البريد الإلكتروني غير صحيح.");
 
         RuleFor(x => x.PhoneNumber)
-                        .Matches(@"^\+?[1-9]\d{1,14}$").WithMessage("تنسيق رقم الهاتف غير صحيح.");
+            .Matches(@"^[+\d\s\-\(\).]{7,15}$")
+                .When(x => !string.IsNullOrWhiteSpace(x.PhoneNumber))
+                .WithMessage("تنسيق رقم الهاتف غير صحيح (يقبل الأرقام المحلية والدولية).");
 
         RuleFor(x => x.Address)
-                      .MaximumLength(200).WithMessage("لا يمكن أن يتجاوز العنوان 200 حرف.");
+            .MaximumLength(200)
+                .When(x => !string.IsNullOrWhiteSpace(x.Address))
+                .WithMessage("لا يمكن أن يتجاوز العنوان 200 حرف.");
     }
 }

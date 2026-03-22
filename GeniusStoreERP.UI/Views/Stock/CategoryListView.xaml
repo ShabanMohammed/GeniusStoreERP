@@ -229,9 +229,9 @@
                         Padding="0"
                         Margin="0,0,5,0"
                         ToolTip="الصفحة الأولى">
-                    <TextBlock Text="|«"
-                            FontWeight="Bold"
-                            FontSize="16"/>
+                    <Viewbox Width="18" Height="18">
+                        <Path Data="{StaticResource IconFirstPage}" Fill="White" Stretch="Uniform"/>
+                    </Viewbox>
                 </Button>
 
                 <!-- Previous Page -->
@@ -241,9 +241,9 @@
                         Height="35"
                         Padding="0"
                         ToolTip="الصفحة السابقة">
-                    <TextBlock Text="«"
-                            FontWeight="Bold"
-                            FontSize="16"/>
+                    <Viewbox Width="18" Height="18">
+                        <Path Data="{StaticResource IconPreviousPage}" Fill="White" Stretch="Uniform"/>
+                    </Viewbox>
                 </Button>
 
                 <!-- Page Info -->
@@ -271,9 +271,9 @@
                         Height="35"
                         Padding="0"
                         ToolTip="الصفحة التالية">
-                    <TextBlock Text="»"
-                            FontWeight="Bold"
-                            FontSize="16"/>
+                    <Viewbox Width="18" Height="18">
+                        <Path Data="{StaticResource IconNextPage}" Fill="White" Stretch="Uniform"/>
+                    </Viewbox>
                 </Button>
 
                 <!-- Last Page -->
@@ -284,11 +284,12 @@
                         Padding="0"
                         Margin="5,0,0,0"
                         ToolTip="الصفحة الأخيرة">
-                    <TextBlock Text="»|"
-                            FontWeight="Bold"
-                            FontSize="16"/>
+                    <Viewbox Width="18" Height="18">
+                        <Path Data="{StaticResource IconLastPage}" Fill="White" Stretch="Uniform"/>
+                    </Viewbox>
                 </Button>
             </StackPanel>
+
         </Grid>
     </Grid>
 </UserControl>

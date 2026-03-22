@@ -1,7 +1,7 @@
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using GeniusStoreERP.Application.Common.Interfaces;
-using GeniusStoreERP.Application.Dtos;
+using GeniusStoreERP.Application.Dtos.ListItemDto;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

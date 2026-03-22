@@ -8,7 +8,9 @@ using GeniusStoreERP.Infrastructure.Data;
 using GeniusStoreERP.UI.Services;
 using GeniusStoreERP.UI.ViewModels;
 using GeniusStoreERP.UI.ViewModels.Stock;
+using GeniusStoreERP.UI.ViewModels.Partners;
 using GeniusStoreERP.UI.Views;
+using GeniusStoreERP.UI.Views.Partners;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -75,6 +77,11 @@ namespace GeniusStoreERP.UI
                 services.AddTransient<ProductListViewModel>();
                 services.AddTransient<ProductEditView>();
                 services.AddTransient<ProductEditViewModel>();
+
+                services.AddTransient<PartnerListView>();
+                services.AddTransient<PartnerListViewModel>();
+                services.AddTransient<PartnerEditView>();
+                services.AddTransient<PartnerEditViewModel>();
 
                 // 7. بناء الـ ServiceProvider النهائي
                 ServiceProvider = services.BuildServiceProvider();

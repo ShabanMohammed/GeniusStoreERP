@@ -24,62 +24,86 @@
         </ResourceDictionary>
     </Window.Resources>
     
-    <Border Style="{StaticResource UnifiedCardStyle}" Margin="20">
-        <StackPanel>
-            <!-- Header Section -->
-            <Grid Margin="0,0,0,20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                
-                <Path Data="{Binding IconKey, Converter={StaticResource ResourceKeyToDataConverter}}" 
-                      Fill="{Binding StatusBrushKey, Converter={StaticResource ResourceKeyToBrushConverter}}"
-                      Width="40" Height="40" Stretch="Uniform" VerticalAlignment="Center"/>
-                
-                <TextBlock Grid.Column="1" Text="{Binding Title}" 
-                           Style="{StaticResource MainHeaderStyle}" 
-                           Margin="15,0,0,0" VerticalAlignment="Center" FontSize="20"/>
-            </Grid>
+    <Grid>
+        <!-- Shadow & Main Frame -->
+        <Border Style="{StaticResource UnifiedCardStyle}" Margin="20" BorderBrush="#DCDFE3" BorderThickness="1.5">
+            <StackPanel>
+                <!-- Header Section -->
+                <Grid Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Path Data="{Binding IconKey, Converter={StaticResource ResourceKeyToDataConverter}}" 
+                          Fill="{Binding StatusBrushKey, Converter={StaticResource ResourceKeyToBrushConverter}}"
+                          Width="40" Height="40" Stretch="Uniform" VerticalAlignment="Center"/>
+                    
+                    <TextBlock Grid.Column="1" Text="{Binding Title}" 
+                               Style="{StaticResource MainHeaderStyle}" 
+                               Margin="15,0,0,0" VerticalAlignment="Center" FontSize="20"/>
+                </Grid>
 
-            <!-- Message Content -->
-            <TextBlock Text="{Binding Message}" 
-                       Style="{StaticResource SubHeaderStyle}" 
-                       Foreground="{StaticResource MainContentTextBrush}"
-                       TextWrapping="Wrap" Margin="0,0,0,25" FontSize="15" LineHeight="22"/>
+                <!-- Message Content -->
+                <TextBlock Text="{Binding Message}" 
+                           Style="{StaticResource SubHeaderStyle}" 
+                           Foreground="{StaticResource MainContentTextBrush}"
+                           TextWrapping="Wrap" Margin="0,0,0,25" FontSize="15" LineHeight="22"/>
 
-            <!-- Buttons Section -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <StackPanel.Style>
-                    <Style TargetType="StackPanel">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsConfirmation}" Value="True">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
-                <Button Content="تم" Command="{Binding OkCommand}" 
-                        Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="100"/>
+                <!-- Buttons Section -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsConfirmation}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <Button Content="تم" Command="{Binding OkCommand}" 
+                            Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="100"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsConfirmation}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <Button Content="لا" Command="{Binding NoCommand}" 
+                            Background="#E0E0E0" Foreground="#2D3436"
+                            Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="100" Margin="0,0,10,0"/>
+                    <Button Content="نعم" Command="{Binding YesCommand}" 
+                            Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="100"/>
+                </StackPanel>
             </StackPanel>
+        </Border>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <StackPanel.Style>
-                    <Style TargetType="StackPanel">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsConfirmation}" Value="True">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
-                <Button Content="لا" Command="{Binding NoCommand}" 
-                        Background="#E0E0E0" Foreground="#2D3436"
-                        Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="100" Margin="0,0,10,0"/>
-                <Button Content="نعم" Command="{Binding YesCommand}" 
-                        Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="100"/>
-            </StackPanel>
-        </StackPanel>
-    </Border>
+        <!-- Close Button (Visual Left in RTL) -->
+        <Button Command="{Binding CancelCommand}" 
+                Background="Transparent" 
+                BorderThickness="0" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Top" 
+                Margin="0,35,35,0" 
+                Cursor="Hand" 
+                Padding="5">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="Transparent">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Viewbox Width="12" Height="12">
+                <Path Data="{StaticResource IconClose}" Fill="#95A5A6" Stretch="Uniform"/>
+            </Viewbox>
+        </Button>
+    </Grid>
 </Window>

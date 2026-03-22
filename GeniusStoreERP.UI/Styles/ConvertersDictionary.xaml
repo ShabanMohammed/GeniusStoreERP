@@ -5,5 +5,6 @@
     <common:ResourceKeyToDataConverter x:Key="ResourceKeyToDataConverter" />
     <common:ResourceKeyToBrushConverter x:Key="ResourceKeyToBrushConverter" />
     <common:NumericToVisibilityConverter x:Key="NumericToVisibilityConverter" />
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     
 </ResourceDictionary>

@@ -1,5 +1,6 @@
-﻿using AutoMapper;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using GeniusStoreERP.Application.Common;
 using GeniusStoreERP.Application.Common.Interfaces;
 using GeniusStoreERP.Application.Dtos;
 using MediatR;
@@ -8,14 +9,14 @@ using Microsoft.EntityFrameworkCore;
 namespace GeniusStoreERP.Application.Partners.Queries.GetPartners;
 
 public record GetPartnersCommand(
-    string searchText,
-    bool IsSupplier,
-    bool IsCustomer,
+    string? searchText = null,
+    bool IsSupplier = false,
+    bool IsCustomer = false,
     int pageSize = 10,
     int currentPage = 1
-    ) : IRequest<List<PartnerDto>>;
+    ) : IRequest<PagedResponse<PartnerDto>>;
 
-public class GetPartnersCommandHandler : IRequestHandler<GetPartnersCommand, List<PartnerDto>>
+public class GetPartnersCommandHandler : IRequestHandler<GetPartnersCommand, PagedResponse<PartnerDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -25,7 +26,7 @@ public class GetPartnersCommandHandler : IRequestHandler<GetPartnersCommand, Lis
         _context = context;
         _mapper = mapper;
     }
-    public async Task<List<PartnerDto>> Handle(GetPartnersCommand request, CancellationToken cancellationToken)
+    public async Task<PagedResponse<PartnerDto>> Handle(GetPartnersCommand request, CancellationToken cancellationToken)
     {
         var query = _context.Partners.AsNoTracking().Where(x => !x.IsDeleted);
 
@@ -45,17 +46,20 @@ public class GetPartnersCommandHandler : IRequestHandler<GetPartnersCommand, Lis
         }
         if (request.IsCustomer)
         {
-            query = query.Where(x => !x.IsCustomer);
+            query = query.Where(x => x.IsCustomer);
         }
 
-        return await query
+        var count = await query.CountAsync(cancellationToken);
+
+        var items = await query
             .OrderBy(x => x.Name)
             .Skip((request.currentPage - 1) * request.pageSize)
             .Take(request.pageSize)
             .ProjectTo<PartnerDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 
-
+        return new PagedResponse<PartnerDto>(items, count, request.currentPage, request.pageSize);
     }
 }
+
 

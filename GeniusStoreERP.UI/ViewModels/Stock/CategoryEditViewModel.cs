@@ -67,7 +67,7 @@ public class CategoryEditViewModel : BaseViewModel
             Id = category.Id;
             Name = category.Name;
             Description = category.Description;
-            Title = "تعديل التصنيف";
+            Title = category.Id == 0 ? "إضافة تصنيف جديد" : "تعديل التصنيف";
         }
     }
 

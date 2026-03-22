@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using GeniusStoreERP.Application.Common.Interfaces;
 using GeniusStoreERP.Application.Dtos;
 using GeniusStoreERP.Application.Exceptions;
@@ -24,7 +24,7 @@ public class GetPartnerByIdQueryHandler : IRequestHandler<GetPartnerByIdQuery, P
         }
         if (partner.IsDeleted)
         {
-            throw new EntityDeletedException();
+            throw new EntityDeletedException(partner);
         }
         return _mapper.Map<PartnerDto>(partner);
 

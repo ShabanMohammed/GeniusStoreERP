@@ -1,0 +1,279 @@
+<UserControl x:Class="GeniusStoreERP.UI.Views.Partners.PartnerListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:GeniusStoreERP.UI.ViewModels.Partners"
+             mc:Ignorable="d"
+             d:DesignHeight="720"
+             d:DesignWidth="1000"
+             FlowDirection="RightToLeft">
+
+    <Grid Margin="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top Section: Header & Actions -->
+        <Grid Grid.Row="0" Margin="0,0,0,25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="{Binding ModeTitle}"
+                     Style="{StaticResource MainHeaderStyle}"
+                     Grid.Column="0"
+                     VerticalAlignment="Center"/>
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+
+                <!-- Search Bar -->
+                <Border Style="{StaticResource UnifiedInputContainerStyle}"
+                        Width="300"
+                        Margin="0,0,15,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Viewbox Width="18" Height="18" Margin="10,0,0,0">
+                            <Path Data="{StaticResource IconSearch}" Fill="#95A5A6" Stretch="Uniform"/>
+                        </Viewbox>
+                        <TextBox Grid.Column="1"
+                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource UnifiedTextBoxStyle}"
+                                 Tag="بحث عن شريك..."/>
+                    </Grid>
+                </Border>
+
+                <!-- Add Button -->
+                <Button Command="{Binding AddCommand}"
+                        Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                        Width="150"
+                        ToolTip="إضافة شريك جديد">
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox Width="16" Height="16" Margin="0,0,8,0">
+                            <Path Data="{StaticResource IconAdd}" Fill="White" Stretch="Uniform"/>
+                        </Viewbox>
+                        <TextBlock Text="{Binding AddButtonTitle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- Center Section: DataGrid Area -->
+        <Border Grid.Row="1" Background="White" CornerRadius="12" Effect="{StaticResource UnifiedCardStyle_ShadowOnly}">
+            <DataGrid ItemsSource="{Binding Partners}" SelectedItem="{Binding SelectedPartner}">
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick"
+                                  Command="{Binding EditCommand}"
+                                  CommandParameter="{Binding SelectedPartner}"/>
+                </DataGrid.InputBindings>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="كود" Binding="{Binding Id}" Width="60"/>
+                    <DataGridTextColumn Header="الاسم" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="رقم الهاتف" Binding="{Binding PhoneNumber}" Width="150"/>
+                    <DataGridTextColumn Header="البريد الإلكتروني" Binding="{Binding Email}" Width="150"/>
+                    <DataGridTextColumn Header="العنوان" Binding="{Binding Address}" Width="*"/>
+                    
+                    <DataGridTemplateColumn Header="إضافة/حذف دور" Width="130">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding DataContext.ToggleRoleCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}"
+                                        Background="Transparent" BorderThickness="0" Cursor="Hand"
+                                        HorizontalAlignment="Left">
+                                    <Grid>
+                                        <!-- Supplier Role Management (Visible in Customers view) -->
+                                        <Border CornerRadius="12" Padding="10,4" BorderThickness="1"
+                                                Visibility="{Binding DataContext.IsCustomerFilter, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="#F5F6F7"/>
+                                                    <Setter Property="BorderBrush" Value="#DCDFE3"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSupplier}" Value="True">
+                                                            <Setter Property="Background" Value="#E3F2FD"/>
+                                                            <Setter Property="BorderBrush" Value="#2196F3"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Viewbox Width="12" Height="12" Margin="0,0,6,0">
+                                                    <Path Fill="#7F8C8D" Stretch="Uniform">
+                                                        <Path.Style>
+                                                            <Style TargetType="Path">
+                                                                <Setter Property="Data" Value="{StaticResource IconAdd}"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding IsSupplier}" Value="True">
+                                                                        <Setter Property="Data" Value="{StaticResource IconDelete}"/>
+                                                                        <Setter Property="Fill" Value="#1565C0"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Path.Style>
+                                                    </Path>
+                                                </Viewbox>
+                                                <TextBlock FontSize="11" FontWeight="SemiBold" Text="مورد">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Foreground" Value="#7F8C8D"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsSupplier}" Value="True">
+                                                                    <Setter Property="Foreground" Value="#1565C0"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!-- Customer Role Management (Visible in Suppliers view) -->
+                                        <Border CornerRadius="12" Padding="10,4" BorderThickness="1"
+                                                Visibility="{Binding DataContext.IsSupplierFilter, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="#F5F6F7"/>
+                                                    <Setter Property="BorderBrush" Value="#DCDFE3"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsCustomer}" Value="True">
+                                                            <Setter Property="Background" Value="#E8F5E9"/>
+                                                            <Setter Property="BorderBrush" Value="#4CAF50"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Viewbox Width="12" Height="12" Margin="0,0,6,0">
+                                                    <Path Fill="#7F8C8D" Stretch="Uniform">
+                                                        <Path.Style>
+                                                            <Style TargetType="Path">
+                                                                <Setter Property="Data" Value="{StaticResource IconAdd}"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding IsCustomer}" Value="True">
+                                                                        <Setter Property="Data" Value="{StaticResource IconDelete}"/>
+                                                                        <Setter Property="Fill" Value="#2E7D32"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Path.Style>
+                                                    </Path>
+                                                </Viewbox>
+                                                <TextBlock FontSize="11" FontWeight="SemiBold" Text="عميل">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Foreground" Value="#7F8C8D"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsCustomer}" Value="True">
+                                                                    <Setter Property="Foreground" Value="#2E7D32"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="الإجراءات" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}"
+                                            Background="Transparent" BorderThickness="0" Margin="0,0,5,0" ToolTip="تعديل">
+                                        <Viewbox Width="18" Height="18">
+                                            <Path Data="{StaticResource IconEdit}" Fill="{StaticResource AccentActionBrush}" Stretch="Uniform"/>
+                                        </Viewbox>
+                                    </Button>
+                                    <Button Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}"
+                                            Background="Transparent" BorderThickness="0" ToolTip="حذف">
+                                        <Viewbox Width="18" Height="18">
+                                            <Path Data="{StaticResource IconDelete}" Fill="#E74C3C" Stretch="Uniform"/>
+                                        </Viewbox>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <!-- Bottom Section: Pagination -->
+        <Grid Grid.Row="2" Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Page Size Selector -->
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <TextBlock Text="عرض" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="13" Foreground="#7F8C8D"/>
+                <Border Style="{StaticResource UnifiedInputContainerStyle}" Height="35" Margin="0" Padding="2">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Command="{Binding DecreasePageSizeCommand}" Content="-" Width="25" Background="Transparent" BorderThickness="0" FontWeight="Bold"/>
+                        <TextBox Text="{Binding PageSize}" IsReadOnly="True" Width="30" BorderThickness="0" Background="Transparent" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                        <Button Command="{Binding IncreasePageSizeCommand}" Content="+" Width="25" Background="Transparent" BorderThickness="0" FontWeight="Bold"/>
+                    </StackPanel>
+                </Border>
+                <TextBlock Text="عناصر لكل صفحة" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="#7F8C8D"/>
+            </StackPanel>
+
+            <!-- Summary Text -->
+            <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" Foreground="#7F8C8D">
+                <Run Text="عرض القيمة "/>
+                <Run Text="{Binding Partners.Count, Mode=OneWay}" FontWeight="SemiBold"/>
+                <Run Text=" من إجمالي "/>
+                <Run Text="{Binding TotalItems}" FontWeight="SemiBold"/>
+                <Run Text=" عنصر"/>
+            </TextBlock>
+
+            <!-- Navigation Buttons -->
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <Button Command="{Binding FirstPageCommand}" Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="40" Height="35" Margin="0,0,5,0" ToolTip="الصفحة الأولى">
+                    <Viewbox Width="18" Height="18">
+                        <Path Data="{StaticResource IconFirstPage}" Fill="White" Stretch="Uniform"/>
+                    </Viewbox>
+                </Button>
+                <Button Command="{Binding PreviousPageCommand}" Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="40" Height="35" ToolTip="الصفحة السابقة">
+                    <Viewbox Width="18" Height="18">
+                        <Path Data="{StaticResource IconPreviousPage}" Fill="White" Stretch="Uniform"/>
+                    </Viewbox>
+                </Button>
+                <Border Background="#F1F3F5" CornerRadius="5" Padding="15,0" Margin="5,0">
+                    <TextBlock VerticalAlignment="Center" FontSize="13" FontWeight="SemiBold">
+                        <Run Text="صفحة "/>
+                        <Run Text="{Binding CurrentPage}"/>
+                        <Run Text=" من "/>
+                        <Run Text="{Binding TotalPages, Mode=OneWay}"/>
+                    </TextBlock>
+                </Border>
+                <Button Command="{Binding NextPageCommand}" Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="40" Height="35" ToolTip="الصفحة التالية">
+                    <Viewbox Width="18" Height="18">
+                        <Path Data="{StaticResource IconNextPage}" Fill="White" Stretch="Uniform"/>
+                    </Viewbox>
+                </Button>
+                <Button Command="{Binding LastPageCommand}" Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="40" Height="35" Margin="5,0,0,0" ToolTip="الصفحة الأخيرة">
+                    <Viewbox Width="18" Height="18">
+                        <Path Data="{StaticResource IconLastPage}" Fill="White" Stretch="Uniform"/>
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</UserControl>

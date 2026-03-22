@@ -1,4 +1,4 @@
-﻿using GeniusStoreERP.Application.Common.Interfaces;
+using GeniusStoreERP.Application.Common.Interfaces;
 using GeniusStoreERP.Application.Exceptions;
 using MediatR;
 
@@ -22,10 +22,10 @@ public class DeletePartnerCommandHandler : IRequestHandler<DeletePartnerCommand>
         }
         if (partner.IsDeleted)
         {
-            throw new EntityDeletedException();
+            throw new EntityDeletedException(partner);
         }
 
-        _context.Partners.Remove(partner);
+        partner.IsDeleted = true;
         await _context.SaveChangesAsync();
 
     }

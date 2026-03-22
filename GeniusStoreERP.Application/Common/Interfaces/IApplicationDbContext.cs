@@ -1,6 +1,7 @@
 ﻿using GeniusStoreERP.Domain.Entities;
 using GeniusStoreERP.Domain.Entities.Partners;
 using GeniusStoreERP.Domain.Entities.Stock;
+using GeniusStoreERP.Domain.Entities.Transactions;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeniusStoreERP.Application.Common.Interfaces
@@ -11,6 +12,11 @@ namespace GeniusStoreERP.Application.Common.Interfaces
         public DbSet<Category> Categories { get; set; }
         public DbSet<Partner> Partners { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
+
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceItem> InvoiceItems { get; set; }
+        public DbSet<InvoiceType> InvoiceTypes { get; set; }
+        public DbSet<InvoiceStatus> InvoiceStatuses { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
     }

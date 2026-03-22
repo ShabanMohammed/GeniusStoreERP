@@ -3,6 +3,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vms="clr-namespace:GeniusStoreERP.UI.ViewModels.Stock"
                     xmlns:vm="clr-namespace:GeniusStoreERP.UI.ViewModels"
+                    xmlns:vmp="clr-namespace:GeniusStoreERP.UI.ViewModels.Partners"
+                    xmlns:vp="clr-namespace:GeniusStoreERP.UI.Views.Partners"
                     xmlns:local="clr-namespace:GeniusStoreERP.UI.Views">
     <!-- Dashboard -->
     <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
@@ -21,5 +23,11 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vms:ProductEditViewModel}">
         <local:ProductEditView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmp:PartnerListViewModel}">
+        <vp:PartnerListView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmp:PartnerEditViewModel}">
+        <vp:PartnerEditView/>
     </DataTemplate>
 </ResourceDictionary>

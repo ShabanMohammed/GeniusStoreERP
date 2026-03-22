@@ -156,8 +156,7 @@ public class CategoryListViewModel : BaseViewModel
             {
                 await _mediator.Send(command);
                 await LoadCategoriesAsync();
-
-
+            }
             catch (NotFoundException)
             {
                 MessageBoxService.ShowError("هذا التصنيف غير موجود");
