@@ -14,6 +14,7 @@ using GeniusStoreERP.UI.Views.Partners;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -38,8 +39,10 @@ namespace GeniusStoreERP.UI
                 services.AddLogging();
 
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlite(configuration.GetConnectionString("DefaultConnection"))
-                );
+                {
+                    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+                    options.ConfigureWarnings(warnings => warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
+                });
 
                 services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
