@@ -5,6 +5,7 @@ using GeniusStoreERP.Domain.Entities.Stock;
 using GeniusStoreERP.Domain.Entities.Transactions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
 
 namespace GeniusStoreERP.Infrastructure.Data;
@@ -24,10 +25,61 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<InvoiceItem> InvoiceItems { get; set; }
     public DbSet<InvoiceType> InvoiceTypes { get; set; }
     public DbSet<InvoiceStatus> InvoiceStatuses { get; set; }
+    public DbSet<GeneralSettings> GeneralSettings { get; set; }
+    public DbSet<StockTransaction> StockTransactions { get; set; }
+    public DbSet<TransactionType> TransactionTypes { get; set; }
 
 
     public new DbSet<ApplicationUser> Users { get; set; }
 
+
+    ///
+    private IDbContextTransaction? _currenttransaction;
+    public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        _currenttransaction = await Database.BeginTransactionAsync(cancellationToken);
+    }
+
+    public async Task CommitTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        if (_currenttransaction == null) return;
+        try
+        {
+
+            if (_currenttransaction != null)
+                await _currenttransaction.CommitAsync(cancellationToken);
+        }
+        catch
+        {
+            if (_currenttransaction != null)
+                await _currenttransaction.RollbackAsync(cancellationToken);
+            throw;
+        }
+        finally
+        {
+
+            _currenttransaction?.Dispose();
+            _currenttransaction = null;
+
+        }
+    }
+
+    public async Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            if (_currenttransaction != null)
+                await _currenttransaction.RollbackAsync(cancellationToken);
+        }
+        finally
+        {
+
+            _currenttransaction?.Dispose();
+            _currenttransaction = null;
+
+
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -48,6 +100,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             new InvoiceStatus { Id = 2, Name = "آجل" }
 
         );
+
+        builder.Entity<TransactionType>().HasData(
+            new TransactionType { Id = 1, Name = "فاتورة" },
+            new TransactionType { Id = 2, Name = "تسوية" },
+            new TransactionType { Id = 2, Name = "تلف" }
+
+            );
+
 
     }
 

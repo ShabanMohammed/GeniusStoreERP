@@ -2,6 +2,7 @@ using GeniusStoreERP.UI.Common;
 using GeniusStoreERP.UI.Services;
 using GeniusStoreERP.UI.ViewModels.Stock;
 using GeniusStoreERP.UI.ViewModels.Partners;
+using GeniusStoreERP.UI.ViewModels.Transactions;
 using GeniusStoreERP.UI.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
@@ -106,6 +107,18 @@ public class MainViewModel : BaseViewModel
                     case "الموردين":
                         _navigationService.NavigateTo<PartnerListViewModel>("Suppliers");
                         break;
+                    case "فواتير المبيعات":
+                        _navigationService.NavigateTo<InvoiceListViewModel>(1);
+                        break;
+                    case "مرتجع المبيعات":
+                        _navigationService.NavigateTo<InvoiceListViewModel>(3);
+                        break;
+                    case "فواتير المشتريات":
+                        _navigationService.NavigateTo<InvoiceListViewModel>(2);
+                        break;
+                    case "مرتجع المشتريات":
+                        _navigationService.NavigateTo<InvoiceListViewModel>(4);
+                        break;
                 }
 
             }
@@ -135,8 +148,27 @@ public class MainViewModel : BaseViewModel
             }
         });
 
-        NavItems.Add(new NavItem { Title = "المبيعات", IconKey = "IconSuccess" });
-        NavItems.Add(new NavItem { Title = "المشتريات", IconKey = "IconSettings" });
+        NavItems.Add(new NavItem
+        {
+            Title = "المبيعات",
+            IconKey = "IconSuccess",
+            SubItems =
+            {
+                new NavItem { Title = "فواتير المبيعات", IconKey = "IconInformation" },
+                new NavItem { Title = "مرتجع المبيعات", IconKey = "IconExchange" }
+            }
+        });
+
+        NavItems.Add(new NavItem
+        {
+            Title = "المشتريات",
+            IconKey = "IconSettings",
+            SubItems =
+            {
+                new NavItem { Title = "فواتير المشتريات", IconKey = "IconInformation" },
+                new NavItem { Title = "مرتجع المشتريات", IconKey = "IconExchange" }
+            }
+        });
         NavItems.Add(new NavItem 
         { 
             Title = "الشركاء", 

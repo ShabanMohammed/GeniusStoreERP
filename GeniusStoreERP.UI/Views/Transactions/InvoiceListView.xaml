@@ -1,0 +1,308 @@
+<UserControl x:Class="GeniusStoreERP.UI.Views.Transactions.InvoiceListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:GeniusStoreERP.UI.ViewModels.Transactions"
+             mc:Ignorable="d"
+             d:DesignHeight="720"
+             d:DesignWidth="1000"
+             FlowDirection="RightToLeft">
+
+    <Grid Margin="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Header & Search -->
+            <RowDefinition Height="*"/>
+            <!-- DataGrid -->
+            <RowDefinition Height="Auto"/>
+            <!-- Pagination -->
+        </Grid.RowDefinitions>
+
+        <!-- Top Section: Header & Actions -->
+        <Grid Grid.Row="0"
+              Margin="0,0,0,25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="{Binding PageTitle}"
+                       Style="{StaticResource MainHeaderStyle}"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"/>
+
+            <StackPanel Grid.Column="2"
+                        Orientation="Horizontal">
+                <!-- Search Bar -->
+                <Border Style="{StaticResource UnifiedInputContainerStyle}"
+                        Width="300"
+                        Margin="0,0,15,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Viewbox Width="18"
+                                 Height="18"
+                                 Margin="10,0,0,0">
+                            <Path Data="{StaticResource IconSearch}"
+                                  Fill="#95A5A6"
+                                  Stretch="Uniform"/>
+                        </Viewbox>
+                        <TextBox Grid.Column="1"
+                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource UnifiedTextBoxStyle}"
+                                 Tag="بحث عن فاتورة..."/>
+                    </Grid>
+                </Border>
+
+                <!-- Add Button -->
+                <Button Command="{Binding AddInvoiceCommand}"
+                        Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                        Width="150"
+                        ToolTip="إضافة فاتورة جديدة">
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox Width="16"
+                                 Height="16"
+                                 Margin="0,0,8,0">
+                            <Path Data="{StaticResource IconAdd}"
+                                  Fill="White"
+                                  Stretch="Uniform"/>
+                        </Viewbox>
+                        <TextBlock Text="إضافة فاتورة"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- Center Section: DataGrid Area -->
+        <Border Grid.Row="1"
+                Background="White"
+                CornerRadius="12"
+                Effect="{StaticResource UnifiedCardStyle_ShadowOnly}">
+            <DataGrid ItemsSource="{Binding InvoiceList}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      SelectionMode="Single">
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick"
+                                  Command="{Binding EditInvoiceCommand}"
+                                  CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                </DataGrid.InputBindings>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="رقم الفاتورة"
+                                        Binding="{Binding InvoiceNumber}"
+                                        Width="100"/>
+                    <DataGridTextColumn Header="التاريخ"
+                                        Binding="{Binding InvoiceDate, StringFormat=\{0:yyyy/MM/dd\}}"
+                                        Width="120"/>
+                    <DataGridTextColumn Header="الطرف الثاني"
+                                        Binding="{Binding PartnerName}"
+                                        Width="200"/>
+                    <DataGridTextColumn Header="الإجمالي"
+                                        Binding="{Binding FinalAmount, StringFormat=\{0:N2\}}"
+                                        Width="120">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="Margin" Value="0,0,10,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="الحالة"
+                                        Binding="{Binding InvoiceStatus}"
+                                        Width="100"/>
+                    <DataGridTextColumn Header="ملاحظات"
+                                        Binding="{Binding Notes}"
+                                        Width="*"/>
+
+                    <!-- Actions Column -->
+                    <DataGridTemplateColumn Header="الإجراءات"
+                                            Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Center">
+                                    <!-- Edit Button -->
+                                    <Button Command="{Binding DataContext.EditInvoiceCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding }"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Margin="0,0,10,0"
+                                            Cursor="Hand"
+                                            ToolTip="تعديل">
+                                        <Viewbox Width="18"
+                                                 Height="18">
+                                            <Path Data="{StaticResource IconEdit}"
+                                                  Fill="{StaticResource AccentActionBrush}"
+                                                  Stretch="Uniform"/>
+                                        </Viewbox>
+                                    </Button>
+
+                                    <!-- Delete Button -->
+                                    <Button Command="{Binding DataContext.DeleteInvoiceCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Cursor="Hand"
+                                            ToolTip="حذف">
+                                        <Viewbox Width="18"
+                                                 Height="18">
+                                            <Path Data="{StaticResource IconDelete}"
+                                                  Fill="#E74C3C"
+                                                  Stretch="Uniform"/>
+                                        </Viewbox>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <!-- Bottom Section: Pagination -->
+        <Grid Grid.Row="2"
+              Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Page Size Selector -->
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="0">
+                <TextBlock Text="عرض"
+                           VerticalAlignment="Center"
+                           Margin="0,0,10,0"
+                           FontSize="13"
+                           Foreground="#7F8C8D"/>
+                <Border Style="{StaticResource UnifiedInputContainerStyle}"
+                        Height="35"
+                        Margin="0"
+                        Padding="2">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Command="{Binding DecreasePageSizeCommand}"
+                                Content="-"
+                                Width="25"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                FontWeight="Bold"
+                                Cursor="Hand"/>
+                        <TextBox Text="{Binding PageSize}"
+                                 IsReadOnly="True"
+                                 Width="30"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalContentAlignment="Center"
+                                 Padding="0"/>
+                        <Button Command="{Binding IncreasePageSizeCommand}"
+                                Content="+"
+                                Width="25"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                FontWeight="Bold"
+                                Cursor="Hand"/>
+                    </StackPanel>
+                </Border>
+                <TextBlock Text="عناصر لكل صفحة"
+                           VerticalAlignment="Center"
+                           Margin="10,0,0,0"
+                           FontSize="13"
+                           Foreground="#7F8C8D"/>
+            </StackPanel>
+
+            <!-- Summary Text -->
+            <TextBlock Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="13"
+                       Foreground="#7F8C8D">
+                <Run Text="عرض "/>
+                <Run Text="{Binding InvoiceList.Count, Mode=OneWay}"
+                     FontWeight="SemiBold"/>
+                <Run Text=" من إجمالي "/>
+                <Run Text="{Binding TotalItems}"
+                     FontWeight="SemiBold"/>
+                <Run Text=" فاتورة"/>
+            </TextBlock>
+
+            <!-- Navigation Buttons -->
+            <StackPanel Grid.Column="2"
+                        Orientation="Horizontal">
+                <!-- First Page -->
+                <Button Command="{Binding FirstPageCommand}"
+                        Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                        Width="40"
+                        Height="35"
+                        Padding="0"
+                        Margin="0,0,5,0"
+                        ToolTip="الصفحة الأولى">
+                    <Viewbox Width="18" Height="18">
+                        <Path Data="{StaticResource IconFirstPage}" Fill="White" Stretch="Uniform"/>
+                    </Viewbox>
+                </Button>
+
+                <!-- Previous Page -->
+                <Button Command="{Binding PreviousPageCommand}"
+                        Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                        Width="40"
+                        Height="35"
+                        Padding="0"
+                        ToolTip="الصفحة السابقة">
+                    <Viewbox Width="18" Height="18">
+                        <Path Data="{StaticResource IconPreviousPage}" Fill="White" Stretch="Uniform"/>
+                    </Viewbox>
+                </Button>
+
+                <!-- Page Info -->
+                <Border Background="#F1F3F5"
+                        CornerRadius="5"
+                        Padding="15,0"
+                        Margin="5,0">
+                    <TextBlock VerticalAlignment="Center"
+                               FontSize="13"
+                               FontWeight="SemiBold">
+                        <Run Text="صفحة"/>
+                        <Run Text=" "/>
+                        <Run Text="{Binding CurrentPage}"/>
+                        <Run Text=" "/>
+                        <Run Text="من"/>
+                        <Run Text=" "/>
+                        <Run Text="{Binding TotalPages, Mode=OneWay}"/>
+                    </TextBlock>
+                </Border>
+
+                <!-- Next Page -->
+                <Button Command="{Binding NextPageCommand}"
+                        Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                        Width="40"
+                        Height="35"
+                        Padding="0"
+                        ToolTip="الصفحة التالية">
+                    <Viewbox Width="18" Height="18">
+                        <Path Data="{StaticResource IconNextPage}" Fill="White" Stretch="Uniform"/>
+                    </Viewbox>
+                </Button>
+
+                <!-- Last Page -->
+                <Button Command="{Binding LastPageCommand}"
+                        Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                        Width="40"
+                        Height="35"
+                        Padding="0"
+                        Margin="5,0,0,0"
+                        ToolTip="الصفحة الأخيرة">
+                    <Viewbox Width="18" Height="18">
+                        <Path Data="{StaticResource IconLastPage}" Fill="White" Stretch="Uniform"/>
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

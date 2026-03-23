@@ -5,6 +5,8 @@
                     xmlns:vm="clr-namespace:GeniusStoreERP.UI.ViewModels"
                     xmlns:vmp="clr-namespace:GeniusStoreERP.UI.ViewModels.Partners"
                     xmlns:vp="clr-namespace:GeniusStoreERP.UI.Views.Partners"
+                    xmlns:vmt="clr-namespace:GeniusStoreERP.UI.ViewModels.Transactions"
+                    xmlns:vt="clr-namespace:GeniusStoreERP.UI.Views.Transactions"
                     xmlns:local="clr-namespace:GeniusStoreERP.UI.Views">
     <!-- Dashboard -->
     <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
@@ -29,5 +31,9 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmp:PartnerEditViewModel}">
         <vp:PartnerEditView/>
+    </DataTemplate>
+    <!-- Transactions -->
+    <DataTemplate DataType="{x:Type vmt:InvoiceListViewModel}">
+        <vt:InvoiceListView/>
     </DataTemplate>
 </ResourceDictionary>

@@ -1,7 +1,7 @@
 ﻿namespace GeniusStoreERP.Application.Exceptions;
 
-public class BusinessException : Exception
+public class EmptyInoiceException : Exception
 {
-
+   
 
 }

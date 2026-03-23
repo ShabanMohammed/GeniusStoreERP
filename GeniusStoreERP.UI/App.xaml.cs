@@ -1,4 +1,3 @@
-using System.Windows;
 using FluentValidation;
 using GeniusStoreERP.Application.Behaviors;
 using GeniusStoreERP.Application.Common.Interfaces;
@@ -7,16 +6,19 @@ using GeniusStoreERP.Domain.Entities;
 using GeniusStoreERP.Infrastructure.Data;
 using GeniusStoreERP.UI.Services;
 using GeniusStoreERP.UI.ViewModels;
-using GeniusStoreERP.UI.ViewModels.Stock;
 using GeniusStoreERP.UI.ViewModels.Partners;
+using GeniusStoreERP.UI.ViewModels.Stock;
+using GeniusStoreERP.UI.ViewModels.Transactions;
 using GeniusStoreERP.UI.Views;
 using GeniusStoreERP.UI.Views.Partners;
+using GeniusStoreERP.UI.Views.Transactions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Windows;
 
 namespace GeniusStoreERP.UI
 {
@@ -86,6 +88,10 @@ namespace GeniusStoreERP.UI
                 services.AddTransient<PartnerEditView>();
                 services.AddTransient<PartnerEditViewModel>();
 
+                services.AddTransient<InvoiceListView>();
+                services.AddTransient<InvoiceListViewModel>();
+
+
                 // 7. بناء الـ ServiceProvider النهائي
                 ServiceProvider = services.BuildServiceProvider();
 
@@ -137,6 +143,21 @@ namespace GeniusStoreERP.UI
                     await userManager.AddToRoleAsync(adminUser, "Admin");
                 }
             }
+
+            if (!await context.GeneralSettings.AnyAsync())
+            {
+                var generalSettings = new GeneralSettings
+                {
+                    CompanyName = "Genius Store ERP",
+                    TaxPercentage = 14,
+                    CurrencySymbol = "EGP",
+                };
+
+                await context.GeneralSettings.AddAsync(generalSettings);
+                await context.SaveChangesAsync();
+
+            }
+
         }
     }
 }
