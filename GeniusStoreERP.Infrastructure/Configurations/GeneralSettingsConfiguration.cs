@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GeniusStoreERP.Infrastructure.Data.Configurations;
 
-public class GeneralSettingsConfiguration : IEntityTypeConfiguration<GeneralSettings>
+public class GeneralSettingsConfiguration : IEntityTypeConfiguration<GeneralSetting>
 {
-    public void Configure(EntityTypeBuilder<GeneralSettings> builder)
+    public void Configure(EntityTypeBuilder<GeneralSetting> builder)
     {
 
 

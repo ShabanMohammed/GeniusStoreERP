@@ -13,7 +13,7 @@ namespace GeniusStoreERP.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "GeneralSettings",
+                name: "GeneralSetting",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -43,7 +43,7 @@ namespace GeniusStoreERP.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "GeneralSettings");
+                name: "GeneralSetting");
         }
     }
 }

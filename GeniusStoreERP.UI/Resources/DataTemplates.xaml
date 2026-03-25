@@ -36,4 +36,7 @@
     <DataTemplate DataType="{x:Type vmt:InvoiceListViewModel}">
         <vt:InvoiceListView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vmt:InvoiceEditorViewModel}">
+        <vt:InvoiceEditorView/>
+    </DataTemplate>
 </ResourceDictionary>

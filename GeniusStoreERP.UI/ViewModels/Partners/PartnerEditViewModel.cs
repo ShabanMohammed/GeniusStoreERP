@@ -16,7 +16,7 @@ public class PartnerEditViewModel : BaseViewModel
 {
     private readonly INavigationService _navigationService;
     private readonly IMediator _mediator;
-    
+
     private int _id;
     private string _name = string.Empty;
     private string _email = string.Empty;
@@ -103,7 +103,7 @@ public class PartnerEditViewModel : BaseViewModel
             Address = partner.Address;
             IsSupplier = partner.IsSupplier;
             IsCustomer = partner.IsCustomer;
-            
+
             if (Id == 0)
             {
                 Title = IsSupplier && IsCustomer ? "إضافة شريك جديد"

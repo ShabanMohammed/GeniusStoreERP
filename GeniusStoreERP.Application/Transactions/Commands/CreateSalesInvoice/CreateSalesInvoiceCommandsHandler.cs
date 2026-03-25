@@ -1,8 +1,9 @@
-﻿using AutoMapper;
+using AutoMapper;
 using GeniusStoreERP.Application.Common.Interfaces;
 using GeniusStoreERP.Application.Exceptions;
 using GeniusStoreERP.Domain.Entities.Stock;
 using GeniusStoreERP.Domain.Entities.Transactions;
+using GeniusStoreERP.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,10 +26,11 @@ public class CreateSalesInvoiceCommandsHandler : IRequestHandler<CreateSalesInvo
             await _context.BeginTransactionAsync(cancellationToken);
             if (request.InvoiceItems == null || !request.InvoiceItems.Any())
                 throw new EmptyInoiceException();
+
             var lastNumber = await _context.Invoices
-           .Where(i => i.InvoiceTypeId == 1)
-           .Select(i => (int?)i.InvoiceNumber)
-           .MaxAsync<int?>(cancellationToken) ?? 0;
+                .Where(i => i.InvoiceTypeId == (int)InvoiceTypeEnum.Sales)
+                .Select(i => (int?)i.InvoiceNumber)
+                .MaxAsync<int?>(cancellationToken) ?? 0;
 
             var invoice = new Invoice
             {
@@ -41,11 +43,10 @@ public class CreateSalesInvoiceCommandsHandler : IRequestHandler<CreateSalesInvo
                 Notes = request.Notes,
                 PartnerId = request.PartnerId,
                 InvoiceStatusId = request.InvoiceStatusId,
-                InvoiceTypeId = 1,
+                InvoiceTypeId = (int)InvoiceTypeEnum.Sales,
                 InvoiceItems = _mapper.Map<List<InvoiceItem>>(request.InvoiceItems)
-
-
             };
+
             await _context.Invoices.AddAsync(invoice, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
@@ -54,31 +55,38 @@ public class CreateSalesInvoiceCommandsHandler : IRequestHandler<CreateSalesInvo
                 var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == item.ProductId, cancellationToken);
                 if (product != null)
                 {
+                    // التحقق من توفر الكمية الكافية
+                    if (product.StockQuantity < item.Quantity)
+                        throw new InsufficientStockException(product.Name);
+
                     product.StockQuantity -= item.Quantity;
                     _context.Products.Update(product);
+
                     var stockMovement = new StockTransaction
                     {
                         ProductId = item.ProductId,
-                        InvoiceId = invoice.Id, // الربط المباشر بالفاتورة
-                        Quantity = -item.Quantity, // القيمة سالبة لأنها "صرف" من المخزن
-                        TransactionDate = DateTime.Now,
-                        TransactionType = 1 // 1 تعني حركة ناتجة عن فاتورة
+                        InvoiceId = invoice.Id,
+                        Quantity = -item.Quantity,
+                        TransactionDate = invoice.InvoiceDate, // استخدام تاريخ الفاتورة
+                        TransactionType = (int)StockTransactionTypeEnum.Invoice
                     };
                     await _context.StockTransactions.AddAsync(stockMovement, cancellationToken);
                 }
             }
 
-
             await _context.SaveChangesAsync(cancellationToken);
             await _context.CommitTransactionAsync(cancellationToken);
             return invoice.Id;
-
-
         }
-        catch (Exception)
+        catch (BusinessException)
         {
             await _context.RollbackTransactionAsync(cancellationToken);
-            throw new BusinessException();
+            throw;
+        }
+        catch (Exception ex)
+        {
+            await _context.RollbackTransactionAsync(cancellationToken);
+            throw new BusinessException("فشل في إنشاء فاتورة المبيعات", ex);
         }
     }
-}
+}

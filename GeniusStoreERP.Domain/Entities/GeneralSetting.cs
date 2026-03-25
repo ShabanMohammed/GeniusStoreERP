@@ -2,7 +2,7 @@ using GeniusStoreERP.Domain.Common;
 
 namespace GeniusStoreERP.Domain.Entities;
 
-public class GeneralSettings : BaseEntity
+public class GeneralSetting : BaseEntity
 {
 
     public string CompanyName { get; set; } = null!;

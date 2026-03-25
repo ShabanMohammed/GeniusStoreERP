@@ -17,7 +17,7 @@ namespace GeniusStoreERP.Application.Common.Interfaces
         public DbSet<InvoiceItem> InvoiceItems { get; set; }
         public DbSet<InvoiceType> InvoiceTypes { get; set; }
         public DbSet<InvoiceStatus> InvoiceStatuses { get; set; }
-        public DbSet<GeneralSettings> GeneralSettings { get; set; }
+        public DbSet<GeneralSetting> GeneralSettings { get; set; }
         public DbSet<StockTransaction> StockTransactions { get; set; }
         public DbSet<TransactionType> TransactionTypes { get; set; }
 

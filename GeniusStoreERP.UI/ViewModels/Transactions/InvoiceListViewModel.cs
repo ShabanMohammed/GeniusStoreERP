@@ -123,6 +123,10 @@ public class InvoiceListViewModel : BaseViewModel
         _mediator = mediator;
         _navigationService = navigationService;
 
+        pageTitle = string.Empty;
+        invoiceList = new ObservableCollection<InvoiceDto>();
+        searchText = string.Empty;
+
         AddInvoiceCommand = new RelayCommand(_ => NavigateToEditor(null));
         EditInvoiceCommand = new RelayCommand(param => NavigateToEditor(param as InvoiceDto));
         DeleteInvoiceCommand = new AsyncRelayCommand(async (param, _) => await DeleteInvoice(param as InvoiceDto));

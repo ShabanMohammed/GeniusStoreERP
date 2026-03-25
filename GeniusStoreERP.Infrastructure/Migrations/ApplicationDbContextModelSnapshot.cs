@@ -90,7 +90,7 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("GeniusStoreERP.Domain.Entities.GeneralSettings", b =>
+            modelBuilder.Entity("GeniusStoreERP.Domain.Entities.GeneralSetting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -155,7 +155,7 @@ namespace GeniusStoreERP.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GeneralSettings");
+                    b.ToTable("GeneralSetting");
                 });
 
             modelBuilder.Entity("GeniusStoreERP.Domain.Entities.Partners.Partner", b =>
@@ -206,7 +206,7 @@ namespace GeniusStoreERP.Infrastructure.Migrations
 
                     b.HasIndex("Email")
                         .IsUnique()
-                        .HasFilter("\"Email\" IS NOT NULL");
+                        .HasFilter("\"Email\" IS NOT NULL AND \"Email\" != ''");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -297,7 +297,7 @@ namespace GeniusStoreERP.Infrastructure.Migrations
 
                     b.HasIndex("Barcode")
                         .IsUnique()
-                        .HasFilter("\"Barcode\" IS NOT NUll");
+                        .HasFilter("\"Barcode\" IS NOT NUll AND \"Barcode\" != ''");
 
                     b.HasIndex("CategoryId");
 
@@ -306,9 +306,74 @@ namespace GeniusStoreERP.Infrastructure.Migrations
 
                     b.HasIndex("SKU")
                         .IsUnique()
-                        .HasFilter("\"SKU\" IS NOT NUll");
+                        .HasFilter("\"SKU\" IS NOT NUll AND \"SKU\" != ''");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("GeniusStoreERP.Domain.Entities.Stock.StockTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AdjustmentId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("InvoiceId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("TransactionDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("TransactionType")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StockTransactions");
+                });
+
+            modelBuilder.Entity("GeniusStoreERP.Domain.Entities.Stock.TransactionType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TransactionTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "فاتورة"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "تسوية"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "تلف"
+                        });
                 });
 
             modelBuilder.Entity("GeniusStoreERP.Domain.Entities.Transactions.Invoice", b =>

@@ -1,13 +1,13 @@
 using FluentValidation;
 
-namespace GeniusStoreERP.Application.Transactions.Commands.CreateSalesInvoice;
+namespace GeniusStoreERP.Application.Transactions.Commands.CreateReturnPurchaseInvoice;
 
-public class CreateSalesInvoiceCommandValidator : AbstractValidator<CreateSalesInvoiceCommand>
+public class CreateReturnPurchaseInvoiceCommandValidator : AbstractValidator<CreateReturnPurchaseInvoiceCommand>
 {
-    public CreateSalesInvoiceCommandValidator()
+    public CreateReturnPurchaseInvoiceCommandValidator()
     {
         RuleFor(x => x.InvoiceDate).NotEmpty().WithMessage("التاريخ مطلوب");
-        RuleFor(x => x.PartnerId).NotEmpty().WithMessage("العميل مطلوب");
+        RuleFor(x => x.PartnerId).NotEmpty().WithMessage("المورد مطلوب");
         RuleFor(x => x.InvoiceItems).NotEmpty().WithMessage("يجب إضافة صنف واحد على الأقل بالفاتورة");
 
         RuleForEach(x => x.InvoiceItems).ChildRules(items =>
@@ -16,6 +16,5 @@ public class CreateSalesInvoiceCommandValidator : AbstractValidator<CreateSalesI
             items.RuleFor(i => i.Quantity).GreaterThan(0).WithMessage("الكمية يجب أن تكون أكبر من الصفر");
             items.RuleFor(i => i.UnitPrice).GreaterThanOrEqualTo(0).WithMessage("سعر الوحدة لا يمكن أن يكون سالباً");
         });
-
     }
 }

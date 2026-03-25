@@ -25,7 +25,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<InvoiceItem> InvoiceItems { get; set; }
     public DbSet<InvoiceType> InvoiceTypes { get; set; }
     public DbSet<InvoiceStatus> InvoiceStatuses { get; set; }
-    public DbSet<GeneralSettings> GeneralSettings { get; set; }
+    public DbSet<GeneralSetting> GeneralSettings { get; set; }
     public DbSet<StockTransaction> StockTransactions { get; set; }
     public DbSet<TransactionType> TransactionTypes { get; set; }
 
@@ -104,7 +104,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         builder.Entity<TransactionType>().HasData(
             new TransactionType { Id = 1, Name = "فاتورة" },
             new TransactionType { Id = 2, Name = "تسوية" },
-            new TransactionType { Id = 2, Name = "تلف" }
+            new TransactionType { Id = 3, Name = "تلف" }
 
             );
 

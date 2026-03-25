@@ -19,6 +19,8 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace GeniusStoreERP.UI
 {
@@ -90,6 +92,8 @@ namespace GeniusStoreERP.UI
 
                 services.AddTransient<InvoiceListView>();
                 services.AddTransient<InvoiceListViewModel>();
+                services.AddTransient<InvoiceEditorView>();
+                services.AddTransient<InvoiceEditorViewModel>();
 
 
                 // 7. بناء الـ ServiceProvider النهائي
@@ -146,7 +150,7 @@ namespace GeniusStoreERP.UI
 
             if (!await context.GeneralSettings.AnyAsync())
             {
-                var generalSettings = new GeneralSettings
+                var generalSettings = new GeneralSetting
                 {
                     CompanyName = "Genius Store ERP",
                     TaxPercentage = 14,
@@ -158,6 +162,24 @@ namespace GeniusStoreERP.UI
 
             }
 
+        }
+
+        private void SelectAllText(object sender, RoutedEventArgs e)
+        {
+            if (e.OriginalSource is TextBox textBox)
+            {
+                textBox.SelectAll();
+            }
+        }
+
+        // دالة تجعل الماوس يركز على الحقل دون تحريك المؤشر في أول نقرة
+        private void SelectivelyIgnoreMouseButton(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is TextBox textBox && !textBox.IsKeyboardFocusWithin)
+            {
+                e.Handled = true;
+                textBox.Focus();
+            }
         }
     }
 }

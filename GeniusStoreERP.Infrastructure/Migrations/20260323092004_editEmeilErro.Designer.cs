@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GeniusStoreERP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260322175100_InitialGenralSetting")]
-    partial class InitialGenralSetting
+    [Migration("20260323092004_editEmeilErro")]
+    partial class editEmeilErro
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -209,7 +209,7 @@ namespace GeniusStoreERP.Infrastructure.Migrations
 
                     b.HasIndex("Email")
                         .IsUnique()
-                        .HasFilter("\"Email\" IS NOT NULL");
+                        .HasFilter("\"Email\" IS NOT NULL AND \"Email\" != ''");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -300,7 +300,7 @@ namespace GeniusStoreERP.Infrastructure.Migrations
 
                     b.HasIndex("Barcode")
                         .IsUnique()
-                        .HasFilter("\"Barcode\" IS NOT NUll");
+                        .HasFilter("\"Barcode\" IS NOT NUll AND \"Barcode\" != ''");
 
                     b.HasIndex("CategoryId");
 
@@ -309,9 +309,74 @@ namespace GeniusStoreERP.Infrastructure.Migrations
 
                     b.HasIndex("SKU")
                         .IsUnique()
-                        .HasFilter("\"SKU\" IS NOT NUll");
+                        .HasFilter("\"SKU\" IS NOT NUll AND \"SKU\" != ''");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("GeniusStoreERP.Domain.Entities.Stock.StockTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AdjustmentId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("InvoiceId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("TransactionDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("TransactionType")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StockTransactions");
+                });
+
+            modelBuilder.Entity("GeniusStoreERP.Domain.Entities.Stock.TransactionType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TransactionTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "فاتورة"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "تسوية"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "تلف"
+                        });
                 });
 
             modelBuilder.Entity("GeniusStoreERP.Domain.Entities.Transactions.Invoice", b =>

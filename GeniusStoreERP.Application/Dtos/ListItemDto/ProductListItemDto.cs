@@ -5,7 +5,8 @@ namespace GeniusStoreERP.Application.Dtos.ListItemDto;
 
 public record ProductListItemDto(
     int Id,
-    string Name
+    string Name,
+    decimal Price
    );
 public class ProductListItemDtoProfile : Profile
 {
