@@ -69,7 +69,7 @@ public class CreateSalesInvoiceCommandsHandler : IRequestHandler<CreateSalesInvo
                         InvoiceId = invoice.Id,
                         Quantity = -item.Quantity, // سالب للمبيعات
                         TransactionDate = invoice.InvoiceDate,
-                        TransactionType = (int)StockTransactionTypeEnum.Invoice,
+                        StockTransactionTypeId = (int)StockTransactionTypeEnum.Invoice,
                         InvoiceReference = invoice.InvoiceNumber.ToString(),
                         Remarks = "مبيعات",
                     };
@@ -92,4 +92,4 @@ public class CreateSalesInvoiceCommandsHandler : IRequestHandler<CreateSalesInvo
             throw new BusinessException("فشل في إنشاء فاتورة المبيعات", ex);
         }
     }
-}
+}

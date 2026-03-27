@@ -27,7 +27,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<InvoiceStatus> InvoiceStatuses { get; set; }
     public DbSet<GeneralSetting> GeneralSettings { get; set; }
     public DbSet<StockTransaction> StockTransactions { get; set; }
-    public DbSet<StockTransactionType> TransactionTypes { get; set; }
+    public DbSet<StockTransactionType> StockTransactionTypes { get; set; }
 
 
     public new DbSet<ApplicationUser> Users { get; set; }
@@ -73,10 +73,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         }
         finally
         {
-
             _currenttransaction?.Dispose();
             _currenttransaction = null;
-
 
         }
     }
@@ -86,14 +84,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-        // Seed Data لجدول أنواع الفواتير
        
-
-      
-       
-
-
-
     }
 
 }

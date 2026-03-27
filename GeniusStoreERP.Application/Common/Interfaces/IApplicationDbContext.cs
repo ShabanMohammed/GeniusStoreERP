@@ -19,7 +19,7 @@ namespace GeniusStoreERP.Application.Common.Interfaces
         public DbSet<InvoiceStatus> InvoiceStatuses { get; set; }
         public DbSet<GeneralSetting> GeneralSettings { get; set; }
         public DbSet<StockTransaction> StockTransactions { get; set; }
-        public DbSet<StockTransactionType> TransactionTypes { get; set; }
+        public DbSet<StockTransactionType> StockTransactionTypes { get; set; }
 
 
         Task BeginTransactionAsync(CancellationToken cancellationToken = default);

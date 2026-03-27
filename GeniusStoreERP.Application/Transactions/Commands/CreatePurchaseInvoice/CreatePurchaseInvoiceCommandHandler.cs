@@ -77,7 +77,7 @@ public class CreatePurchaseInvoiceCommandHandler : IRequestHandler<CreatePurchas
                         Invoice = invoice, // سيتم ربطه تلقائياً بعد SaveChanges
                         Quantity = item.Quantity,
                         TransactionDate = invoice.InvoiceDate,
-                        TransactionType = (int)StockTransactionTypeEnum.Invoice,
+                        StockTransactionTypeId = (int)StockTransactionTypeEnum.Invoice,
                         InvoiceReference = invoice.InvoiceNumber.ToString(),
                         Remarks = $"وارد فاتورة مشتريات رقم {invoice.InvoiceNumber} - المورد: {partner?.Name ?? "مورد عام"}"
                     };

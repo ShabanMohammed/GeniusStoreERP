@@ -8,11 +8,7 @@ public class GeneralSettingsConfiguration : IEntityTypeConfiguration<GeneralSett
 {
     public void Configure(EntityTypeBuilder<GeneralSetting> builder)
     {
-
-
-        // تحديد المفتاح الأساسي (رغم أنه موروث من BaseEntity)
         builder.HasKey(x => x.Id);
-
         // إعدادات الحقول النصية (مطلوبة)
         builder.Property(x => x.CompanyName)
             .IsRequired()

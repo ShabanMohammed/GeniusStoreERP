@@ -7,7 +7,8 @@ namespace GeniusStoreERP.Infrastructure.Configurations;
 public class InvoiceItemConfiguration : IEntityTypeConfiguration<InvoiceItem>
 {
     public void Configure(EntityTypeBuilder<InvoiceItem> builder)
-    {
+       {
+     
         builder.HasKey(ii => ii.Id);
         builder.HasIndex(ii => ii.InvoiceId);
         builder.HasIndex(ii => ii.ProductId);

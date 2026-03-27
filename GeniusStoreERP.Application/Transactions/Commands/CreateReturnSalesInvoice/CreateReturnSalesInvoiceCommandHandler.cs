@@ -66,7 +66,7 @@ public class CreateReturnSalesInvoiceCommandHandler : IRequestHandler<CreateRetu
                         InvoiceId = invoice.Id,
                         Quantity = item.Quantity, //مرتجع المبيعات موجب لزيادة المخزون
                         TransactionDate = invoice.InvoiceDate,
-                        TransactionType = (int)StockTransactionTypeEnum.Invoice,
+                        StockTransactionTypeId = (int)StockTransactionTypeEnum.Invoice,
                         InvoiceReference = invoice.InvoiceNumber.ToString(),
                         Remarks = "مرتجع المبيعات",
                     };
