@@ -61,11 +61,14 @@ public class CreateReturnSalesInvoiceCommandHandler : IRequestHandler<CreateRetu
 
                     var stockMovement = new StockTransaction
                     {
+
                         ProductId = item.ProductId,
                         InvoiceId = invoice.Id,
-                        Quantity = item.Quantity, // موجب لمرتجع المبيعات
+                        Quantity = item.Quantity, //مرتجع المبيعات موجب لزيادة المخزون
                         TransactionDate = invoice.InvoiceDate,
-                        TransactionType = (int)StockTransactionTypeEnum.Invoice
+                        TransactionType = (int)StockTransactionTypeEnum.Invoice,
+                        InvoiceReference = invoice.InvoiceNumber.ToString(),
+                        Remarks = "مرتجع المبيعات",
                     };
                     await _context.StockTransactions.AddAsync(stockMovement, cancellationToken);
                 }

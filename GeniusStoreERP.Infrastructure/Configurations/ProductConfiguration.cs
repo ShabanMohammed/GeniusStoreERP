@@ -11,21 +11,23 @@ namespace GeniusStoreERP.Infrastructure.Configurations
             builder.HasKey(p => p.Id);
 
             builder.HasIndex(p => p.Name).IsUnique();
-            builder.HasIndex(p => p.Barcode).IsUnique().HasFilter("\"Barcode\" IS NOT NUll AND \"Barcode\" != ''");
-            builder.HasIndex(p => p.SKU).IsUnique().HasFilter("\"SKU\" IS NOT NUll AND \"SKU\" != ''");
+            builder.HasIndex(p => p.Barcode).IsUnique()
+                   .HasFilter("\"Barcode\" IS NOT NUll AND \"Barcode\" != ''");
+            builder.HasIndex(p => p.SKU).IsUnique()
+                    .HasFilter("\"SKU\" IS NOT NUll AND \"SKU\" != ''");
 
-            builder.Property(p => p.Name).IsRequired().HasMaxLength(100);
-            // ضبط دقة حقل رصيد المخزن
+            builder.Property(p => p.Name).IsRequired()
+                   .HasMaxLength(100);
+            builder.Property(p => p.Price)
+                  .HasPrecision(18, 2);
             builder.Property(p => p.StockQuantity)
                    .HasPrecision(18, 4);
-
-            // ضبط دقة حقل حد الطلب بنفس الطريقة
             builder.Property(p => p.ReorderLevel)
                    .HasPrecision(18, 4);
-
-            // ضبط دقة السعر (عادة خانتين عشريتين كافية للعملات)
-            builder.Property(p => p.Price)
-                   .HasPrecision(18, 2);
+            builder.Property(p => p.Barcode)
+                   .HasMaxLength(50);
+            builder.Property(p => p.SKU)
+                   .HasMaxLength(50);
 
             builder.HasOne(p => p.Category)
                     .WithMany(c => c.Products)

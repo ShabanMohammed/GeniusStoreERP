@@ -1,15 +1,24 @@
-﻿namespace GeniusStoreERP.Domain.Entities.Stock;
+﻿using GeniusStoreERP.Domain.Common;
+using GeniusStoreERP.Domain.Entities.Transactions;
 
-public class StockTransaction
+namespace GeniusStoreERP.Domain.Entities.Stock;
+
+public class StockTransaction : BaseEntity
 {
-    public int Id { get; set; }
-    public int ProductId { get; set; }
-    public decimal Quantity { get; set; } // موجبة للإضافة، سالبة للصرف
-    public int TransactionType { get; set; } // (1: فاتورة، 2: تسوية جردية، 3: هالك)
-    public DateTime TransactionDate { get; set; }
 
-    // الربط الاختياري (Nullable)
-    public int? InvoiceId { get; set; } // إذا كانت ناتجة عن فاتورة
-    public int? AdjustmentId { get; set; } // إذا كانت ناتجة عن أمر تسوية منفصل
+    public int ProductId { get; set; }
+    public decimal Quantity { get; set; }
+    public int StockTransactionTypeId { get; set; }
+    public DateTime TransactionDate { get; set; }
+    public int? InvoiceId { get; set; }
+    public string? InvoiceReference { get; set; }
+    public int? AdjustmentId { get; set; }
+    public string? AdjustmentReference { get; set; }
+    public string? Remarks { get; set; }
+
+    //navtion property
+    public Product? Product { get; set; }
+    public Invoice? Invoice { get; set; }
+    public StockTransactionType? Type { get; set; }
 
 }

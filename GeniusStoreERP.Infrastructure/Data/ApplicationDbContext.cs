@@ -27,7 +27,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<InvoiceStatus> InvoiceStatuses { get; set; }
     public DbSet<GeneralSetting> GeneralSettings { get; set; }
     public DbSet<StockTransaction> StockTransactions { get; set; }
-    public DbSet<TransactionType> TransactionTypes { get; set; }
+    public DbSet<StockTransactionType> TransactionTypes { get; set; }
 
 
     public new DbSet<ApplicationUser> Users { get; set; }
@@ -87,26 +87,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         // Seed Data لجدول أنواع الفواتير
-        builder.Entity<InvoiceType>().HasData(
-            new InvoiceType { Id = 1, Name = "مبيعات" },
-            new InvoiceType { Id = 2, Name = "مشتريات" },
-            new InvoiceType { Id = 3, Name = "مرتجع مبيعات" },
-            new InvoiceType { Id = 4, Name = "مرتجع مشتريات" }
-        );
+       
 
-        // Seed Data لجدول طرق السداد
-        builder.Entity<InvoiceStatus>().HasData(
-            new InvoiceStatus { Id = 1, Name = "نقدي" },
-            new InvoiceStatus { Id = 2, Name = "آجل" }
+      
+       
 
-        );
-
-        builder.Entity<TransactionType>().HasData(
-            new TransactionType { Id = 1, Name = "فاتورة" },
-            new TransactionType { Id = 2, Name = "تسوية" },
-            new TransactionType { Id = 3, Name = "تلف" }
-
-            );
 
 
     }

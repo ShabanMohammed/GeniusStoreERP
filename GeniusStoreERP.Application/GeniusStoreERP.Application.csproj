@@ -28,6 +28,14 @@
     <Folder Include="Transactions\Commands\CreatePurchaseInvoice\" />
     <Folder Include="Transactions\Commands\CreateReturnSalesInvoice\" />
     <Folder Include="Transactions\Commands\CreateReturnPurchaseInvoice\" />
+    <Folder Include="Transactions\Commands\VoidInvoiceByReverseCommand\" />
+    <Folder Include="Transactions\Queries\GetInvoiceByIdQuery\" />
+    <Folder Include="Transactions\Queries\GetInvoiceForVoidingQuery\" />
+    <Folder Include="Transactions\Queries\GetInvoiceHistoryQuery\" />
+    <Folder Include="Transactions\Queries\GetRelatedTransactionsQuery\" />
+    <Folder Include="Transactions\Queries\GetStockDiscrepancyQuery\" />
+    <Folder Include="Transactions\Queries\GetVoidedInvoicesReportQuery\" />
+    <Folder Include="Transactions\Queries\GetProductMovementCardQuery\" />
   </ItemGroup>
 
 </Project>

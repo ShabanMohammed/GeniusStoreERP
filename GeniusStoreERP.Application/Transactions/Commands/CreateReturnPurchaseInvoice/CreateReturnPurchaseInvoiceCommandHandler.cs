@@ -65,11 +65,14 @@ public class CreateReturnPurchaseInvoiceCommandHandler : IRequestHandler<CreateR
 
                     var stockMovement = new StockTransaction
                     {
+
                         ProductId = item.ProductId,
                         InvoiceId = invoice.Id,
-                        Quantity = -item.Quantity, // سالب لمرتجع المشتريات
+                        Quantity = -item.Quantity, // سالب للمشتريات
                         TransactionDate = invoice.InvoiceDate,
-                        TransactionType = (int)StockTransactionTypeEnum.Invoice
+                        TransactionType = (int)StockTransactionTypeEnum.Invoice,
+                        InvoiceReference = invoice.InvoiceNumber.ToString(),
+                        Remarks = "مرتجع مشتريات",
                     };
                     await _context.StockTransactions.AddAsync(stockMovement, cancellationToken);
                 }

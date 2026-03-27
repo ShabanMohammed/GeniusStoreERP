@@ -2,15 +2,18 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GeniusStoreERP.Infrastructure.Configurations
+namespace GeniusStoreERP.Infrastructure.Configurations;
+
+public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 {
-    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
+    public void Configure(EntityTypeBuilder<Category> builder)
     {
-        public void Configure(EntityTypeBuilder<Category> builder)
-        {
-            builder.HasKey(c => c.Id);
-            builder.HasIndex(c => c.Name).IsUnique();
-            builder.Property(c => c.Name).IsRequired().HasMaxLength(100);
-        }
+        builder.HasKey(c => c.Id);
+        builder.HasIndex(c => c.Name)
+                .IsUnique();
+        builder.Property(c => c.Name).IsRequired()
+                .HasMaxLength(100);
+        builder.Property(c => c.Description)
+                .HasMaxLength(500);
     }
 }

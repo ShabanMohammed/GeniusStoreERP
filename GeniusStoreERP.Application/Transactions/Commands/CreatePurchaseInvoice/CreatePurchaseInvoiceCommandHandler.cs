@@ -25,13 +25,19 @@ public class CreatePurchaseInvoiceCommandHandler : IRequestHandler<CreatePurchas
         try
         {
             await _context.BeginTransactionAsync(cancellationToken);
+
             if (request.InvoiceItems == null || !request.InvoiceItems.Any())
                 throw new EmptyInoiceException();
 
+            // 1. جلب المورد مرة واحدة لتجنب التكرار داخل الحلقة
+            var partner = await _context.Partners
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.Id == request.PartnerId, cancellationToken);
+
+            // 2. حساب رقم الفاتورة التالي
             var lastNumber = await _context.Invoices
                 .Where(i => i.InvoiceTypeId == (int)InvoiceTypeEnum.Purchase)
-                .Select(i => (int?)i.InvoiceNumber)
-                .MaxAsync<int?>(cancellationToken) ?? 0;
+                .MaxAsync(i => (int?)i.InvoiceNumber, cancellationToken) ?? 0;
 
             var invoice = new Invoice
             {
@@ -49,30 +55,41 @@ public class CreatePurchaseInvoiceCommandHandler : IRequestHandler<CreatePurchas
             };
 
             await _context.Invoices.AddAsync(invoice, cancellationToken);
-            await _context.SaveChangesAsync(cancellationToken);
+
+            // استخراج معرفات المنتجات لجلبها دفعة واحدة (Eager Loading) لتحسين الأداء
+            var productIds = invoice.InvoiceItems.Select(i => i.ProductId).ToList();
+            var products = await _context.Products
+                .Where(p => productIds.Contains(p.Id))
+                .ToListAsync(cancellationToken);
 
             foreach (var item in invoice.InvoiceItems)
             {
-                var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == item.ProductId, cancellationToken);
+                var product = products.FirstOrDefault(p => p.Id == item.ProductId);
                 if (product != null)
                 {
-                    product.StockQuantity += item.Quantity; // زيادة المخزون للمشتريات
-                    _context.Products.Update(product);
+                    // تحديث المخزون
+                    product.StockQuantity += item.Quantity;
 
+                    // إضافة حركة المخزن
                     var stockMovement = new StockTransaction
                     {
                         ProductId = item.ProductId,
-                        InvoiceId = invoice.Id,
-                        Quantity = item.Quantity, // موجب للمشتريات
+                        Invoice = invoice, // سيتم ربطه تلقائياً بعد SaveChanges
+                        Quantity = item.Quantity,
                         TransactionDate = invoice.InvoiceDate,
-                        TransactionType = (int)StockTransactionTypeEnum.Invoice
+                        TransactionType = (int)StockTransactionTypeEnum.Invoice,
+                        InvoiceReference = invoice.InvoiceNumber.ToString(),
+                        Remarks = $"وارد فاتورة مشتريات رقم {invoice.InvoiceNumber} - المورد: {partner?.Name ?? "مورد عام"}"
                     };
+
                     await _context.StockTransactions.AddAsync(stockMovement, cancellationToken);
                 }
             }
 
+            // SaveChanges واحدة كافية قبل عمل Commit لضمان وحدة العمل (Unit of Work)
             await _context.SaveChangesAsync(cancellationToken);
             await _context.CommitTransactionAsync(cancellationToken);
+
             return invoice.Id;
         }
         catch (BusinessException)
@@ -83,7 +100,7 @@ public class CreatePurchaseInvoiceCommandHandler : IRequestHandler<CreatePurchas
         catch (Exception ex)
         {
             await _context.RollbackTransactionAsync(cancellationToken);
-            throw new BusinessException("فشل في إنشاء فاتورة المشتريات", ex);
+            throw new BusinessException("حدث خطأ تقني أثناء إنشاء فاتورة المشتريات", ex);
         }
     }
 }

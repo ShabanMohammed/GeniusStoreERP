@@ -64,11 +64,14 @@ public class CreateSalesInvoiceCommandsHandler : IRequestHandler<CreateSalesInvo
 
                     var stockMovement = new StockTransaction
                     {
+
                         ProductId = item.ProductId,
                         InvoiceId = invoice.Id,
-                        Quantity = -item.Quantity,
-                        TransactionDate = invoice.InvoiceDate, // استخدام تاريخ الفاتورة
-                        TransactionType = (int)StockTransactionTypeEnum.Invoice
+                        Quantity = -item.Quantity, // سالب للمبيعات
+                        TransactionDate = invoice.InvoiceDate,
+                        TransactionType = (int)StockTransactionTypeEnum.Invoice,
+                        InvoiceReference = invoice.InvoiceNumber.ToString(),
+                        Remarks = "مبيعات",
                     };
                     await _context.StockTransactions.AddAsync(stockMovement, cancellationToken);
                 }

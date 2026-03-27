@@ -1,6 +1,6 @@
-using System;
 using GeniusStoreERP.Domain.Common;
 using GeniusStoreERP.Domain.Entities.Partners;
+using GeniusStoreERP.Domain.Entities.Stock;
 
 namespace GeniusStoreERP.Domain.Entities.Transactions;
 
@@ -27,5 +27,6 @@ public class Invoice : BaseEntity
 
 
     public ICollection<InvoiceItem>? InvoiceItems { get; set; }
+    public ICollection<StockTransaction>? StockTransactions { get; set; }
 
 }
