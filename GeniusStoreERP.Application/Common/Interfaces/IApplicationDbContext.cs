@@ -1,4 +1,5 @@
 ﻿using GeniusStoreERP.Domain.Entities;
+using GeniusStoreERP.Domain.Entities.Finances;
 using GeniusStoreERP.Domain.Entities.Partners;
 using GeniusStoreERP.Domain.Entities.Stock;
 using GeniusStoreERP.Domain.Entities.Transactions;
@@ -20,6 +21,9 @@ namespace GeniusStoreERP.Application.Common.Interfaces
         public DbSet<GeneralSetting> GeneralSettings { get; set; }
         public DbSet<StockTransaction> StockTransactions { get; set; }
         public DbSet<StockTransactionType> StockTransactionTypes { get; set; }
+        public DbSet<PartnerTransaction> PartnerTransactions { get; set; }
+        public DbSet<PartnerTransactionType> PartnerTransactionTypes { get; set; }
+
 
 
         Task BeginTransactionAsync(CancellationToken cancellationToken = default);

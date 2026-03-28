@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GeniusStoreERP.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Intilize : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -62,9 +62,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -90,9 +90,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                     Logo = table.Column<byte[]>(type: "bytea", nullable: true),
                     TaxPercentage = table.Column<decimal>(type: "numeric(5,2)", nullable: false, defaultValue: 14m),
                     CurrencySymbol = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false, defaultValue: "EGP"),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -139,15 +139,28 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                     PhoneNumber = table.Column<string>(type: "character varying(20)", unicode: false, maxLength: 20, nullable: false),
                     IsCustomer = table.Column<bool>(type: "boolean", nullable: false),
                     IsSupplier = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Partners", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PartnerTransactionTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PartnerTransactionTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -283,9 +296,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                     SKU = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     Barcode = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     CategoryId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -316,9 +329,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                     PartnerId = table.Column<int>(type: "integer", nullable: false),
                     InvoiceStatusId = table.Column<int>(type: "integer", nullable: false),
                     InvoiceTypeId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -360,9 +373,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                     TaxRate = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
                     TaxAmount = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
                     NetLineTotal = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -384,6 +397,50 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PartnerTransactions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    PartnerId = table.Column<int>(type: "integer", nullable: false),
+                    InvoiceId = table.Column<int>(type: "integer", nullable: true),
+                    PaymentId = table.Column<int>(type: "integer", nullable: true),
+                    TransactionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    TransactionTypeId = table.Column<int>(type: "integer", nullable: false),
+                    Debit = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    Credit = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    ReferenceNumber = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    Remarks = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
+                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PartnerTransactions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PartnerTransactions_Invoices_InvoiceId",
+                        column: x => x.InvoiceId,
+                        principalTable: "Invoices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PartnerTransactions_PartnerTransactionTypes_TransactionType~",
+                        column: x => x.TransactionTypeId,
+                        principalTable: "PartnerTransactionTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PartnerTransactions_Partners_PartnerId",
+                        column: x => x.PartnerId,
+                        principalTable: "Partners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "StockTransactions",
                 columns: table => new
                 {
@@ -398,9 +455,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                     AdjustmentId = table.Column<int>(type: "integer", nullable: true),
                     AdjustmentReference = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     Remarks = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -445,6 +502,22 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                     { 2, "مشتريات" },
                     { 3, "مرتجع مبيعات" },
                     { 4, "مرتجع مشتريات" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PartnerTransactionTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "رصيد افتتاحي" },
+                    { 2, "فاتورة مبيعات" },
+                    { 3, "فاتورة مشتريات" },
+                    { 4, "سند قبض" },
+                    { 5, "سند صرف" },
+                    { 6, "مرتجع مبيعات" },
+                    { 7, "مرتجع مشتريات" },
+                    { 8, "إشعار دائن" },
+                    { 9, "إشعار مدين" }
                 });
 
             migrationBuilder.InsertData(
@@ -562,6 +635,26 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_PartnerTransactions_InvoiceId",
+                table: "PartnerTransactions",
+                column: "InvoiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PartnerTransactions_PartnerId",
+                table: "PartnerTransactions",
+                column: "PartnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PartnerTransactions_TransactionDate",
+                table: "PartnerTransactions",
+                column: "TransactionDate");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PartnerTransactions_TransactionTypeId",
+                table: "PartnerTransactions",
+                column: "TransactionTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_Barcode",
                 table: "Products",
                 column: "Barcode",
@@ -638,6 +731,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "InvoiceItems");
 
             migrationBuilder.DropTable(
+                name: "PartnerTransactions");
+
+            migrationBuilder.DropTable(
                 name: "StockTransactions");
 
             migrationBuilder.DropTable(
@@ -645,6 +741,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "PartnerTransactionTypes");
 
             migrationBuilder.DropTable(
                 name: "Invoices");

@@ -1,5 +1,7 @@
 using GeniusStoreERP.Application.Common.Interfaces;
+using GeniusStoreERP.Domain.Common;
 using GeniusStoreERP.Domain.Entities;
+using GeniusStoreERP.Domain.Entities.Finances;
 using GeniusStoreERP.Domain.Entities.Partners;
 using GeniusStoreERP.Domain.Entities.Stock;
 using GeniusStoreERP.Domain.Entities.Transactions;
@@ -28,7 +30,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<GeneralSetting> GeneralSettings { get; set; }
     public DbSet<StockTransaction> StockTransactions { get; set; }
     public DbSet<StockTransactionType> StockTransactionTypes { get; set; }
-
+    public DbSet<PartnerTransaction> PartnerTransactions { get; set; }
+    public DbSet<PartnerTransactionType> PartnerTransactionTypes { get; set; }
 
     public new DbSet<ApplicationUser> Users { get; set; }
 
@@ -84,7 +87,22 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-       
+        foreach (var entityType in builder.Model.GetEntityTypes())
+        {
+            if (typeof(BaseEntity).IsAssignableFrom(entityType.ClrType) && !entityType.ClrType.IsAbstract)
+            {
+                builder.Entity(entityType.ClrType)
+                    .HasKey(nameof(BaseEntity.Id));
+
+                builder.Entity(entityType.ClrType)
+                    .Property(nameof(BaseEntity.CreatedBy))
+                    .HasMaxLength(50);
+
+                builder.Entity(entityType.ClrType)
+                    .Property(nameof(BaseEntity.UpdatedBy))
+                    .HasMaxLength(50);
+            }
+        }
     }
 
 }

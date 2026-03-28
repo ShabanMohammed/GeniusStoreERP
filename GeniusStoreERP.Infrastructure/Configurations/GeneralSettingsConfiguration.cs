@@ -8,7 +8,7 @@ public class GeneralSettingsConfiguration : IEntityTypeConfiguration<GeneralSett
 {
     public void Configure(EntityTypeBuilder<GeneralSetting> builder)
     {
-        builder.HasKey(x => x.Id);
+
         // إعدادات الحقول النصية (مطلوبة)
         builder.Property(x => x.CompanyName)
             .IsRequired()

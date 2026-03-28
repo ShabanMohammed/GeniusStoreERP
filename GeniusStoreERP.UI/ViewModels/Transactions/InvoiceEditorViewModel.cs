@@ -77,7 +77,7 @@ public class InvoiceEditorViewModel : BaseViewModel
 
         SaveCommand = new AsyncRelayCommand(async (param, _) => await SaveInvoice());
         CancelCommand = new RelayCommand(_ => _navigationService.NavigateTo<InvoiceListViewModel>(_invoiceTypeId));
-        AddItemCommand = new RelayCommand(_ => AddNewItem());
+        AddItemCommand = new AsyncRelayCommand(async (param, _) => await AddNewItem());
         RemoveItemCommand = new RelayCommand(item => RemoveItem(item as InvoiceItemEditor));
     }
 

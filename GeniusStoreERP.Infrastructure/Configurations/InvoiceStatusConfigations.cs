@@ -8,10 +8,9 @@ public class InvoiceStatusConfiguration : IEntityTypeConfiguration<InvoiceStatus
 {
     public void Configure(EntityTypeBuilder<InvoiceStatus> builder)
     {
-       builder.HasKey(s => s.Id);
-
+        builder.HasKey(x => x.Id);
         builder.HasIndex(s => s.Name)
-               .IsUnique();
+          .IsUnique();
 
         builder.Property(s => s.Name)
                .IsRequired()
