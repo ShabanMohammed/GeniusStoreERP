@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
@@ -18,9 +18,9 @@ public record InvoiceDto(
     int PartnerId,
     string PartnerName,
     int InvoiceStatusId,
-    string InvoiceStatus,
+    string StatusName,
     int InvoiceTypeId,
-    string InvoiceType,
+    string TypeName,
     ICollection<InvoiceItemDto> InvoiceItems
     );
 
@@ -30,9 +30,9 @@ public class InvoiceDtoProfile : Profile
     public InvoiceDtoProfile()
     {
         CreateMap<Invoice, InvoiceDto>()
-              .ForMember(dest => dest.PartnerName, opt => opt.MapFrom(src => src.Partner != null ? src.Partner.Name : string.Empty))
-              .ForMember(dest => dest.InvoiceStatus, opt => opt.MapFrom(src => src.InvoiceStatus != null ? src.InvoiceStatus.Name : string.Empty))
-              .ForMember(dest => dest.InvoiceType, opt => opt.MapFrom(src => src.InvoiceType != null ? src.InvoiceType.Name : string.Empty));
+              .ForCtorParam("PartnerName", opt => opt.MapFrom(src => src.Partner != null ? src.Partner.Name : string.Empty))
+              .ForCtorParam("StatusName", opt => opt.MapFrom(src => src.InvoiceStatus != null ? src.InvoiceStatus.Name : string.Empty))
+              .ForCtorParam("TypeName", opt => opt.MapFrom(src => src.InvoiceType != null ? src.InvoiceType.Name : string.Empty));
 
         CreateMap<InvoiceDto,Invoice>();
     }

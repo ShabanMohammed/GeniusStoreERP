@@ -1,6 +1,7 @@
 using GeniusStoreERP.Application.Dtos;
+using GeniusStoreERP.Application.Exceptions;
+using GeniusStoreERP.Application.Transactions.Commands.VoidInvoiceByReverse;
 using GeniusStoreERP.Application.Transactions.Queries.GetInvoicesByType;
-using GeniusStoreERP.Domain.Entities.Transactions;
 using GeniusStoreERP.UI.Common;
 using GeniusStoreERP.UI.Services;
 using MediatR;
@@ -110,6 +111,8 @@ public class InvoiceListViewModel : BaseViewModel
 
     public ICommand AddInvoiceCommand { get; }
     public ICommand EditInvoiceCommand { get; }
+    public ICommand PrintInvoiceCommand { get; }
+    public ICommand ViewDetailsCommand { get; }
     public ICommand DeleteInvoiceCommand { get; }
     public ICommand NextPageCommand { get; }
     public ICommand PreviousPageCommand { get; }
@@ -129,6 +132,8 @@ public class InvoiceListViewModel : BaseViewModel
 
         AddInvoiceCommand = new RelayCommand(_ => NavigateToEditor(null));
         EditInvoiceCommand = new RelayCommand(param => NavigateToEditor(param as InvoiceDto));
+        PrintInvoiceCommand = new RelayCommand(param => PrintInvoice(param as InvoiceDto));
+        ViewDetailsCommand = new RelayCommand(param => NavigateToEditor(param as InvoiceDto));
         DeleteInvoiceCommand = new AsyncRelayCommand(async (param, _) => await DeleteInvoice(param as InvoiceDto));
 
         NextPageCommand = new RelayCommand(_ => { if (CurrentPage < TotalPages) CurrentPage++; }, _ => CurrentPage < TotalPages);
@@ -190,7 +195,50 @@ public class InvoiceListViewModel : BaseViewModel
     private async Task DeleteInvoice(InvoiceDto? invoice)
     {
         if (invoice == null) return;
-        // Logic for deletion if needed, or just a placeholder for now
+
+        if (invoice.InvoiceStatusId == 2) // الملغاة مسبقاً
+        {
+            MessageBoxService.ShowWarning("هذه الفاتورة ملغاة بالفعل.");
+            return;
+        }
+
+        var result = MessageBoxService.ShowConfirmation($"هل تريد بالتأكيد إلغاء الفاتورة رقم {invoice.InvoiceNumber}؟\nسيتم عكس جميع تأثيرات هذه الفاتورة.");
+        if (result == System.Windows.MessageBoxResult.Yes)
+        {
+            try
+            {
+                IsLoading = true;
+                var command = new VoidInvoiceByReverseCommand(invoice.Id);
+                await _mediator.Send(command);
+                
+                MessageBoxService.ShowSuccess("تم إلغاء الفاتورة بنجاح.");
+                await LoadInvoices(); // تحديث القائمة
+            }
+            catch (NotFoundException ex)
+            {
+                MessageBoxService.ShowError($"{ex.Message}الفاتورة غير موجودة");
+            }
+            catch (BusinessException ex)
+            {
+                MessageBoxService.ShowError(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBoxService.ShowError($"حدث خطأ غير متوقع: {ex.Message}");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+    }
+
+    private void PrintInvoice(InvoiceDto? invoice)
+    {
+        if (invoice == null) return;
+        
+        // TODO: تنفيذ منطق الطباعة
+        MessageBoxService.ShowInfo($"جاري تجهيز الفاتورة رقم {invoice.InvoiceNumber} للطباعة...");
     }
 
     private void NavigateToEditor(object? parameter)

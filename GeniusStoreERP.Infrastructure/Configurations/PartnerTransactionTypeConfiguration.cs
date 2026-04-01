@@ -23,7 +23,8 @@ public class PartnerTransactionTypeConfiguration : IEntityTypeConfiguration<Part
             new PartnerTransactionType { Id = 6, Name = "مرتجع مبيعات" },
             new PartnerTransactionType { Id = 7, Name = "مرتجع مشتريات" },
             new PartnerTransactionType { Id = 8, Name = "إشعار دائن" },
-            new PartnerTransactionType { Id = 9, Name = "إشعار مدين" }
+            new PartnerTransactionType { Id = 9, Name = "إشعار مدين" },
+            new PartnerTransactionType { Id = 10, Name = "الغاء فاتورة" }
         );
     }
 }

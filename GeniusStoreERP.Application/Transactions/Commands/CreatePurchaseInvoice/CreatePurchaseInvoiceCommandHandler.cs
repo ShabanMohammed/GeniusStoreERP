@@ -1,6 +1,7 @@
 using AutoMapper;
 using GeniusStoreERP.Application.Common.Interfaces;
 using GeniusStoreERP.Application.Exceptions;
+using GeniusStoreERP.Domain.Entities.Finances;
 using GeniusStoreERP.Domain.Entities.Stock;
 using GeniusStoreERP.Domain.Entities.Transactions;
 using GeniusStoreERP.Domain.Enums;
@@ -55,7 +56,18 @@ public class CreatePurchaseInvoiceCommandHandler : IRequestHandler<CreatePurchas
             };
 
             await _context.Invoices.AddAsync(invoice, cancellationToken);
-
+            // اضافة الحركة الى حسابات المورد
+            var partnerTransaction = new PartnerTransaction
+            {
+                PartnerId = invoice.PartnerId,
+                Invoice = invoice, // سيتم ربطه تلقائياً بعد SaveChanges
+                TransactionDate = invoice.InvoiceDate,
+                TransactionTypeId = (int)PartnerTransactionTypeEnum.PurchaseInvoice,
+                ReferenceNumber = invoice.InvoiceNumber.ToString(),
+                Credit = invoice.FinalAmount,
+                Remarks = $"وارد فاتورة مشتريات رقم {invoice.InvoiceNumber} "
+            };
+            await _context.PartnerTransactions.AddAsync(partnerTransaction);
             // استخراج معرفات المنتجات لجلبها دفعة واحدة (Eager Loading) لتحسين الأداء
             var productIds = invoice.InvoiceItems.Select(i => i.ProductId).ToList();
             var products = await _context.Products

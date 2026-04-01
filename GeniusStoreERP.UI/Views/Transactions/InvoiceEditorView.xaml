@@ -18,10 +18,43 @@
         <!-- Header -->
         <Border Grid.Row="0" Padding="15" Background="{StaticResource PrimaryHeaderBrush}" CornerRadius="10" Margin="0,0,0,20">
             <DockPanel>
-                <TextBlock Text="تحرير الفاتورة" Foreground="White" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="تحرير الفاتورة" Foreground="White" FontSize="20" FontWeight="Bold"/>
+                    <Border Margin="15,0,0,0" Padding="10,3" CornerRadius="12" 
+                            Visibility="{Binding IsReadOnly, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding InvoiceStatusId}" Value="1">
+                                        <Setter Property="Background" Value="#E8F5E9"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding InvoiceStatusId}" Value="2">
+                                        <Setter Property="Background" Value="#FFEBEE"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <TextBlock Text="{Binding Status}" FontSize="12" FontWeight="SemiBold">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding InvoiceStatusId}" Value="1">
+                                            <Setter Property="Foreground" Value="#2E7D32"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding InvoiceStatusId}" Value="2">
+                                            <Setter Property="Foreground" Value="#C62828"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Border>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" DockPanel.Dock="Left">
-                    <Button Command="{Binding SaveCommand}" Content="حفظ (F10)" Style="{StaticResource UnifiedPrimaryButtonStyle}" Background="#27ae60" Margin="5,0" Padding="15,0"/>
-                    <Button Command="{Binding CancelCommand}" Content="إلغاء" Style="{StaticResource UnifiedPrimaryButtonStyle}" Background="#e74c3c" Margin="5,0" Padding="15,0"/>
+                    <Button Command="{Binding SaveCommand}" Content="حفظ (F10)" 
+                            Visibility="{Binding IsEditable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Style="{StaticResource UnifiedPrimaryButtonStyle}" Background="#27ae60" Margin="5,0" Padding="15,0"/>
+                    <Button Command="{Binding CancelCommand}" Content="رجوع" Style="{StaticResource UnifiedPrimaryButtonStyle}" Background="#e74c3c" Margin="5,0" Padding="15,0"/>
                 </StackPanel>
             </DockPanel>
         </Border>
@@ -41,23 +74,24 @@
 
                 <StackPanel Grid.Column="0" Margin="5">
                     <TextBlock Text="تاريخ الفاتورة" Style="{StaticResource FieldLabelStyle}"/>
-                    <DatePicker SelectedDate="{Binding InvoiceDate}" Height="35" VerticalContentAlignment="Center"/>
+                    <DatePicker SelectedDate="{Binding InvoiceDate}" IsEnabled="{Binding IsEditable}" Height="35" VerticalContentAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Margin="5">
                     <TextBlock Text="العميل / المورد" Style="{StaticResource FieldLabelStyle}"/>
                     <ComboBox ItemsSource="{Binding Partners}" 
-                              SelectedItem="{Binding SelectedPartner}"
-                              DisplayMemberPath="Name"
-                              Height="35"
-                              IsEditable="True"
-                              IsTextSearchEnabled="True"
-                              TextSearch.TextPath="Name"/>
+                               SelectedItem="{Binding SelectedPartner}"
+                               IsEnabled="{Binding IsEditable}"
+                               DisplayMemberPath="Name"
+                               Height="35"
+                               IsEditable="True"
+                               IsTextSearchEnabled="True"
+                               TextSearch.TextPath="Name"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="2" Margin="5">
                     <TextBlock Text="ملاحظات" Style="{StaticResource FieldLabelStyle}"/>
-                    <TextBox Text="{Binding Notes}" Height="35"/>
+                    <TextBox Text="{Binding Notes}" IsReadOnly="{Binding IsReadOnly}" Height="35"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -71,7 +105,8 @@
                 </Grid.RowDefinitions>
 
                 <!-- Item Entry Bar -->
-                <Border Grid.Row="0" Background="#f8f9fa" CornerRadius="5" Padding="10" Margin="0,0,0,10">
+                <Border Grid.Row="0" Background="#f8f9fa" CornerRadius="5" Padding="10" Margin="0,0,0,10"
+                        Visibility="{Binding IsEditable, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
@@ -151,7 +186,8 @@
                         <DataGridTextColumn Header="ضريبة مبلغ" Binding="{Binding TaxAmount}" Width="*"/>
                         <DataGridTextColumn Header="الإجمالي النهائي" Binding="{Binding LineTotal,Mode=OneWay}" Width="1.5*"/>
 
-                        <DataGridTemplateColumn Width="50">
+                        <DataGridTemplateColumn Width="50"
+                                                Visibility="{Binding DataContext.IsEditable, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"

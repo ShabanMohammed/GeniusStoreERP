@@ -10,15 +10,15 @@ public class PartnerTransaction : BaseEntity
     public Partner? Partner { get; set; }
     public int? InvoiceId { get; set; }
     public Invoice? Invoice { get; set; }
-    public int? PaymentId { get; set; } 
+    public int? PaymentId { get; set; }
     //public Payment? Payment { get; set; }
     public DateTime TransactionDate { get; set; }
-    private int TransactionTypeId { get; set; }
+    public int TransactionTypeId { get; set; }
     public PartnerTransactionType? Type { get; set; }
 
     public decimal Debit { get; set; }  // مدين (قيمة تزيد مديونية العميل أو تنقص مديونية المورد)
     public decimal Credit { get; set; } // دائن (قيمة تنقص مديونية العميل أو تزيد مديونية المورد)
 
-    public string? ReferenceNumber { get; set; } 
-    public string? Remarks { get; set; } 
+    public string? ReferenceNumber { get; set; }
+    public string? Remarks { get; set; }
 }

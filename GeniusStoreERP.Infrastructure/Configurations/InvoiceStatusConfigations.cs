@@ -21,8 +21,8 @@ public class InvoiceStatusConfiguration : IEntityTypeConfiguration<InvoiceStatus
                .OnDelete(DeleteBehavior.Restrict);
         // Seed Data لجدول طرق السداد
         builder.HasData(
-            new InvoiceStatus { Id = 1, Name = "نقدي" },
-            new InvoiceStatus { Id = 2, Name = "آجل" }
+            new InvoiceStatus { Id = 1, Name = "نشط" },
+            new InvoiceStatus { Id = 2, Name = "ملغاة" }
 
         );
 

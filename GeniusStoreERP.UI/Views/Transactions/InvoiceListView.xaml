@@ -98,13 +98,15 @@
                                         Width="100"/>
                     <DataGridTextColumn Header="التاريخ"
                                         Binding="{Binding InvoiceDate, StringFormat=\{0:yyyy/MM/dd\}}"
-                                        Width="120"/>
+                                        Width="110"/>
                     <DataGridTextColumn Header="الطرف الثاني"
                                         Binding="{Binding PartnerName}"
-                                        Width="200"/>
-                    <DataGridTextColumn Header="الإجمالي"
-                                        Binding="{Binding FinalAmount, StringFormat=\{0:N2\}}"
-                                        Width="120">
+                                        Width="180"/>
+                    
+                    <!-- Financial Totals -->
+                    <DataGridTextColumn Header="إجمالي الأصناف"
+                                        Binding="{Binding TotalItemsAmount, StringFormat=\{0:N2\}}"
+                                        Width="110">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -112,46 +114,127 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="الحالة"
-                                        Binding="{Binding InvoiceStatus}"
-                                        Width="100"/>
+
+                    <DataGridTextColumn Header="الخصم"
+                                        Binding="{Binding TotalItemsDiscount, StringFormat=\{0:N2\}}"
+                                        Width="85">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="Margin" Value="0,0,10,0"/>
+                                <Setter Property="Foreground" Value="#E67E22"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="الضريبة"
+                                        Binding="{Binding TotalItemsTax, StringFormat=\{0:N2\}}"
+                                        Width="85">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="Margin" Value="0,0,10,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="الصافي"
+                                        Binding="{Binding FinalAmount, StringFormat=\{0:N2\}}"
+                                        Width="110">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="Margin" Value="0,0,10,0"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="Foreground" Value="#2C3E50"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- Status Column with Colors -->
+                    <DataGridTemplateColumn Header="الحالة" Width="95">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Padding="8,4" CornerRadius="12" HorizontalAlignment="Center">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding InvoiceStatusId}" Value="1">
+                                                    <Setter Property="Background" Value="#E8F5E9"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding InvoiceStatusId}" Value="2">
+                                                    <Setter Property="Background" Value="#FFEBEE"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <TextBlock Text="{Binding StatusName}" FontSize="11" FontWeight="SemiBold">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding InvoiceStatusId}" Value="1">
+                                                        <Setter Property="Foreground" Value="#2E7D32"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding InvoiceStatusId}" Value="2">
+                                                        <Setter Property="Foreground" Value="#C62828"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                     <DataGridTextColumn Header="ملاحظات"
                                         Binding="{Binding Notes}"
                                         Width="*"/>
 
-                    <!-- Actions Column -->
-                    <DataGridTemplateColumn Header="الإجراءات"
-                                            Width="120">
+                    <!-- Action Commands -->
+                    <DataGridTemplateColumn Header="الإجراءات" Width="140">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Center">
-                                    <!-- Edit Button -->
-                                    <Button Command="{Binding DataContext.EditInvoiceCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding }"
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <!-- Print -->
+                                    <Button Command="{Binding DataContext.PrintInvoiceCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}"
                                             Background="Transparent"
                                             BorderThickness="0"
                                             Margin="0,0,10,0"
                                             Cursor="Hand"
-                                            ToolTip="تعديل">
-                                        <Viewbox Width="18"
-                                                 Height="18">
-                                            <Path Data="{StaticResource IconEdit}"
-                                                  Fill="{StaticResource AccentActionBrush}"
+                                            ToolTip="طباعة">
+                                        <Viewbox Width="18" Height="18">
+                                            <Path Data="{StaticResource IconPrint}"
+                                                  Fill="#3498DB"
                                                   Stretch="Uniform"/>
                                         </Viewbox>
                                     </Button>
 
-                                    <!-- Delete Button -->
+                                    <!-- View Details -->
+                                    <Button Command="{Binding DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Margin="0,0,10,0"
+                                            Cursor="Hand"
+                                            ToolTip="تفاصيل">
+                                        <Viewbox Width="18" Height="18">
+                                            <Path Data="{StaticResource IconViewDetails}"
+                                                  Fill="#1ABC9C"
+                                                  Stretch="Uniform"/>
+                                        </Viewbox>
+                                    </Button>
+
+                                    <!-- Void / Delete -->
                                     <Button Command="{Binding DataContext.DeleteInvoiceCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                             CommandParameter="{Binding}"
                                             Background="Transparent"
                                             BorderThickness="0"
                                             Cursor="Hand"
-                                            ToolTip="حذف">
-                                        <Viewbox Width="18"
-                                                 Height="18">
-                                            <Path Data="{StaticResource IconDelete}"
+                                            ToolTip="إلغاء">
+                                        <Viewbox Width="18" Height="18">
+                                            <Path Data="{StaticResource IconVoid}"
                                                   Fill="#E74C3C"
                                                   Stretch="Uniform"/>
                                         </Viewbox>

@@ -24,7 +24,7 @@ public class InvoiceItemDtoProfile : Profile
     public InvoiceItemDtoProfile()
     {
         CreateMap<InvoiceItem, InvoiceItemDto>()
-            .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product != null ? src.Product.Name : string.Empty));
+            .ForCtorParam("ProductName", opt => opt.MapFrom(src => src.Product != null ? src.Product.Name : string.Empty));
         CreateMap<InvoiceItemDto, InvoiceItem>();
 
     }

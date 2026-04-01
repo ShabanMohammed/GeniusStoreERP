@@ -23,16 +23,26 @@ public class InvoiceEditorViewModel : BaseViewModel
     private readonly IMediator _mediator;
     private readonly INavigationService _navigationService;
 
+    private bool _isReadOnly;
+    public bool IsReadOnly { get => _isReadOnly; set => SetProperty(ref _isReadOnly, value); }
+    public bool IsEditable => !IsReadOnly;
+
     private int _invoiceTypeId;
     private DateTime _invoiceDate = DateTime.UtcNow;
     private PartnerListItemDto? _selectedPartner;
     private string? _notes;
+    private string? _status;
+    private int _invoiceStatusId;
     private ObservableCollection<PartnerListItemDto> _partners = new();
     private ObservableCollection<ProductListItemDto> _products = new();
     private ObservableCollection<InvoiceItemEditor> _invoiceItems = new();
     private InvoiceItemEditor _currentItem = new();
     private ProductListItemDto? _selectedProduct;
     private decimal _taxPercentageFromSettings;
+    private int? _tempPartnerId;
+
+    public string? Status { get => _status; set => SetProperty(ref _status, value); }
+    public int InvoiceStatusId { get => _invoiceStatusId; set => SetProperty(ref _invoiceStatusId, value); }
 
     public DateTime InvoiceDate { get => _invoiceDate; set => SetProperty(ref _invoiceDate, value); }
     public PartnerListItemDto? SelectedPartner { get => _selectedPartner; set => SetProperty(ref _selectedPartner, value); }
@@ -89,7 +99,28 @@ public class InvoiceEditorViewModel : BaseViewModel
         }
         else if (parameter is InvoiceDto invoice)
         {
-            // Edit mode logic (not implemented yet)
+            IsReadOnly = true;
+            _invoiceTypeId = invoice.InvoiceTypeId;
+            _invoiceDate = invoice.InvoiceDate;
+            _notes = invoice.Notes;
+            Status = invoice.StatusName;
+            InvoiceStatusId = invoice.InvoiceStatusId;
+            
+            InvoiceItems = new ObservableCollection<InvoiceItemEditor>(
+                invoice.InvoiceItems.Select(x => new InvoiceItemEditor
+                {
+                    ProductId = x.ProductId,
+                    ProductName = x.ProductName,
+                    Quantity = x.Quantity,
+                    UnitPrice = x.UnitPrice,
+                    DiscountPercentage = x.DiscountRate,
+                    DiscountAmount = x.DisCountAmount,
+                    TaxPercentage = x.TaxRate,
+                    TaxAmount = x.TaxAmount
+                }));
+
+            UpdateTotals();
+            _tempPartnerId = invoice.PartnerId;
         }
 
         await LoadData();
@@ -114,6 +145,12 @@ public class InvoiceEditorViewModel : BaseViewModel
             {
                 _taxPercentageFromSettings = settingsResult.TaxPercentage;
                 CurrentItem.TaxPercentage = _taxPercentageFromSettings;
+            }
+
+            if (_tempPartnerId.HasValue)
+            {
+                SelectedPartner = Partners.FirstOrDefault(p => p.Id == _tempPartnerId.Value);
+                _tempPartnerId = null;
             }
         }
         catch (Exception ex)

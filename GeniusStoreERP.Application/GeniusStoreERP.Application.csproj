@@ -28,7 +28,6 @@
     <Folder Include="Transactions\Commands\CreatePurchaseInvoice\" />
     <Folder Include="Transactions\Commands\CreateReturnSalesInvoice\" />
     <Folder Include="Transactions\Commands\CreateReturnPurchaseInvoice\" />
-    <Folder Include="Transactions\Commands\VoidInvoiceByReverseCommand\" />
     <Folder Include="Transactions\Queries\GetInvoiceByIdQuery\" />
     <Folder Include="Transactions\Queries\GetInvoiceForVoidingQuery\" />
     <Folder Include="Transactions\Queries\GetInvoiceHistoryQuery\" />
