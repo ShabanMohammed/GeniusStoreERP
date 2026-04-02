@@ -80,33 +80,36 @@ public class VoidInvoiceByReverseCommandHendler : IRequestHandler<VoidInvoiceByR
                 Remarks = $"إلغاء تلقائي لـ {typeName} رقم {invoice.InvoiceNumber}"
             };
             await _context.PartnerTransactions.AddAsync(reverseTransaction);
-            var productIds = invoice.InvoiceItems.Select(i => i.ProductId).ToList();
-            var products = await _context.Products
-                .Where(p => productIds.Contains(p.Id))
-                .ToListAsync(cancellationToken);
-
-            foreach (var item in invoice.InvoiceItems)
+            if (invoice.InvoiceItems != null && invoice.InvoiceItems.Any())
             {
-                item.IsDeleted = true;
-                var product = products.FirstOrDefault(p => p.Id == item.ProductId);
-                if (product != null)
+                var productIds = invoice.InvoiceItems.Select(i => i.ProductId).ToList();
+                var products = await _context.Products
+                    .Where(p => productIds.Contains(p.Id))
+                    .ToListAsync(cancellationToken);
+
+                foreach (var item in invoice.InvoiceItems)
                 {
-                    // تحديث المخزون
-                    product.StockQuantity += item.Quantity * stockReverse;
-
-                    // إضافة حركة المخزن
-                    var stockMovement = new StockTransaction
+                    item.IsDeleted = true;
+                    var product = products.FirstOrDefault(p => p.Id == item.ProductId);
+                    if (product != null)
                     {
-                        ProductId = item.ProductId,
-                        InvoiceId = invoice.Id,
-                        Quantity = item.Quantity * stockReverse,
-                        TransactionDate = invoice.InvoiceDate,
-                        StockTransactionTypeId = (int)StockTransactionTypeEnum.Invoice,
-                        InvoiceReference = invoice.InvoiceNumber.ToString(),
-                        Remarks = $"إلغاء تلقائي لـ {typeName} رقم {invoice.InvoiceNumber}"
-                    };
+                        // تحديث المخزون
+                        product.StockQuantity += item.Quantity * stockReverse;
 
-                    await _context.StockTransactions.AddAsync(stockMovement, cancellationToken);
+                        // إضافة حركة المخزن
+                        var stockMovement = new StockTransaction
+                        {
+                            ProductId = item.ProductId,
+                            InvoiceId = invoice.Id,
+                            Quantity = item.Quantity * stockReverse,
+                            TransactionDate = invoice.InvoiceDate,
+                            StockTransactionTypeId = (int)StockTransactionTypeEnum.Invoice,
+                            InvoiceReference = invoice.InvoiceNumber.ToString(),
+                            Remarks = $"إلغاء تلقائي لـ {typeName} رقم {invoice.InvoiceNumber}"
+                        };
+
+                        await _context.StockTransactions.AddAsync(stockMovement, cancellationToken);
+                    }
                 }
             }
             await _context.SaveChangesAsync(cancellationToken);

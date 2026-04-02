@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Stock\Products\Queries\GetProductTransactionsQuery\" />
     <Folder Include="Transactions\Commands\CreatePurchaseInvoice\" />
     <Folder Include="Transactions\Commands\CreateReturnSalesInvoice\" />
     <Folder Include="Transactions\Commands\CreateReturnPurchaseInvoice\" />
