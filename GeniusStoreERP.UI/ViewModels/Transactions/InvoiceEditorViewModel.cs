@@ -70,10 +70,10 @@ public class InvoiceEditorViewModel : BaseViewModel
         }
     }
 
-    public decimal TotalAmount => InvoiceItems.Sum(x => x.LineTotal);
-    public decimal TotalDiscount => InvoiceItems.Sum(x => x.DiscountAmount);
-    public decimal TotalTax => InvoiceItems.Sum(x => x.TaxAmount);
-    public decimal FinalAmount => TotalAmount - TotalDiscount + TotalTax;
+    public decimal TotalItemsAmount => InvoiceItems.Sum(x => x.Quantity * x.UnitPrice);
+    public decimal TotalItemsDiscount => InvoiceItems.Sum(x => x.DiscountAmount);
+    public decimal TotalItemsTax => InvoiceItems.Sum(x => x.TaxAmount);
+    public decimal FinalAmount => InvoiceItems.Sum(x => x.LineTotal);
 
     public ICommand SaveCommand { get; }
     public ICommand CancelCommand { get; }
@@ -212,7 +212,7 @@ public class InvoiceEditorViewModel : BaseViewModel
         InvoiceItems.Add(newItem);
         UpdateTotals();
 
-        CurrentItem = new InvoiceItemEditor();
+        CurrentItem = new InvoiceItemEditor { TaxPercentage = _taxPercentageFromSettings };
         SelectedProduct = null;
     }
 
@@ -227,9 +227,9 @@ public class InvoiceEditorViewModel : BaseViewModel
 
     private void UpdateTotals()
     {
-        OnPropertyChanged(nameof(TotalAmount));
-        OnPropertyChanged(nameof(TotalDiscount));
-        OnPropertyChanged(nameof(TotalTax));
+        OnPropertyChanged(nameof(TotalItemsAmount));
+        OnPropertyChanged(nameof(TotalItemsDiscount));
+        OnPropertyChanged(nameof(TotalItemsTax));
         OnPropertyChanged(nameof(FinalAmount));
     }
 
@@ -265,16 +265,16 @@ public class InvoiceEditorViewModel : BaseViewModel
             object command = _invoiceTypeId switch
             {
                 (int)InvoiceTypeEnum.Sales => new CreateSalesInvoiceCommand(
-                    InvoiceDate, TotalAmount, TotalDiscount, TotalTax, FinalAmount, Notes, SelectedPartner.Id, 1, items),
+                    InvoiceDate, TotalItemsAmount, TotalItemsDiscount, TotalItemsTax, FinalAmount, Notes, SelectedPartner.Id, 1, items),
 
                 (int)InvoiceTypeEnum.Purchase => new CreatePurchaseInvoiceCommand(
-                    InvoiceDate, TotalAmount, TotalDiscount, TotalTax, FinalAmount, Notes, SelectedPartner.Id, 1, items),
+                    InvoiceDate, TotalItemsAmount, TotalItemsDiscount, TotalItemsTax, FinalAmount, Notes, SelectedPartner.Id, 1, items),
 
                 (int)InvoiceTypeEnum.ReturnSales => new CreateReturnSalesInvoiceCommand(
-                    InvoiceDate, TotalAmount, TotalDiscount, TotalTax, FinalAmount, Notes, SelectedPartner.Id, 1, items),
+                    InvoiceDate, TotalItemsAmount, TotalItemsDiscount, TotalItemsTax, FinalAmount, Notes, SelectedPartner.Id, 1, items),
 
                 (int)InvoiceTypeEnum.ReturnPurchase => new CreateReturnPurchaseInvoiceCommand(
-                    InvoiceDate, TotalAmount, TotalDiscount, TotalTax, FinalAmount, Notes, SelectedPartner.Id, 1, items),
+                    InvoiceDate, TotalItemsAmount, TotalItemsDiscount, TotalItemsTax, FinalAmount, Notes, SelectedPartner.Id, 1, items),
 
                 _ => throw new BusinessException("نوع فاتورة غير معروف")
             };

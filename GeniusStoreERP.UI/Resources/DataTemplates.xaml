@@ -39,4 +39,12 @@
     <DataTemplate DataType="{x:Type vmt:InvoiceEditorViewModel}">
         <vt:InvoiceEditorView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vmt:InvoiceDetailsViewModel}">
+        <vt:InvoiceDetailsView/>
+    </DataTemplate>
+
+    <!-- Settings -->
+    <DataTemplate DataType="{x:Type vm:GeneralSettingEditViewModel}">
+        <local:GeneralSettingEditView/>
+    </DataTemplate>
 </ResourceDictionary>

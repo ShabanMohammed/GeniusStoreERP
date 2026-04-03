@@ -119,6 +119,9 @@ public class MainViewModel : BaseViewModel
                     case "مرتجع المشتريات":
                         _navigationService.NavigateTo<InvoiceListViewModel>(4);
                         break;
+                    case "الإعدادات العامة":
+                        _navigationService.NavigateTo<GeneralSettingEditViewModel>();
+                        break;
                 }
 
             }
@@ -179,7 +182,15 @@ public class MainViewModel : BaseViewModel
                 new NavItem { Title = "الموردين", IconKey = "IconUsers" }
             }
         });
-        NavItems.Add(new NavItem { Title = "الإعدادات", IconKey = "IconSettings" });
+        NavItems.Add(new NavItem 
+        { 
+            Title = "الإعدادات", 
+            IconKey = "IconSettings",
+            SubItems =
+            {
+                new NavItem { Title = "الإعدادات العامة", IconKey = "IconSettings" }
+            }
+        });
 
         SelectedNavItem = NavItems[0];
 

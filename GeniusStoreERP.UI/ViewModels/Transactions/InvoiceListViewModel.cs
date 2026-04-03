@@ -1,10 +1,14 @@
+using GeniusStoreERP.Application.Common.Interfaces;
 using GeniusStoreERP.Application.Dtos;
 using GeniusStoreERP.Application.Exceptions;
 using GeniusStoreERP.Application.Transactions.Commands.VoidInvoiceByReverse;
 using GeniusStoreERP.Application.Transactions.Queries.GetInvoicesByType;
 using GeniusStoreERP.UI.Common;
 using GeniusStoreERP.UI.Services;
+using GeniusStoreERP.UI.ViewModels;
+using GeniusStoreERP.UI.Views;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -14,6 +18,8 @@ public class InvoiceListViewModel : BaseViewModel
 {
 
     private readonly IMediator _mediator;
+    private readonly IInvoiceReportService _reportService;
+    private readonly IServiceProvider _serviceProvider;
 
     private INavigationService _navigationService;
 
@@ -110,7 +116,7 @@ public class InvoiceListViewModel : BaseViewModel
     public int TotalPages => (int)Math.Ceiling((double)TotalItems / (PageSize > 0 ? PageSize : 10));
 
     public ICommand AddInvoiceCommand { get; }
-    public ICommand EditInvoiceCommand { get; }
+
     public ICommand PrintInvoiceCommand { get; }
     public ICommand ViewDetailsCommand { get; }
     public ICommand DeleteInvoiceCommand { get; }
@@ -121,19 +127,21 @@ public class InvoiceListViewModel : BaseViewModel
     public ICommand IncreasePageSizeCommand { get; }
     public ICommand DecreasePageSizeCommand { get; }
 
-    public InvoiceListViewModel(IMediator mediator, INavigationService navigationService)
+    public InvoiceListViewModel(IMediator mediator, INavigationService navigationService,
+        IInvoiceReportService reportService, IServiceProvider serviceProvider)
     {
         _mediator = mediator;
         _navigationService = navigationService;
+        _reportService = reportService;
+        _serviceProvider = serviceProvider;
 
         pageTitle = string.Empty;
         invoiceList = new ObservableCollection<InvoiceDto>();
         searchText = string.Empty;
 
         AddInvoiceCommand = new RelayCommand(_ => NavigateToEditor(null));
-        EditInvoiceCommand = new RelayCommand(param => NavigateToEditor(param as InvoiceDto));
         PrintInvoiceCommand = new RelayCommand(param => PrintInvoice(param as InvoiceDto));
-        ViewDetailsCommand = new RelayCommand(param => NavigateToEditor(param as InvoiceDto));
+        ViewDetailsCommand = new RelayCommand(param => NavigateToDetails(param as InvoiceDto));
         DeleteInvoiceCommand = new AsyncRelayCommand(async (param, _) => await DeleteInvoice(param as InvoiceDto));
 
         NextPageCommand = new RelayCommand(_ => { if (CurrentPage < TotalPages) CurrentPage++; }, _ => CurrentPage < TotalPages);
@@ -236,9 +244,37 @@ public class InvoiceListViewModel : BaseViewModel
     private void PrintInvoice(InvoiceDto? invoice)
     {
         if (invoice == null) return;
-        
-        // TODO: تنفيذ منطق الطباعة
-        MessageBoxService.ShowInfo($"جاري تجهيز الفاتورة رقم {invoice.InvoiceNumber} للطباعة...");
+
+        try
+        {
+            // توليد ملف PDF للفاتورة
+            var pdfData = _reportService.GeneratePdf(invoice);
+
+            // الحصول على ReportPreviewWindow من DI
+            var previewWindow = _serviceProvider.GetRequiredService<ReportPreviewWindow>();
+            var previewVm = previewWindow.DataContext as ReportPreviewViewModel;
+
+            if (previewVm != null)
+            {
+                var title = $"فاتورة رقم {invoice.InvoiceNumber} - {invoice.PartnerName}";
+                var info = $"التاريخ: {invoice.InvoiceDate:yyyy/MM/dd} | الصافي: {invoice.FinalAmount:N2}";
+
+                // دالة التصدير إلى Excel
+                Action<string> excelExport = (filePath) =>
+                {
+                    var excelData = _reportService.GenerateExcel(invoice);
+                    System.IO.File.WriteAllBytes(filePath, excelData);
+                };
+
+                previewVm.LoadReport(pdfData, title, info, excelExport);
+            }
+
+            previewWindow.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBoxService.ShowError($"حدث خطأ أثناء تجهيز الفاتورة للطباعة:\n{ex.Message}");
+        }
     }
 
     private void NavigateToEditor(object? parameter)
@@ -246,5 +282,11 @@ public class InvoiceListViewModel : BaseViewModel
         // إذا كان كائن InvoiceDto نمرره كما هو، وإذا كان null نمرر الـ TypeId
         object param = parameter ?? InvoiceTypeId;
         _navigationService.NavigateTo<InvoiceEditorViewModel>(param);
+    }
+
+    private void NavigateToDetails(InvoiceDto? invoice)
+    {
+        if (invoice == null) return;
+        _navigationService.NavigateTo<InvoiceDetailsViewModel>(invoice);
     }
 }

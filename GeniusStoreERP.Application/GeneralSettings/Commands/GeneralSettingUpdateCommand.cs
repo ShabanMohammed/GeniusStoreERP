@@ -1,8 +1,9 @@
-using GeniusStoreERP.Domain.Entities;
+using GeniusStoreERP.Application.Dtos;
+using MediatR;
 
-namespace GeniusStoreERP.Application.Dtos;
+namespace GeniusStoreERP.Application.GeneralSettings.Commands;
 
-public record GeneralSettingsDto(
+public record GeneralSettingUpdateCommand(
     string CompanyName,
     string? LegalName,
     string? Address,
@@ -14,4 +15,4 @@ public record GeneralSettingsDto(
     byte[]? Logo,
     decimal TaxPercentage,
     string CurrencySymbol
-);
+) : IRequest<GeneralSettingsDto>;

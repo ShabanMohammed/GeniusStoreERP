@@ -16,7 +16,10 @@ public record InvoiceItemDto(
     decimal TaxRate,
     decimal TaxAmount,
     decimal NetLineTotal
-);
+)
+{
+    public decimal LineTotal => Quantity * UnitPrice;
+}
 
 
 public class InvoiceItemDtoProfile : Profile

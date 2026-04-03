@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window x:Class="GeniusStoreERP.UI.Views.ReportOptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:GeniusStoreERP.UI.ViewModels"
+        mc:Ignorable="d"
+        Title="خيارات التقرير"
+        SizeToContent="Height"
+        Width="450"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        FlowDirection="RightToLeft"
+        FontFamily="{StaticResource MainFontFamily}">
+
+    <Border Style="{StaticResource UnifiedCardStyle}" Margin="15">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" /> <!-- Header -->
+                <RowDefinition Height="*" />    <!-- Content -->
+                <RowDefinition Height="Auto" /> <!-- Buttons -->
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,25">
+                <TextBlock Text="إعدادات تصدير التقرير"
+                           Style="{StaticResource MainHeaderStyle}" />
+                <TextBlock Text="حدد الفترة الزمنية ونوع البيانات المطلوبة للتقرير"
+                           Style="{StaticResource SubHeaderStyle}" />
+            </StackPanel>
+
+            <!-- Content -->
+            <StackPanel Grid.Row="1">
+                <!-- Date Range -->
+                <Grid Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="من تاريخ" Style="{StaticResource FieldLabelStyle}" />
+                        <Border Style="{StaticResource UnifiedInputContainerStyle}" Margin="0">
+                            <DatePicker SelectedDate="{Binding FromDate}" 
+                                        BorderThickness="0" 
+                                        Background="Transparent"
+                                        VerticalContentAlignment="Center"
+                                        Padding="5"/>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="إلى تاريخ" Style="{StaticResource FieldLabelStyle}" />
+                        <Border Style="{StaticResource UnifiedInputContainerStyle}" Margin="0">
+                            <DatePicker SelectedDate="{Binding ToDate}" 
+                                        BorderThickness="0" 
+                                        Background="Transparent"
+                                        VerticalContentAlignment="Center"
+                                        Padding="5"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Type Selection -->
+                <StackPanel Margin="0,0,0,25">
+                    <TextBlock Text="نطاق البيانات" Style="{StaticResource FieldLabelStyle}" />
+                    <Border Style="{StaticResource UnifiedInputContainerStyle}" Margin="0">
+                        <ComboBox SelectedIndex="{Binding SelectedTypeIndex}"
+                                  Style="{StaticResource UnifiedComboBoxStyle}">
+                            <ComboBoxItem Content="كافة العمليات (مبيعات ومشتريات)" />
+                            <ComboBoxItem Content="فواتير المبيعات فقط" />
+                            <ComboBoxItem Content="فواتير المشتريات فقط" />
+                        </ComboBox>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Action Buttons -->
+            <Grid Grid.Row="2" Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="1" Grid.ColumnSpan="2"
+                        Command="{Binding ConfirmCommand}"
+                        Content="توليد التقرير"
+                        Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                        Height="45" />
+
+                <Button Grid.Column="0"
+                        Command="{Binding CancelCommand}"
+                        Content="إلغاء التراجع"
+                        Height="45"
+                        Background="#F1F3F5"
+                        Foreground="{StaticResource MainContentTextBrush}"
+                        BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

@@ -22,6 +22,14 @@ public class GetGeneralSettingsQueryHandler : IRequestHandler<GetGeneralSettings
 
         return new GeneralSettingsDto(
             settings.CompanyName,
+            settings.LegalName,
+            settings.Address,
+            settings.Phone1,
+            settings.Phone2,
+            settings.Email,
+            settings.Website,
+            settings.TaxNumber,
+            settings.Logo,
             settings.TaxPercentage,
             settings.CurrencySymbol
         );
