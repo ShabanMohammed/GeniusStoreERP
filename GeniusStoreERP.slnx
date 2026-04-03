@@ -3,4 +3,4 @@
   <Project Path="GeniusStoreERP.Domain/GeniusStoreERP.Domain.csproj" />
   <Project Path="GeniusStoreERP.Infrastructure/GeniusStoreERP.Infrastructure.csproj" />
   <Project Path="GeniusStoreERP.UI/GeniusStoreERP.UI.csproj" />
-</Solution>
+ </Solution>

@@ -89,6 +89,38 @@
                         Effect="{StaticResource UnifiedCardStyle_ShadowOnly}">
                         <DataGrid ItemsSource="{Binding Products}"
                                   SelectedItem="{Binding SelectedProduct}">
+                                <DataGrid.ContextMenu>
+                                        <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                                                <MenuItem Header="عرض حركة الصنف"
+                                                          Command="{Binding ViewTransactionsCommand}"
+                                                          CommandParameter="{Binding SelectedProduct}">
+                                                        <MenuItem.Icon>
+                                                                <Viewbox Width="16" Height="16">
+                                                                        <Path Data="{StaticResource IconExchange}" Fill="#3498DB" Stretch="Uniform"/>
+                                                                </Viewbox>
+                                                        </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Header="تعديل"
+                                                          Command="{Binding EditCommand}"
+                                                          CommandParameter="{Binding SelectedProduct}">
+                                                        <MenuItem.Icon>
+                                                                <Viewbox Width="16" Height="16">
+                                                                        <Path Data="{StaticResource IconEdit}" Fill="{StaticResource AccentActionBrush}" Stretch="Uniform"/>
+                                                                </Viewbox>
+                                                        </MenuItem.Icon>
+                                                </MenuItem>
+                                                <Separator/>
+                                                <MenuItem Header="حذف"
+                                                          Command="{Binding DeleteCommand}"
+                                                          CommandParameter="{Binding SelectedProduct}">
+                                                        <MenuItem.Icon>
+                                                                <Viewbox Width="16" Height="16">
+                                                                        <Path Data="{StaticResource IconDelete}" Fill="#E74C3C" Stretch="Uniform"/>
+                                                                </Viewbox>
+                                                        </MenuItem.Icon>
+                                                </MenuItem>
+                                        </ContextMenu>
+                                </DataGrid.ContextMenu>
                                 <DataGrid.InputBindings>
                                         <MouseBinding MouseAction="LeftDoubleClick"
                                                       Command="{Binding EditCommand}"
@@ -127,6 +159,22 @@
                                                         <DataTemplate>
                                                                 <StackPanel Orientation="Horizontal"
                                                                             HorizontalAlignment="Center">
+                                                                        <!-- View Transactions Button -->
+                                                                        <Button Command="{Binding DataContext.ViewTransactionsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                                CommandParameter="{Binding}"
+                                                                                Background="Transparent"
+                                                                                BorderThickness="0"
+                                                                                Margin="0,0,10,0"
+                                                                                Cursor="Hand"
+                                                                                ToolTip="عرض حركة الصنف">
+                                                                                <Viewbox Width="18"
+                                                                                         Height="18">
+                                                                                        <Path Data="{StaticResource IconExchange}"
+                                                                                              Fill="#3498DB"
+                                                                                              Stretch="Uniform"/>
+                                                                                </Viewbox>
+                                                                        </Button>
+
                                                                         <!-- Edit Button -->
                                                                         <Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                                                 CommandParameter="{Binding }"

@@ -6,7 +6,7 @@ using GeniusStoreERP.Application.Dtos;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace GeniusStoreERP.Application.Transactions.Queries.GetProductTransactions;
+namespace GeniusStoreERP.Application.Stock.Products.Queries.GetProductTransactions;
 
 public class GetProductTransactionsQueryHandler : IRequestHandler<GetProductTransactionsQuery, PagedResponse<ProductTransactionDto>>
 {

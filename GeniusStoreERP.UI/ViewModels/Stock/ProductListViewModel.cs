@@ -84,6 +84,7 @@ public class ProductListViewModel : BaseViewModel
     public ICommand AddCommand { get; }
     public ICommand EditCommand { get; }
     public ICommand DeleteCommand { get; }
+    public ICommand ViewTransactionsCommand { get; }
     public ICommand NextPageCommand { get; }
     public ICommand PreviousPageCommand { get; }
     public ICommand FirstPageCommand { get; }
@@ -103,6 +104,14 @@ public class ProductListViewModel : BaseViewModel
             if (product != null)
             {
                 _navigationService.NavigateTo<ProductEditViewModel>(product);
+            }
+        });
+        ViewTransactionsCommand = new RelayCommand(p =>
+        {
+            var product = p as ProductDto ?? SelectedProduct;
+            if (product != null)
+            {
+                _navigationService.NavigateTo<ProductTransactionsViewModel>(product);
             }
         });
         DeleteCommand = new AsyncRelayCommand((p, _) => DeleteProduct(p as ProductDto));

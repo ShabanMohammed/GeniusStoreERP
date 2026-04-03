@@ -4,7 +4,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GeniusStoreERP.Application.Transactions.Queries.GetProductTransactions;
+namespace GeniusStoreERP.Application.Stock.Products.Queries.GetProductTransactions;
 
 public record GetProductTransactionsQuery(
     int ProductId,

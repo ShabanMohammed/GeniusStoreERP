@@ -26,6 +26,9 @@
     <DataTemplate DataType="{x:Type vms:ProductEditViewModel}">
         <local:ProductEditView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vms:ProductTransactionsViewModel}">
+        <local:ProductTransactionsView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vmp:PartnerListViewModel}">
         <vp:PartnerListView/>
     </DataTemplate>

@@ -59,7 +59,7 @@ public class CreateReturnSalesInvoiceCommandHandler : IRequestHandler<CreateRetu
             // اضافة الحركة الى حسابات العميل
             var partnerTransaction = new PartnerTransaction
             {
-                Partner = partner,
+                PartnerId = invoice.PartnerId,
                 Invoice = invoice, // سيتم ربطه تلقائياً بعد SaveChanges
                 TransactionDate = invoice.InvoiceDate,
                 TransactionTypeId = (int)PartnerTransactionTypeEnum.SalesReturn,

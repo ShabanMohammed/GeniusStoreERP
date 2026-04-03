@@ -58,7 +58,7 @@ public class CreateSalesInvoiceCommandsHandler : IRequestHandler<CreateSalesInvo
             // اضافة الحركة الى حسابات العميل
             var partnerTransaction = new PartnerTransaction
             {
-                Partner = partner,
+                PartnerId = invoice.PartnerId,
                 Invoice = invoice, // سيتم ربطه تلقائياً بعد SaveChanges
                 TransactionDate = invoice.InvoiceDate,
                 TransactionTypeId = (int)PartnerTransactionTypeEnum.SalesInvoice,
