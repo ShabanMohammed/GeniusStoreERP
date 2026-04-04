@@ -30,7 +30,7 @@
                         Width="40" Height="40"
                         ToolTip="رجوع">
                     <Viewbox Width="16" Height="16">
-                        <Path Data="{StaticResource IconBack}" Fill="{StaticResource PrimaryTextBrush}" Stretch="Uniform"/>
+                        <Path Data="{StaticResource IconBack}" Fill="{StaticResource MainContentTextBrush}" Stretch="Uniform"/>
                     </Viewbox>
                 </Button>
                 <TextBlock Text="{Binding Title}"

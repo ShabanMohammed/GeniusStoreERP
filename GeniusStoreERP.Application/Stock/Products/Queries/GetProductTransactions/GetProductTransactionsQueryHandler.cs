@@ -21,19 +21,19 @@ public class GetProductTransactionsQueryHandler : IRequestHandler<GetProductTran
 
     public async Task<PagedResponse<ProductTransactionDto>> Handle(GetProductTransactionsQuery request, CancellationToken cancellationToken)
     {
-var query = _context.StockTransactions
-    .AsNoTracking()
-    .Where(x => x.ProductId == request.ProductId);
+        var query = _context.StockTransactions
+            .AsNoTracking()
+            .Where(x => x.ProductId == request.ProductId);
 
-if (request.StartDate.HasValue)
-{
-    query = query.Where(x => x.TransactionDate >= request.StartDate.Value);
-}
+        if (request.StartDate.HasValue)
+        {
+            query = query.Where(x => x.TransactionDate.Date >= request.StartDate.Value.Date.ToUniversalTime());
+        }
 
-if (request.EndDate.HasValue)
-{
-    query = query.Where(x => x.TransactionDate <= request.EndDate.Value);
-}
+        if (request.EndDate.HasValue)
+        {
+            query = query.Where(x => x.TransactionDate.Date <= request.EndDate.Value.Date.AddHours(23).AddMinutes(59).AddSeconds(59).AddMinutes(59).AddSeconds(59).ToUniversalTime());
+        }
 
         var count = await query.CountAsync(cancellationToken);
 
@@ -42,6 +42,7 @@ if (request.EndDate.HasValue)
             .Skip((request.CurrentPage - 1) * request.PageSize)
             .Take(request.PageSize)
             .ProjectTo<ProductTransactionDto>(_mapper.ConfigurationProvider)
+            .OrderBy(t => t.Id)
             .ToListAsync(cancellationToken);
 
         return new PagedResponse<ProductTransactionDto>(items, count, request.CurrentPage, request.PageSize);

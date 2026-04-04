@@ -1,9 +1,13 @@
 using System;
+using AutoMapper;
+using GeniusStoreERP.Domain.Entities.Stock;
 
 namespace GeniusStoreERP.Application.Dtos;
 
 public class ProductTransactionDto
 {
+    public ProductTransactionDto() { } // Added parameterless constructor
+
     public int Id { get; set; }
     public int ProductId { get; set; }
     public string? ProductName { get; set; }
@@ -16,4 +20,16 @@ public class ProductTransactionDto
     public int? AdjustmentId { get; set; }
     public string? AdjustmentReference { get; set; }
     public string? Remarks { get; set; }
+}
+
+public class ProductTransactionDtoProfile : Profile
+{
+    public ProductTransactionDtoProfile()
+    {
+        CreateMap<StockTransaction, ProductTransactionDto>()
+        .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product != null ? src.Product.Name : string.Empty))
+        .ForMember(dest => dest.StockTransactionTypeName, opt => opt.MapFrom(src => src.Type != null ? src.Type.Name : string.Empty));
+        
+        CreateMap<ProductTransactionDto, StockTransaction>();
+    }
 }
