@@ -229,6 +229,110 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("GeniusStoreERP.Domain.Entities.Finances.Treasury", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Treasuries");
+                });
+
+            modelBuilder.Entity("GeniusStoreERP.Domain.Entities.Finances.TreasuryTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<int?>("InvoiceId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("PartnerId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ReferenceNumber")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("TransactionDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("TreasuryId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.HasIndex("PartnerId");
+
+                    b.HasIndex("TreasuryId");
+
+                    b.ToTable("TreasuryTransactions");
+                });
+
             modelBuilder.Entity("GeniusStoreERP.Domain.Entities.GeneralSetting", b =>
                 {
                     b.Property<int>("Id")
@@ -334,6 +438,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsShareholder")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("IsSupplier")
@@ -970,6 +1077,29 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                     b.Navigation("Type");
                 });
 
+            modelBuilder.Entity("GeniusStoreERP.Domain.Entities.Finances.TreasuryTransaction", b =>
+                {
+                    b.HasOne("GeniusStoreERP.Domain.Entities.Transactions.Invoice", "Invoice")
+                        .WithMany()
+                        .HasForeignKey("InvoiceId");
+
+                    b.HasOne("GeniusStoreERP.Domain.Entities.Partners.Partner", "Partner")
+                        .WithMany()
+                        .HasForeignKey("PartnerId");
+
+                    b.HasOne("GeniusStoreERP.Domain.Entities.Finances.Treasury", "Treasury")
+                        .WithMany("Transactions")
+                        .HasForeignKey("TreasuryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Invoice");
+
+                    b.Navigation("Partner");
+
+                    b.Navigation("Treasury");
+                });
+
             modelBuilder.Entity("GeniusStoreERP.Domain.Entities.Stock.Product", b =>
                 {
                     b.HasOne("GeniusStoreERP.Domain.Entities.Stock.Category", "Category")
@@ -1102,6 +1232,11 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GeniusStoreERP.Domain.Entities.Finances.Treasury", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 
             modelBuilder.Entity("GeniusStoreERP.Domain.Entities.Partners.Partner", b =>

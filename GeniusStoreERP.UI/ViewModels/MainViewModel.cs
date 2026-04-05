@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using GeniusStoreERP.UI.ViewModels.Finances;
 
 namespace GeniusStoreERP.UI.ViewModels;
 
@@ -122,6 +123,9 @@ public class MainViewModel : BaseViewModel
                     case "الإعدادات العامة":
                         _navigationService.NavigateTo<GeneralSettingEditViewModel>();
                         break;
+                    case "الخزينة":
+                        _navigationService.NavigateTo<TreasuryViewModel>();
+                        break;
                 }
 
             }
@@ -180,6 +184,15 @@ public class MainViewModel : BaseViewModel
             {
                 new NavItem { Title = "العملاء", IconKey = "IconUsers" },
                 new NavItem { Title = "الموردين", IconKey = "IconUsers" }
+            }
+        });
+        NavItems.Add(new NavItem
+        {
+            Title = "المالية",
+            IconKey = "IconSuccess",
+            SubItems =
+            {
+                new NavItem { Title = "الخزينة", IconKey = "IconInformation" }
             }
         });
         NavItems.Add(new NavItem 

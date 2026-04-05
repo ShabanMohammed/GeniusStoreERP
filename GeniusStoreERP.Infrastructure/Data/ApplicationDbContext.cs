@@ -31,7 +31,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<StockTransaction> StockTransactions { get; set; }
     public DbSet<StockTransactionType> StockTransactionTypes { get; set; }
     public DbSet<PartnerTransaction> PartnerTransactions { get; set; }
-    public DbSet<PartnerTransactionType> PartnerTransactionTypes { get; set; }
+public DbSet<PartnerTransactionType> PartnerTransactionTypes { get; set; }
+public DbSet<Treasury> Treasuries { get; set; }
+public DbSet<TreasuryTransaction> TreasuryTransactions { get; set; }
+
 
     public new DbSet<ApplicationUser> Users { get; set; }
 

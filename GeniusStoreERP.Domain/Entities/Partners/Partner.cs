@@ -11,6 +11,7 @@ public class Partner : BaseEntity
     public string PhoneNumber { get; set; } = string.Empty;
     public bool IsCustomer { get; set; }
     public bool IsSupplier { get; set; }
+    public bool IsShareholder { get; set; }
 
     //navigation properties
     public ICollection<Invoice>? Invoices { get; set; }

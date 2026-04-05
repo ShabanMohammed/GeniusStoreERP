@@ -12,6 +12,8 @@ using GeniusStoreERP.UI.ViewModels.Transactions;
 using GeniusStoreERP.UI.Views;
 using GeniusStoreERP.UI.Views.Partners;
 using GeniusStoreERP.UI.Views.Transactions;
+using GeniusStoreERP.UI.Views.Finances;
+using GeniusStoreERP.UI.ViewModels.Finances;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -102,6 +104,14 @@ namespace GeniusStoreERP.UI
                 // Settings
                 services.AddTransient<GeneralSettingEditView>();
                 services.AddTransient<GeneralSettingEditViewModel>();
+
+                // Finances / Treasury
+                services.AddTransient<TreasuryView>();
+                services.AddTransient<TreasuryViewModel>();
+                services.AddTransient<TreasuryTransactionView>();
+                services.AddTransient<TreasuryTransactionViewModel>();
+                services.AddTransient<AddTreasuryView>();
+                services.AddTransient<AddTreasuryViewModel>();
 
                 services.AddSingleton<IInvoiceReportService, InvoiceReportService>();
                 

@@ -139,6 +139,7 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                     PhoneNumber = table.Column<string>(type: "character varying(20)", unicode: false, maxLength: 20, nullable: false),
                     IsCustomer = table.Column<bool>(type: "boolean", nullable: false),
                     IsSupplier = table.Column<bool>(type: "boolean", nullable: false),
+                    IsShareholder = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
@@ -174,6 +175,27 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StockTransactionTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Treasuries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Code = table.Column<string>(type: "text", nullable: false),
+                    Balance = table.Column<decimal>(type: "numeric", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Treasuries", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -484,13 +506,54 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TreasuryTransactions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TreasuryId = table.Column<int>(type: "integer", nullable: false),
+                    Amount = table.Column<decimal>(type: "numeric", nullable: false),
+                    TransactionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    PartnerId = table.Column<int>(type: "integer", nullable: true),
+                    InvoiceId = table.Column<int>(type: "integer", nullable: true),
+                    ReferenceNumber = table.Column<string>(type: "text", nullable: true),
+                    Notes = table.Column<string>(type: "text", nullable: true),
+                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TreasuryTransactions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TreasuryTransactions_Invoices_InvoiceId",
+                        column: x => x.InvoiceId,
+                        principalTable: "Invoices",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TreasuryTransactions_Partners_PartnerId",
+                        column: x => x.PartnerId,
+                        principalTable: "Partners",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TreasuryTransactions_Treasuries_TreasuryId",
+                        column: x => x.TreasuryId,
+                        principalTable: "Treasuries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "InvoiceStatuses",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "نقدي" },
-                    { 2, "آجل" }
+                    { 1, "نشط" },
+                    { 2, "ملغاة" }
                 });
 
             migrationBuilder.InsertData(
@@ -517,7 +580,8 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                     { 6, "مرتجع مبيعات" },
                     { 7, "مرتجع مشتريات" },
                     { 8, "إشعار دائن" },
-                    { 9, "إشعار مدين" }
+                    { 9, "إشعار مدين" },
+                    { 10, "الغاء فاتورة" }
                 });
 
             migrationBuilder.InsertData(
@@ -704,6 +768,21 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 table: "StockTransactionTypes",
                 column: "Name",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TreasuryTransactions_InvoiceId",
+                table: "TreasuryTransactions",
+                column: "InvoiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TreasuryTransactions_PartnerId",
+                table: "TreasuryTransactions",
+                column: "PartnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TreasuryTransactions_TreasuryId",
+                table: "TreasuryTransactions",
+                column: "TreasuryId");
         }
 
         /// <inheritdoc />
@@ -737,6 +816,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "StockTransactions");
 
             migrationBuilder.DropTable(
+                name: "TreasuryTransactions");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -746,13 +828,19 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "PartnerTransactionTypes");
 
             migrationBuilder.DropTable(
-                name: "Invoices");
-
-            migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
                 name: "StockTransactionTypes");
+
+            migrationBuilder.DropTable(
+                name: "Invoices");
+
+            migrationBuilder.DropTable(
+                name: "Treasuries");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "InvoiceStatuses");
@@ -762,9 +850,6 @@ namespace GeniusStoreERP.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Partners");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
         }
     }
 }

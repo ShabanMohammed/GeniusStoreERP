@@ -1,4 +1,4 @@
-﻿using GeniusStoreERP.Domain.Entities;
+using GeniusStoreERP.Domain.Entities;
 using GeniusStoreERP.Domain.Entities.Finances;
 using GeniusStoreERP.Domain.Entities.Partners;
 using GeniusStoreERP.Domain.Entities.Stock;
@@ -23,6 +23,8 @@ namespace GeniusStoreERP.Application.Common.Interfaces
         public DbSet<StockTransactionType> StockTransactionTypes { get; set; }
         public DbSet<PartnerTransaction> PartnerTransactions { get; set; }
         public DbSet<PartnerTransactionType> PartnerTransactionTypes { get; set; }
+        public DbSet<Treasury> Treasuries { get; set; }
+        public DbSet<TreasuryTransaction> TreasuryTransactions { get; set; }
 
 
 

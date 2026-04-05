@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using GeniusStoreERP.Application.Common.Interfaces;
 using GeniusStoreERP.Application.Dtos.ListItemDto;
@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GeniusStoreERP.Application.Partners.Queries.GetPartnerItems;
 
-public record GetPartnerItemsCommand(bool IsCustomer = false, bool IsSupplier = false) : IRequest<List<PartnerListItemDto>>;
+public record GetPartnerItemsCommand(bool IsCustomer = false, bool IsSupplier = false, bool IsShareholder = false) : IRequest<List<PartnerListItemDto>>;
 
 public class GetPartnerItemsCommandHandler : IRequestHandler<GetPartnerItemsCommand, List<PartnerListItemDto>>
 {
@@ -21,8 +21,18 @@ public class GetPartnerItemsCommandHandler : IRequestHandler<GetPartnerItemsComm
     }
     public async Task<List<PartnerListItemDto>> Handle(GetPartnerItemsCommand request, CancellationToken cancellationToken)
     {
-        var partnerListItemDto = await _context.Partners.Where(x => x.IsCustomer == request.IsCustomer && x.IsSupplier == request.IsSupplier)
-             .ProjectTo<PartnerListItemDto>(_mapper.ConfigurationProvider).ToListAsync();
-        return partnerListItemDto;
+        var query = _context.Partners.AsQueryable();
+
+        if (request.IsCustomer || request.IsSupplier || request.IsShareholder)
+        {
+            query = query.Where(x => 
+                (request.IsCustomer && x.IsCustomer) || 
+                (request.IsSupplier && x.IsSupplier) ||
+                (request.IsShareholder && x.IsShareholder));
+        }
+
+        return await query
+             .ProjectTo<PartnerListItemDto>(_mapper.ConfigurationProvider)
+             .ToListAsync(cancellationToken);
     }
 }
