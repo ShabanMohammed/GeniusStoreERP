@@ -9,6 +9,9 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
 {
     public ApplicationDbContext CreateDbContext(string[] args)
     {
+        // تفعيل وضع التوافق القديم لـ Npgsql للتعامل مع DateTime
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
         // الوصول لملف appsettings.json من مشروع الـ UI
         IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)

@@ -35,6 +35,10 @@ namespace GeniusStoreERP.UI
         {
             try
             {
+                // تفعيل وضع التوافق القديم لـ Npgsql للتعامل مع DateTime
+                // هذا يسمح بإرسال قيم DateTime محلية إلى PostgreSQL
+                AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
                 configuration = new ConfigurationBuilder()
                     .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)

@@ -27,8 +27,8 @@ public class GetTreasuryTransactionsQueryHandler : IRequestHandler<GetTreasuryTr
             .Where(t => t.TreasuryId == request.TreasuryId)
             .Include(t => t.Treasury)
             .Include(t => t.Partner)
-            .ProjectTo<TreasuryTransactionDto>(_mapper.ConfigurationProvider)
             .OrderByDescending(t => t.TransactionDate)
+            .ProjectTo<TreasuryTransactionDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
     }
 }

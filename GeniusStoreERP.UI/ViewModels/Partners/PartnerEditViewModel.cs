@@ -133,8 +133,10 @@ public class PartnerEditViewModel : BaseViewModel
                 var command = new UpdatePartnerCommand(Id, Name, Email, PhoneNumber, Address, IsCustomer, IsSupplier);
                 await _mediator.Send(command);
             }
-
-            _navigationService.NavigateTo<PartnerListViewModel>();
+            if (IsCustomer)
+                _navigationService.NavigateTo<PartnerListViewModel>("Customers");
+            else
+                _navigationService.NavigateTo<PartnerListViewModel>("Suppliers");
         }
         catch (EntityDeletedException deletedEx)
         {
@@ -144,7 +146,10 @@ public class PartnerEditViewModel : BaseViewModel
                 if (result == System.Windows.MessageBoxResult.Yes)
                 {
                     await _mediator.Send(new RestorePartnerCommand(partner.Id));
-                    _navigationService.NavigateTo<PartnerListViewModel>();
+                    if (IsCustomer)
+                        _navigationService.NavigateTo<PartnerListViewModel>("Customers");
+                    else
+                        _navigationService.NavigateTo<PartnerListViewModel>("Suppliers");
                 }
             }
         }
@@ -157,7 +162,10 @@ public class PartnerEditViewModel : BaseViewModel
                 if (result == System.Windows.MessageBoxResult.Yes)
                 {
                     await _mediator.Send(new UpgradePartnerRoleCommand(partner.Id));
-                    _navigationService.NavigateTo<PartnerListViewModel>();
+                    if (IsCustomer)
+                        _navigationService.NavigateTo<PartnerListViewModel>("Customers");
+                    else
+                        _navigationService.NavigateTo<PartnerListViewModel>("Suppliers");
                 }
             }
         }

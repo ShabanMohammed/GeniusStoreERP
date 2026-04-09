@@ -21,6 +21,5 @@ public class TreasuryTransaction : BaseEntity
     
     public string? ReferenceNumber { get; set; }
     public string? Notes { get; set; }
-    
-    public string? CreatedBy { get; set; } // BaseEntity has this, but keeping it visible if needed.
+  
 }

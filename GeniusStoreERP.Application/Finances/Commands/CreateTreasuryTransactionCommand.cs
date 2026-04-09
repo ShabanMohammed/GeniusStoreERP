@@ -55,11 +55,16 @@ public class CreateTreasuryTransactionCommandHandler : IRequestHandler<CreateTre
                 treasury.Balance -= request.Amount;
             }
 
+            // تحويل التاريخ إلى UTC إذا لم يكن كذلك
+            var transactionDateUtc = request.TransactionDate.Kind == DateTimeKind.Utc
+                ? request.TransactionDate
+                : request.TransactionDate.ToUniversalTime();
+
             var transaction = new TreasuryTransaction
             {
                 TreasuryId = request.TreasuryId,
                 Amount = request.Amount,
-                TransactionDate = request.TransactionDate,
+                TransactionDate = transactionDateUtc,
                 Type = request.Type,
                 PartnerId = request.PartnerId,
                 InvoiceId = request.InvoiceId,
@@ -75,7 +80,7 @@ public class CreateTreasuryTransactionCommandHandler : IRequestHandler<CreateTre
                 var partnerTransaction = new PartnerTransaction
                 {
                     PartnerId = request.PartnerId.Value,
-                    TransactionDate = request.TransactionDate,
+                    TransactionDate = transactionDateUtc,
                     ReferenceNumber = request.ReferenceNumber,
                     Remarks = $"حركة خزينة: {request.Notes}",
                     InvoiceId = request.InvoiceId

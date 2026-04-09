@@ -7,6 +7,8 @@
                     xmlns:vp="clr-namespace:GeniusStoreERP.UI.Views.Partners"
                     xmlns:vmt="clr-namespace:GeniusStoreERP.UI.ViewModels.Transactions"
                     xmlns:vt="clr-namespace:GeniusStoreERP.UI.Views.Transactions"
+                    xmlns:vf="clr-namespace:GeniusStoreERP.UI.ViewModels.Finances"
+                    xmlns:vf2="clr-namespace:GeniusStoreERP.UI.Views.Finances"
                     xmlns:local="clr-namespace:GeniusStoreERP.UI.Views">
     <!-- Dashboard -->
     <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
@@ -50,4 +52,15 @@
     <DataTemplate DataType="{x:Type vm:GeneralSettingEditViewModel}">
         <local:GeneralSettingEditView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vf:TreasuryViewModel}">
+        <vf2:TreasuryView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vf:AddTreasuryViewModel}">
+        <vf2:AddTreasuryView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vf:TreasuryTransactionViewModel}">
+        <vf2:TreasuryTransactionView/>
+    </DataTemplate>
+
+
 </ResourceDictionary>
