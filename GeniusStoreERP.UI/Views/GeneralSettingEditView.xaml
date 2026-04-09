@@ -7,165 +7,230 @@
              xmlns:viewModels="clr-namespace:GeniusStoreERP.UI.ViewModels"
              mc:Ignorable="d" 
              FlowDirection="RightToLeft"
-             d:DesignHeight="700" d:DesignWidth="900"
+             d:DesignHeight="800" d:DesignWidth="1000"
              d:DataContext="{d:DesignInstance Type=viewModels:GeneralSettingEditViewModel}">
 
+    <UserControl.Resources>
+        <!-- Custom Shadow for Image -->
+        <DropShadowEffect x:Key="ImageShadow" BlurRadius="15" Color="#000" Opacity="0.1" ShadowDepth="2"/>
+    </UserControl.Resources>
+
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid Margin="30">
+        <Grid Margin="40">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <!-- Header Section -->
-            <StackPanel Grid.Row="0" Margin="0,0,0,25">
+            <StackPanel Grid.Row="0" Margin="0,0,0,35">
                 <TextBlock Text="الإعدادات العامة" 
-                           Style="{StaticResource MainHeaderStyle}"/>
-                <TextBlock Text="تخصيص معلومات المنشأة والإعدادات الافتراضية للنظام" 
-                           Style="{StaticResource SubHeaderStyle}"/>
+                           Style="{StaticResource MainHeaderStyle}"
+                           FontSize="28" FontWeight="ExtraBold"/>
+                <TextBlock Text="تخصيص معلومات المنشأة وتصميم الفاتورة والإعدادات المالية" 
+                           Style="{StaticResource SubHeaderStyle}"
+                           FontSize="14" Opacity="0.8"/>
             </StackPanel>
 
-            <!-- Settings Card -->
-            <Border Grid.Row="1" Style="{StaticResource UnifiedCardStyle}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+            <!-- Main Content Area -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/> <!-- Logo Section -->
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>   <!-- Forms Section -->
+                </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Row="0">
-                        <!-- Section: Company Info -->
-                        <TextBlock Text="معلومات الشركة" 
-                                   FontSize="16" FontWeight="Bold" Foreground="{StaticResource AccentActionBrush}" 
-                                   Margin="0,0,0,20"/>
-                        
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <!-- Raw 1: Company Name & Legal Name -->
-                            <StackPanel Grid.Row="0" Grid.Column="0">
-                                <TextBlock Text="اسم الشركة" Style="{StaticResource FieldLabelStyle}"/>
-                                <Border Style="{StaticResource UnifiedInputContainerStyle}">
-                                    <TextBox Text="{Binding GeneralSetting.CompanyName, UpdateSourceTrigger=PropertyChanged}" 
-                                             Style="{StaticResource UnifiedTextBoxStyle}"/>
-                                </Border>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="0" Grid.Column="2">
-                                <TextBlock Text="الاسم القانوني" Style="{StaticResource FieldLabelStyle}"/>
-                                <Border Style="{StaticResource UnifiedInputContainerStyle}">
-                                    <TextBox Text="{Binding GeneralSetting.LegalName, UpdateSourceTrigger=PropertyChanged}" 
-                                             Style="{StaticResource UnifiedTextBoxStyle}"/>
-                                </Border>
-                            </StackPanel>
-
-                            <!-- Row 2: Tax Number & Address -->
-                            <StackPanel Grid.Row="1" Grid.Column="0">
-                                <TextBlock Text="الرقم الضريبي" Style="{StaticResource FieldLabelStyle}"/>
-                                <Border Style="{StaticResource UnifiedInputContainerStyle}">
-                                    <TextBox Text="{Binding GeneralSetting.TaxNumber, UpdateSourceTrigger=PropertyChanged}" 
-                                             Style="{StaticResource UnifiedTextBoxStyle}"/>
-                                </Border>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="1" Grid.Column="2">
-                                <TextBlock Text="العنوان" Style="{StaticResource FieldLabelStyle}"/>
-                                <Border Style="{StaticResource UnifiedInputContainerStyle}">
-                                    <TextBox Text="{Binding GeneralSetting.Address, UpdateSourceTrigger=PropertyChanged}" 
-                                             Style="{StaticResource UnifiedTextBoxStyle}"/>
-                                </Border>
-                            </StackPanel>
-
-                            <!-- Row 3: Phone 1 & Phone 2 -->
-                            <StackPanel Grid.Row="2" Grid.Column="0">
-                                <TextBlock Text="الهاتف 1" Style="{StaticResource FieldLabelStyle}"/>
-                                <Border Style="{StaticResource UnifiedInputContainerStyle}">
-                                    <TextBox Text="{Binding GeneralSetting.Phone1, UpdateSourceTrigger=PropertyChanged}" 
-                                             Style="{StaticResource UnifiedTextBoxStyle}"/>
-                                </Border>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="2" Grid.Column="2">
-                                <TextBlock Text="الهاتف 2" Style="{StaticResource FieldLabelStyle}"/>
-                                <Border Style="{StaticResource UnifiedInputContainerStyle}">
-                                    <TextBox Text="{Binding GeneralSetting.Phone2, UpdateSourceTrigger=PropertyChanged}" 
-                                             Style="{StaticResource UnifiedTextBoxStyle}"/>
-                                </Border>
-                            </StackPanel>
-
-                            <!-- Row 4: Email & Website -->
-                            <StackPanel Grid.Row="3" Grid.Column="0">
-                                <TextBlock Text="البريد الإلكتروني" Style="{StaticResource FieldLabelStyle}"/>
-                                <Border Style="{StaticResource UnifiedInputContainerStyle}">
-                                    <TextBox Text="{Binding GeneralSetting.Email, UpdateSourceTrigger=PropertyChanged}" 
-                                             Style="{StaticResource UnifiedTextBoxStyle}"/>
-                                </Border>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="3" Grid.Column="2">
-                                <TextBlock Text="الموقع الإلكتروني" Style="{StaticResource FieldLabelStyle}"/>
-                                <Border Style="{StaticResource UnifiedInputContainerStyle}">
-                                    <TextBox Text="{Binding GeneralSetting.Website, UpdateSourceTrigger=PropertyChanged}" 
-                                             Style="{StaticResource UnifiedTextBoxStyle}"/>
-                                </Border>
-                            </StackPanel>
-
-                            <!-- Section: Financial Info -->
-                            <TextBlock Grid.Row="4" Grid.ColumnSpan="3" Text="الإعدادات المالية" 
+                <!-- Left Column: Logo & Branding -->
+                <StackPanel Grid.Column="0">
+                    <Border Style="{StaticResource UnifiedCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="شعار المنشأة" 
                                        FontSize="16" FontWeight="Bold" Foreground="{StaticResource AccentActionBrush}" 
-                                       Margin="0,20,0,20"/>
-                        </Grid>
+                                       Margin="0,0,0,20" HorizontalAlignment="Center"/>
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                            <!-- Logo Preview Container -->
+                            <Grid HorizontalAlignment="Center" Margin="0,0,0,20">
+                                <Border Width="200" Height="200" 
+                                        Background="#F8F9FA" 
+                                        BorderBrush="#E9ECEF" 
+                                        BorderThickness="2" 
+                                        CornerRadius="12"
+                                        Effect="{StaticResource ImageShadow}">
+                                    <Grid>
+                                        <!-- Placeholder when no logo -->
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                    Visibility="{Binding SettingModel.Logo, Converter={StaticResource NullToVisibilityConverter}}">
+                                            <Viewbox Width="64" Height="64" Opacity="0.2">
+                                                <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="#495057"/>
+                                            </Viewbox>
+                                            <TextBlock Text="لا يوجد شعار" FontSize="12" Opacity="0.4" Margin="0,10,0,0"/>
+                                        </StackPanel>
 
-                            <StackPanel Grid.Column="0">
-                                <TextBlock Text="نسبة الضريبة (%)" Style="{StaticResource FieldLabelStyle}"/>
-                                <Border Style="{StaticResource UnifiedInputContainerStyle}">
-                                    <TextBox Text="{Binding GeneralSetting.TaxPercentage, UpdateSourceTrigger=PropertyChanged}" 
-                                             Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                        <!-- Actual Logo Image -->
+                                        <Image Source="{Binding SettingModel.Logo, Converter={StaticResource ByteArrayToImageConverter}}" 
+                                               Stretch="Uniform"
+                                               Margin="10"
+                                               RenderOptions.BitmapScalingMode="HighQuality"
+                                               Visibility="{Binding SettingModel.Logo, Converter={StaticResource NotNullToVisibilityConverter}}"/>
+                                    </Grid>
                                 </Border>
-                            </StackPanel>
+                            </Grid>
 
-                            <StackPanel Grid.Column="2">
-                                <TextBlock Text="رمز العملة" Style="{StaticResource FieldLabelStyle}"/>
-                                <Border Style="{StaticResource UnifiedInputContainerStyle}">
-                                    <TextBox Text="{Binding GeneralSetting.CurrencySymbol, UpdateSourceTrigger=PropertyChanged}" 
-                                             Style="{StaticResource UnifiedTextBoxStyle}"/>
-                                </Border>
-                            </StackPanel>
-                        </Grid>
-                    </StackPanel>
+                            <!-- Logo Actions -->
+                            <Button Content="تغيير الشعار" 
+                                    Command="{Binding SelectLogoCommand}"
+                                    Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                                    Width="180" Margin="0,0,0,10"/>
+                            
+                            <Button Content="إزالة الشعار" 
+                                    Command="{Binding RemoveLogoCommand}"
+                                    Style="{StaticResource UnifiedSecondaryButtonStyle}"
+                                    Width="180" Background="#FFF5F5" BorderBrush="#FFC9C9" Foreground="#E03131"
+                                    Visibility="{Binding SettingModel.Logo, Converter={StaticResource NotNullToVisibilityConverter}}"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
 
-                    <!-- Footer Actions -->
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,30,0,0">
-                        <Button Content="حفظ التغييرات" 
+                <!-- Right Column: Settings Form -->
+                <StackPanel Grid.Column="2">
+                    <!-- Section: Company Info -->
+                    <Border Style="{StaticResource UnifiedCardStyle}" Margin="0,0,0,20">
+                        <StackPanel>
+                            <TextBlock Text="معلومات الشركة" 
+                                       FontSize="18" FontWeight="Bold" Foreground="{StaticResource AccentActionBrush}" 
+                                       Margin="0,0,0,25"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Company Name & Legal Name -->
+                                <StackPanel Grid.Row="0" Grid.Column="0">
+                                    <TextBlock Text="اسم الشركة *" Style="{StaticResource FieldLabelStyle}"/>
+                                    <Border Style="{StaticResource UnifiedInputContainerStyle}">
+                                        <TextBox Text="{Binding SettingModel.CompanyName, UpdateSourceTrigger=PropertyChanged}" 
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="0" Grid.Column="2">
+                                    <TextBlock Text="الاسم القانوني" Style="{StaticResource FieldLabelStyle}"/>
+                                    <Border Style="{StaticResource UnifiedInputContainerStyle}">
+                                        <TextBox Text="{Binding SettingModel.LegalName, UpdateSourceTrigger=PropertyChanged}" 
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <!-- Tax Number & Address -->
+                                <StackPanel Grid.Row="1" Grid.Column="0">
+                                    <TextBlock Text="الرقم الضريبي" Style="{StaticResource FieldLabelStyle}"/>
+                                    <Border Style="{StaticResource UnifiedInputContainerStyle}">
+                                        <TextBox Text="{Binding SettingModel.TaxNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Grid.Column="2">
+                                    <TextBlock Text="العنوان" Style="{StaticResource FieldLabelStyle}"/>
+                                    <Border Style="{StaticResource UnifiedInputContainerStyle}">
+                                        <TextBox Text="{Binding SettingModel.Address, UpdateSourceTrigger=PropertyChanged}" 
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <!-- Phones -->
+                                <StackPanel Grid.Row="2" Grid.Column="0">
+                                    <TextBlock Text="الهاتف الرئيسي" Style="{StaticResource FieldLabelStyle}"/>
+                                    <Border Style="{StaticResource UnifiedInputContainerStyle}">
+                                        <TextBox Text="{Binding SettingModel.Phone1, UpdateSourceTrigger=PropertyChanged}" 
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Grid.Column="2">
+                                    <TextBlock Text="الهاتف الفرعي" Style="{StaticResource FieldLabelStyle}"/>
+                                    <Border Style="{StaticResource UnifiedInputContainerStyle}">
+                                        <TextBox Text="{Binding SettingModel.Phone2, UpdateSourceTrigger=PropertyChanged}" 
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <!-- Email & Website -->
+                                <StackPanel Grid.Row="3" Grid.Column="0">
+                                    <TextBlock Text="البريد الإلكتروني" Style="{StaticResource FieldLabelStyle}"/>
+                                    <Border Style="{StaticResource UnifiedInputContainerStyle}">
+                                        <TextBox Text="{Binding SettingModel.Email, UpdateSourceTrigger=PropertyChanged}" 
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="3" Grid.Column="2">
+                                    <TextBlock Text="الموقع الإلكتروني" Style="{StaticResource FieldLabelStyle}"/>
+                                    <Border Style="{StaticResource UnifiedInputContainerStyle}">
+                                        <TextBox Text="{Binding SettingModel.Website, UpdateSourceTrigger=PropertyChanged}" 
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Section: Financial Settings -->
+                    <Border Style="{StaticResource UnifiedCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="الإعدادات المالية" 
+                                       FontSize="18" FontWeight="Bold" Foreground="{StaticResource AccentActionBrush}" 
+                                       Margin="0,0,0,25"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="نسبة الضريبة الافتراضية (%)" Style="{StaticResource FieldLabelStyle}"/>
+                                    <Border Style="{StaticResource UnifiedInputContainerStyle}">
+                                        <TextBox Text="{Binding SettingModel.TaxPercentage, UpdateSourceTrigger=PropertyChanged}" 
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Text="عملة النظام" Style="{StaticResource FieldLabelStyle}"/>
+                                    <Border Style="{StaticResource UnifiedInputContainerStyle}">
+                                        <TextBox Text="{Binding SettingModel.CurrencySymbol, UpdateSourceTrigger=PropertyChanged}" 
+                                                 Style="{StaticResource UnifiedTextBoxStyle}"/>
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Submit Actions -->
+                    <StackPanel x:Name="Footer" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,30,0,20">
+                        <Button Content="إلغاء الأمر" 
+                                Command="{Binding CancelCommand}" 
+                                Style="{StaticResource UnifiedSecondaryButtonStyle}"
+                                Width="140" Margin="0,0,15,0"/>
+
+                        <Button Content="حفظ كافة الإعدادات" 
                                 Command="{Binding SaveCommand}" 
                                 Style="{StaticResource UnifiedPrimaryButtonStyle}"
-                                Width="150" Margin="0,0,15,0"/>
-                        
-                        <Button Content="إلغاء" 
-                                Command="{Binding CancelCommand}" 
-                                Style="{StaticResource UnifiedPrimaryButtonStyle}"
-                                Width="100" Background="#F1F3F5" Foreground="#495057"/>
+                                Width="220"/>
                     </StackPanel>
-                </Grid>
-            </Border>
+                </StackPanel>
+            </Grid>
         </Grid>
     </ScrollViewer>
 </UserControl>

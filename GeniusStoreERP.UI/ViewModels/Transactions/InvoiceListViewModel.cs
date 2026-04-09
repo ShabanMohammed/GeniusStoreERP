@@ -12,6 +12,9 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
+using GeniusStoreERP.Application.GeneralSettings.Queries.GetGeneralSettings;
+using System.Threading.Tasks;
+
 namespace GeniusStoreERP.UI.ViewModels.Transactions;
 
 public class InvoiceListViewModel : BaseViewModel
@@ -140,7 +143,7 @@ public class InvoiceListViewModel : BaseViewModel
         searchText = string.Empty;
 
         AddInvoiceCommand = new RelayCommand(_ => NavigateToEditor(null));
-        PrintInvoiceCommand = new RelayCommand(param => PrintInvoice(param as InvoiceDto));
+        PrintInvoiceCommand = new AsyncRelayCommand(async (param, _) => await PrintInvoice(param as InvoiceDto));
         ViewDetailsCommand = new RelayCommand(param => NavigateToDetails(param as InvoiceDto));
         DeleteInvoiceCommand = new AsyncRelayCommand(async (param, _) => await DeleteInvoice(param as InvoiceDto));
 
@@ -241,14 +244,15 @@ public class InvoiceListViewModel : BaseViewModel
         }
     }
 
-    private void PrintInvoice(InvoiceDto? invoice)
+    private async Task PrintInvoice(InvoiceDto? invoice)
     {
         if (invoice == null) return;
 
         try
         {
+            var settings = await _mediator.Send(new GetGeneralSettingsQuery());
             // توليد ملف PDF للفاتورة
-            var pdfData = _reportService.GeneratePdf(invoice);
+            var pdfData = _reportService.GeneratePdf(invoice, settings);
 
             // الحصول على ReportPreviewWindow من DI
             var previewWindow = _serviceProvider.GetRequiredService<ReportPreviewWindow>();
@@ -262,7 +266,7 @@ public class InvoiceListViewModel : BaseViewModel
                 // دالة التصدير إلى Excel
                 Action<string> excelExport = (filePath) =>
                 {
-                    var excelData = _reportService.GenerateExcel(invoice);
+                    var excelData = _reportService.GenerateExcel(invoice, settings);
                     System.IO.File.WriteAllBytes(filePath, excelData);
                 };
 

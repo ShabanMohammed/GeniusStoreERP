@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GeniusStoreERP.UI.Common;
 using GeniusStoreERP.UI.Services;
+using GeniusStoreERP.UI.Models;
 using GeniusStoreERP.Application.GeneralSettings.Commands;
 using GeniusStoreERP.Application.GeneralSettings.Queries.GetGeneralSettings;
 using GeniusStoreERP.Application.Dtos;
@@ -14,13 +15,13 @@ namespace GeniusStoreERP.UI.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IMediator _mediator;
-        private GeneralSettingsDto? _generalSetting;
+        private GeneralSettingEditModel? _settingModel;
         private bool _isLoading;
 
-        public GeneralSettingsDto? GeneralSetting
+        public GeneralSettingEditModel? SettingModel
         {
-            get => _generalSetting;
-            set => SetProperty(ref _generalSetting, value);
+            get => _settingModel;
+            set => SetProperty(ref _settingModel, value);
         }
 
         public bool IsLoading
@@ -31,28 +32,20 @@ namespace GeniusStoreERP.UI.ViewModels
 
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
+        public ICommand SelectLogoCommand { get; }
+        public ICommand RemoveLogoCommand { get; }
 
         public GeneralSettingEditViewModel(INavigationService navigationService, IMediator mediator)
         {
             _navigationService = navigationService;
             _mediator = mediator;
 
-            _generalSetting = new GeneralSettingsDto(
-                string.Empty,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                0,
-                string.Empty
-            );
+            _settingModel = new GeneralSettingEditModel();
 
             SaveCommand = new AsyncRelayCommand((_, _) => OnSaveAsync());
             CancelCommand = new RelayCommand(_ => _navigationService.NavigateTo<DashboardViewModel>());
+            SelectLogoCommand = new RelayCommand(OnSelectLogo);
+            RemoveLogoCommand = new RelayCommand(OnRemoveLogo);
         }
 
         public override async void Initialize(object? parameter)
@@ -69,7 +62,20 @@ namespace GeniusStoreERP.UI.ViewModels
                 var result = await _mediator.Send(query);
                 if (result != null)
                 {
-                    GeneralSetting = result;
+                    SettingModel = new GeneralSettingEditModel
+                    {
+                        CompanyName = result.CompanyName,
+                        LegalName = result.LegalName,
+                        Address = result.Address,
+                        Phone1 = result.Phone1,
+                        Phone2 = result.Phone2,
+                        Email = result.Email,
+                        Website = result.Website,
+                        TaxNumber = result.TaxNumber,
+                        Logo = result.Logo,
+                        TaxPercentage = result.TaxPercentage,
+                        CurrencySymbol = result.CurrencySymbol
+                    };
                 }
             }
             catch (Exception ex)
@@ -84,23 +90,29 @@ namespace GeniusStoreERP.UI.ViewModels
 
         private async Task OnSaveAsync()
         {
-            if (GeneralSetting == null || IsLoading) return;
+            if (SettingModel == null || IsLoading) return;
+
+            if (!SettingModel.IsValid())
+            {
+                MessageBoxService.ShowWarning("يرجى التأكد من إدخال اسم الشركة");
+                return;
+            }
 
             IsLoading = true;
             try
             {
                 var command = new GeneralSettingUpdateCommand(
-                    GeneralSetting.CompanyName,
-                    GeneralSetting.LegalName,
-                    GeneralSetting.Address,
-                    GeneralSetting.Phone1,
-                    GeneralSetting.Phone2,
-                    GeneralSetting.Email,
-                    GeneralSetting.Website,
-                    GeneralSetting.TaxNumber,
-                    GeneralSetting.Logo,
-                    GeneralSetting.TaxPercentage,
-                    GeneralSetting.CurrencySymbol
+                    SettingModel.CompanyName,
+                    SettingModel.LegalName,
+                    SettingModel.Address,
+                    SettingModel.Phone1,
+                    SettingModel.Phone2,
+                    SettingModel.Email,
+                    SettingModel.Website,
+                    SettingModel.TaxNumber,
+                    SettingModel.Logo,
+                    SettingModel.TaxPercentage,
+                    SettingModel.CurrencySymbol
                 );
 
                 await _mediator.Send(command);
@@ -116,5 +128,39 @@ namespace GeniusStoreERP.UI.ViewModels
                 IsLoading = false;
             }
         }
+
+        private void OnSelectLogo(object? parameter)
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif",
+                Title = "اختر شعار الشركة"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                try
+                {
+                    byte[] logoBytes = System.IO.File.ReadAllBytes(dialog.FileName);
+                    if (SettingModel != null)
+                    {
+                        SettingModel.Logo = logoBytes;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBoxService.ShowError($"فشل في قراءة ملف الصورة: {ex.Message}");
+                }
+            }
+        }
+
+        private void OnRemoveLogo(object? parameter)
+        {
+            if (SettingModel != null)
+            {
+                SettingModel.Logo = null;
+            }
+        }
     }
 }
+

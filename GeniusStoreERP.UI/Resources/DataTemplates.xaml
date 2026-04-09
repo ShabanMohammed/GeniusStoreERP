@@ -37,6 +37,12 @@
     <DataTemplate DataType="{x:Type vmp:PartnerEditViewModel}">
         <vp:PartnerEditView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vmp:PartnerAccountsViewModel}">
+        <vp:PartnerAccountsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmp:PartnerStatementViewModel}">
+        <vp:PartnerStatementView/>
+    </DataTemplate>
     <!-- Transactions -->
     <DataTemplate DataType="{x:Type vmt:InvoiceListViewModel}">
         <vt:InvoiceListView/>

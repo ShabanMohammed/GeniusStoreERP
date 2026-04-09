@@ -4,7 +4,7 @@ namespace GeniusStoreERP.Application.Common.Interfaces;
 
 public interface IInvoiceReportService
 {
-    byte[] GeneratePdf(InvoiceDto invoice);
-    byte[] GenerateExcel(InvoiceDto invoice);
-    byte[] GenerateWord(InvoiceDto invoice);
+    byte[] GeneratePdf(InvoiceDto invoice, GeneralSettingsDto? settings);
+    byte[] GenerateExcel(InvoiceDto invoice, GeneralSettingsDto? settings);
+    byte[] GenerateWord(InvoiceDto invoice, GeneralSettingsDto? settings);
 }

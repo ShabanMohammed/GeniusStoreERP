@@ -126,6 +126,9 @@ public class MainViewModel : BaseViewModel
                     case "الخزينة":
                         _navigationService.NavigateTo<TreasuryViewModel>();
                         break;
+                    case "حسابات الشركاء":
+                        _navigationService.NavigateTo<PartnerAccountsViewModel>();
+                        break;
                 }
 
             }
@@ -192,7 +195,8 @@ public class MainViewModel : BaseViewModel
             IconKey = "IconSuccess",
             SubItems =
             {
-                new NavItem { Title = "الخزينة", IconKey = "IconInformation" }
+                new NavItem { Title = "الخزينة", IconKey = "IconInformation" },
+                new NavItem { Title = "حسابات الشركاء", IconKey = "IconInformation" }
             }
         });
         NavItems.Add(new NavItem 

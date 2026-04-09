@@ -6,6 +6,9 @@
     <common:ResourceKeyToBrushConverter x:Key="ResourceKeyToBrushConverter" />
     <common:NumericToVisibilityConverter x:Key="NumericToVisibilityConverter" />
     <common:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    <common:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
+    <common:NullToVisibilityConverter x:Key="NullToVisibilityConverter" Invert="False" />
+    <common:NullToVisibilityConverter x:Key="NotNullToVisibilityConverter" Invert="True" />
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     
 </ResourceDictionary>

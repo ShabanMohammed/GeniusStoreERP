@@ -8,6 +8,8 @@ using Microsoft.Win32;
 using System.IO;
 using System.Windows.Input;
 using GeniusStoreERP.Application.Common.Interfaces;
+using GeniusStoreERP.Application.GeneralSettings.Queries.GetGeneralSettings;
+using System.Threading.Tasks;
 
 namespace GeniusStoreERP.UI.ViewModels.Transactions;
 
@@ -38,9 +40,9 @@ public class InvoiceDetailsViewModel : BaseViewModel
         _navigationService = navigationService;
         _reportService = reportService;
 
-        ExportPdfCommand = new RelayCommand(_ => ExportToPdf());
-        ExportExcelCommand = new RelayCommand(_ => ExportToExcel());
-        ExportWordCommand = new RelayCommand(_ => ExportToWord());
+        ExportPdfCommand = new AsyncRelayCommand(async (p, _) => await ExportToPdf());
+        ExportExcelCommand = new AsyncRelayCommand(async (p, _) => await ExportToExcel());
+        ExportWordCommand = new AsyncRelayCommand(async (p, _) => await ExportToWord());
         VoidCommand = new AsyncRelayCommand(async (p, _) => await VoidInvoice());
         BackCommand = new RelayCommand(_ => _navigationService.NavigateTo<InvoiceListViewModel>(Invoice?.InvoiceTypeId ?? 1));
     }
@@ -54,7 +56,7 @@ public class InvoiceDetailsViewModel : BaseViewModel
         }
     }
 
-    private void ExportToPdf()
+    private async Task ExportToPdf()
     {
         if (Invoice == null) return;
         
@@ -68,7 +70,8 @@ public class InvoiceDetailsViewModel : BaseViewModel
         {
             try
             {
-                var bytes = _reportService.GeneratePdf(Invoice);
+                var settings = await _mediator.Send(new GetGeneralSettingsQuery());
+                var bytes = _reportService.GeneratePdf(Invoice, settings);
                 File.WriteAllBytes(dialog.FileName, bytes);
                 MessageBoxService.ShowSuccess("تم تصدير ملف PDF بنجاح");
             }
@@ -79,7 +82,7 @@ public class InvoiceDetailsViewModel : BaseViewModel
         }
     }
 
-    private void ExportToExcel()
+    private async Task ExportToExcel()
     {
         if (Invoice == null) return;
 
@@ -93,7 +96,8 @@ public class InvoiceDetailsViewModel : BaseViewModel
         {
             try
             {
-                var bytes = _reportService.GenerateExcel(Invoice);
+                var settings = await _mediator.Send(new GetGeneralSettingsQuery());
+                var bytes = _reportService.GenerateExcel(Invoice, settings);
                 File.WriteAllBytes(dialog.FileName, bytes);
                 MessageBoxService.ShowSuccess("تم تصدير ملف Excel بنجاح");
             }
@@ -104,7 +108,7 @@ public class InvoiceDetailsViewModel : BaseViewModel
         }
     }
 
-    private void ExportToWord()
+    private async Task ExportToWord()
     {
         if (Invoice == null) return;
 
@@ -118,7 +122,8 @@ public class InvoiceDetailsViewModel : BaseViewModel
         {
             try
             {
-                var bytes = _reportService.GenerateWord(Invoice);
+                var settings = await _mediator.Send(new GetGeneralSettingsQuery());
+                var bytes = _reportService.GenerateWord(Invoice, settings);
                 File.WriteAllBytes(dialog.FileName, bytes);
                 MessageBoxService.ShowSuccess("تم تصدير ملف Word بنجاح");
             }

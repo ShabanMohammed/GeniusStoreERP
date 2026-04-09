@@ -97,6 +97,10 @@ namespace GeniusStoreERP.UI
                 services.AddTransient<PartnerListViewModel>();
                 services.AddTransient<PartnerEditView>();
                 services.AddTransient<PartnerEditViewModel>();
+                services.AddTransient<PartnerAccountsView>();
+                services.AddTransient<PartnerAccountsViewModel>();
+                services.AddTransient<PartnerStatementView>();
+                services.AddTransient<PartnerStatementViewModel>();
 
                 services.AddTransient<InvoiceListView>();
                 services.AddTransient<InvoiceListViewModel>();

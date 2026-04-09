@@ -131,11 +131,20 @@ public class PartnerListViewModel : BaseViewModel
     public ICommand LastPageCommand { get; }
     public ICommand IncreasePageSizeCommand { get; }
     public ICommand DecreasePageSizeCommand { get; }
+    public ICommand ViewStatementCommand { get; }
 
     public PartnerListViewModel(INavigationService navigationService, IMediator mediator)
     {
         _navigationService = navigationService;
         _mediator = mediator;
+        ViewStatementCommand = new RelayCommand(p =>
+        {
+            var partner = p as PartnerDto ?? SelectedPartner;
+            if (partner != null)
+            {
+                _navigationService.NavigateTo<PartnerStatementViewModel>(partner.Id);
+            }
+        });
         SearchCommand = new AsyncRelayCommand((_, _) => LoadPartnersAsync());
         AddCommand = new RelayCommand(_ => {
             var partnerDto = new PartnerDto(0, "", "", "", "", IsSupplierFilter, IsCustomerFilter);

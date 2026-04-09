@@ -189,6 +189,13 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Command="{Binding DataContext.ViewStatementCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}"
+                                            Background="Transparent" BorderThickness="0" Margin="0,0,5,0" ToolTip="كشف حساب">
+                                        <Viewbox Width="18" Height="18">
+                                            <Path Data="{StaticResource IconExchange}" Fill="#F39C12" Stretch="Uniform"/>
+                                        </Viewbox>
+                                    </Button>
                                     <Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                             CommandParameter="{Binding}"
                                             Background="Transparent" BorderThickness="0" Margin="0,0,5,0" ToolTip="تعديل">
