@@ -24,7 +24,7 @@ public class InvoiceDocument : IDocument
         {
             page.Margin(1, Unit.Centimetre);
             page.PageColor(Colors.White);
-            page.DefaultTextStyle(x => x.FontSize(11).FontFamily("Cairo")); // Cairo Font
+            page.DefaultTextStyle(x => x.FontSize(11).FontFamily("Calibri")); // Calibri Font
             page.ContentFromRightToLeft(); // RTL for Arabic
 
             // Watermark for cancelled invoices

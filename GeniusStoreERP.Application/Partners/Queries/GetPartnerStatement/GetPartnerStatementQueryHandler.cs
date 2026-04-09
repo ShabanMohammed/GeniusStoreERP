@@ -57,7 +57,8 @@ namespace GeniusStoreERP.Application.Partners.Queries.GetPartnerStatement
 
             if (request.ToDate.HasValue)
             {
-                query = query.Where(t => t.TransactionDate <= request.ToDate.Value);
+                var toDateLimit = request.ToDate.Value.Date.AddDays(1);
+                query = query.Where(t => t.TransactionDate < toDateLimit);
             }
 
             var transactions = await query

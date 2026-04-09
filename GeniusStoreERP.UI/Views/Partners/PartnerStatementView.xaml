@@ -61,10 +61,10 @@
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                     <TextBlock Text="من:" VerticalAlignment="Center" Foreground="White" Margin="0,0,10,0"/>
-                    <DatePicker SelectedDate="{Binding FromDate}" Width="130" Margin="0,0,15,0"/>
+                    <DatePicker SelectedDate="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}" Width="130" Margin="0,0,15,0"/>
                     
                     <TextBlock Text="إلى:" VerticalAlignment="Center" Foreground="White" Margin="0,0,10,0"/>
-                    <DatePicker SelectedDate="{Binding ToDate}" Width="130" Margin="0,0,15,0"/>
+                    <DatePicker SelectedDate="{Binding ToDate, UpdateSourceTrigger=PropertyChanged}" Width="130" Margin="0,0,15,0"/>
                     
                     <Button Command="{Binding RefreshCommand}" Style="{StaticResource UnifiedSecondaryButtonStyle}" Width="40">
                         <Viewbox Width="16" Height="16">

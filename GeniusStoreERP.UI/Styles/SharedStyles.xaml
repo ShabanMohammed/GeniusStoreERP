@@ -6,7 +6,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Typography -->
-    <FontFamily x:Key="MainFontFamily">pack://application:,,,/Resources/Fonts/Cairo-Regular.ttf#Cairo</FontFamily>
+    <FontFamily x:Key="MainFontFamily">Calibri</FontFamily>
 
     <!-- Global Defaults -->
     <Style TargetType="Window">

@@ -19,18 +19,8 @@ public class InvoiceReportService : IInvoiceReportService
         // Initializing QuestPDF License (Community is free for certain uses)
         QuestPDF.Settings.License = LicenseType.Community;
 
-        // Register Cairo font for QuestPDF
-        try
-        {
-            var fontPathRegular = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Fonts", "Cairo-Regular.ttf");
-            var fontPathBold = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Fonts", "Cairo-Bold.ttf");
-            
-            if (File.Exists(fontPathRegular))
-                QuestPDF.Drawing.FontManager.RegisterFont(File.OpenRead(fontPathRegular));
-            if (File.Exists(fontPathBold))
-                QuestPDF.Drawing.FontManager.RegisterFont(File.OpenRead(fontPathBold));
-        }
-        catch { /* Font registration might fail if already registered or files missing */ }
+        // Calibri is typically a system font; QuestPDF will find it automatically on Windows.
+        // If needed in other environments, you would register the .ttf files here.
     }
 
     public byte[] GeneratePdf(InvoiceDto invoice, GeneralSettingsDto? settings)

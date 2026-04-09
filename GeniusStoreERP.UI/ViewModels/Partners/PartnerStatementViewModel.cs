@@ -16,7 +16,7 @@ namespace GeniusStoreERP.UI.ViewModels.Partners
         private readonly INavigationService _navigationService;
         private int _partnerId;
 
-        private DateTime? _fromDate = DateTime.Now.AddMonths(-1);
+        private DateTime? _fromDate = DateTime.Today.AddMonths(-1);
         public DateTime? FromDate
         {
             get => _fromDate;
@@ -29,7 +29,7 @@ namespace GeniusStoreERP.UI.ViewModels.Partners
             }
         }
 
-        private DateTime? _toDate = DateTime.Now;
+        private DateTime? _toDate = DateTime.Today;
         public DateTime? ToDate
         {
             get => _toDate;
