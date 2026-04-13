@@ -129,6 +129,9 @@ public class MainViewModel : BaseViewModel
                     case "حسابات الشركاء":
                         _navigationService.NavigateTo<PartnerAccountsViewModel>();
                         break;
+                    case "التقارير":
+                        _navigationService.NavigateTo<ReportsMainViewModel>();
+                        break;
                 }
 
             }
@@ -199,6 +202,13 @@ public class MainViewModel : BaseViewModel
                 new NavItem { Title = "حسابات الشركاء", IconKey = "IconInformation" }
             }
         });
+        NavItems.Add(new NavItem
+        {
+            Title = "التقارير",
+            IconKey = "IconActivity", // Update icon if needed
+            TargetViewModel = null
+        });
+
         NavItems.Add(new NavItem 
         { 
             Title = "الإعدادات", 

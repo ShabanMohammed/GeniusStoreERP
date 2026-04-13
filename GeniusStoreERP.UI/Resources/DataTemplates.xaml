@@ -68,5 +68,10 @@
         <vf2:TreasuryTransactionView/>
     </DataTemplate>
 
+    <!-- Reports -->
+    <DataTemplate DataType="{x:Type vm:ReportsMainViewModel}">
+        <local:ReportsMainView/>
+    </DataTemplate>
+
 
 </ResourceDictionary>

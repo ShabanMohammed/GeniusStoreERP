@@ -122,11 +122,17 @@ namespace GeniusStoreERP.UI
                 services.AddTransient<AddTreasuryViewModel>();
 
                 services.AddSingleton<IInvoiceReportService, InvoiceReportService>();
+                services.AddSingleton<IPartnerReportService, PartnerReportService>();
+                services.AddSingleton<IStockReportService, StockReportService>();
                 
                 services.AddTransient<ReportOptionsWindow>();
                 services.AddTransient<ReportOptionsViewModel>();
                 services.AddTransient<ReportPreviewWindow>();
                 services.AddTransient<ReportPreviewViewModel>();
+
+                // Reports Hub
+                services.AddTransient<ReportsMainView>();
+                services.AddTransient<ReportsMainViewModel>();
 
                 // 7. بناء الـ ServiceProvider النهائي
                 ServiceProvider = services.BuildServiceProvider();
