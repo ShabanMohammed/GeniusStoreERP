@@ -1,4 +1,4 @@
-﻿using GeniusStoreERP.Domain.Common;
+using GeniusStoreERP.Domain.Common;
 using GeniusStoreERP.Domain.Entities.Transactions;
 
 namespace GeniusStoreERP.Domain.Entities.Stock;
@@ -19,6 +19,7 @@ public class StockTransaction : BaseEntity
     //navtion property
     public Product? Product { get; set; }
     public Invoice? Invoice { get; set; }
+    public StockAdjustment? StockAdjustment { get; set; }
     public StockTransactionType? Type { get; set; }
 
 }

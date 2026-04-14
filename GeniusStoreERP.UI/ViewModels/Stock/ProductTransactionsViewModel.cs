@@ -7,6 +7,11 @@ using MediatR;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
+using GeniusStoreERP.UI.Views;
+using System.Windows;
+using GeniusStoreERP.Application.GeneralSettings.Queries.GetGeneralSettings;
+using GeniusStoreERP.Application.Common.Interfaces;
 
 namespace GeniusStoreERP.UI.ViewModels.Stock;
 
@@ -115,6 +120,7 @@ public class ProductTransactionsViewModel : BaseViewModel
     public ICommand IncreasePageSizeCommand { get; }
     public ICommand DecreasePageSizeCommand { get; }
     public ICommand ClearDatesCommand { get; }
+    public ICommand PrintReportCommand { get; }
 
     public ProductTransactionsViewModel(INavigationService navigationService, IMediator mediator, IServiceProvider serviceProvider)
     {
@@ -152,6 +158,8 @@ public class ProductTransactionsViewModel : BaseViewModel
             CurrentPage = 1;
             _ = LoadTransactionsAsync();
         });
+
+        PrintReportCommand = new AsyncRelayCommand(async (_, _) => await GenerateReportAsync());
     }
 
     public override void Initialize(object? parameter)
@@ -187,6 +195,36 @@ public class ProductTransactionsViewModel : BaseViewModel
         catch (Exception ex)
         {
             MessageBoxService.ShowError(ex.Message);
+        }
+    }
+
+    private async Task GenerateReportAsync()
+    {
+        if (Product == null) return;
+        
+        try
+        {
+            // Fetch all transactions for the date filter
+            var query = new GetProductTransactionsQuery(Product.Id, 1, int.MaxValue, StartDate, EndDate);
+            var result = await _mediator.Send(query);
+            
+            var allTransactions = result?.Items?.ToList() ?? new List<ProductTransactionDto>();
+            var settings = await _mediator.Send(new GetGeneralSettingsQuery());
+            
+            var stockReportService = _serviceProvider.GetRequiredService<IStockReportService>();
+            var pdf = stockReportService.GenerateProductMovementPdf(Product, allTransactions, StartDate, EndDate, settings);
+            
+            var previewViewModel = _serviceProvider.GetRequiredService<ReportPreviewViewModel>();
+            previewViewModel.LoadReport(pdf, $"كشف حركة صنف - {Product.Name}");
+            
+            var previewWindow = new ReportPreviewWindow(previewViewModel);
+            previewWindow.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+             MessageBox.Show($"حدث خطأ أثناء إنشاء التقرير:\n{ex.Message}", "خطأ", 
+                 MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, 
+                 MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
         }
     }
 }

@@ -19,4 +19,10 @@ public class StockReportService : IStockReportService
         var document = new InventoryValueReportDocument(products, settings);
         return document.GeneratePdf();
     }
+
+    public byte[] GenerateProductMovementPdf(ProductDto product, List<ProductTransactionDto> transactions, DateTime? startDate, DateTime? endDate, GeneralSettingsDto? settings)
+    {
+        var document = new ProductMovementReportDocument(product, transactions, startDate, endDate, settings);
+        return document.GeneratePdf();
+    }
 }

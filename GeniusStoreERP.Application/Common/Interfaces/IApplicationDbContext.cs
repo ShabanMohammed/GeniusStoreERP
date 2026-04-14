@@ -21,6 +21,8 @@ namespace GeniusStoreERP.Application.Common.Interfaces
         public DbSet<GeneralSetting> GeneralSettings { get; set; }
         public DbSet<StockTransaction> StockTransactions { get; set; }
         public DbSet<StockTransactionType> StockTransactionTypes { get; set; }
+        public DbSet<StockAdjustment> StockAdjustments { get; set; }
+        public DbSet<StockAdjustmentItem> StockAdjustmentItems { get; set; }
         public DbSet<PartnerTransaction> PartnerTransactions { get; set; }
         public DbSet<PartnerTransactionType> PartnerTransactionTypes { get; set; }
         public DbSet<Treasury> Treasuries { get; set; }

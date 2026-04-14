@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using GeniusStoreERP.UI.ViewModels.Partners;
+using GeniusStoreERP.UI.ViewModels.Stock;
 using GeniusStoreERP.UI.Services;
 using GeniusStoreERP.Application.Stock.Products.Queries.GetLowStockProducts;
 using GeniusStoreERP.Application.Stock.Products.Queries.GetAllProducts;
@@ -12,6 +13,7 @@ using MediatR;
 using System.Threading.Tasks;
 using System;
 using GeniusStoreERP.UI.Views;
+using System.Windows;
 
 namespace GeniusStoreERP.UI.ViewModels;
 
@@ -63,7 +65,12 @@ public class ReportsMainViewModel : BaseViewModel
             Description = "الأصناف التي وصلت لحد الطلب.",
             OpenCommand = new AsyncRelayCommand(async (p, ct) => await GenerateLowStockReport())
         });
-        stockCategory.Reports.Add(new ReportItem { Title = "حركة صنف تفصيلية", Description = "تتبع صنف معين خلال فترة." });
+        stockCategory.Reports.Add(new ReportItem 
+        { 
+            Title = "حركة صنف تفصيلية", 
+            Description = "تتبع صنف معين خلال فترة.",
+            OpenCommand = new RelayCommand(_ => _navigationService.NavigateTo<ProductListViewModel>())
+        });
         Categories.Add(stockCategory);
 
         // 2. تقارير الشركاء
@@ -95,30 +102,48 @@ public class ReportsMainViewModel : BaseViewModel
 
     private async Task GenerateLowStockReport()
     {
-        var products = await _mediator.Send(new GetLowStockProductsQuery());
-        var settings = await _mediator.Send(new GetGeneralSettingsQuery());
-        
-        var pdf = _stockReportService.GenerateLowStockPdf(products, settings);
-        
-        var previewViewModel = App.ServiceProvider.GetRequiredService<ReportPreviewViewModel>();
-        previewViewModel.LoadReport(pdf, "تقرير نواقص الأصناف");
-        
-        var previewWindow = new ReportPreviewWindow(previewViewModel);
-        previewWindow.ShowDialog();
+        try
+        {
+            var products = await _mediator.Send(new GetLowStockProductsQuery());
+            var settings = await _mediator.Send(new GetGeneralSettingsQuery());
+            
+            var pdf = _stockReportService.GenerateLowStockPdf(products, settings);
+            
+            var previewViewModel = App.ServiceProvider.GetRequiredService<ReportPreviewViewModel>();
+            previewViewModel.LoadReport(pdf, "تقرير نواقص الأصناف");
+            
+            var previewWindow = new ReportPreviewWindow(previewViewModel);
+            previewWindow.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"حدث خطأ أثناء إنشاء تقرير النواقص:\n{ex.Message}", "خطأ", 
+                MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, 
+                MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+        }
     }
 
     private async Task GenerateInventoryValueReport()
     {
-        var products = await _mediator.Send(new GetAllProductsQuery());
-        var settings = await _mediator.Send(new GetGeneralSettingsQuery());
-        
-        var pdf = _stockReportService.GenerateInventoryValuePdf(products, settings);
-        
-        var previewViewModel = App.ServiceProvider.GetRequiredService<ReportPreviewViewModel>();
-        previewViewModel.LoadReport(pdf, "تقرير جرد المخزون");
-        
-        var previewWindow = new ReportPreviewWindow(previewViewModel);
-        previewWindow.ShowDialog();
+        try
+        {
+            var products = await _mediator.Send(new GetAllProductsQuery());
+            var settings = await _mediator.Send(new GetGeneralSettingsQuery());
+            
+            var pdf = _stockReportService.GenerateInventoryValuePdf(products, settings);
+            
+            var previewViewModel = App.ServiceProvider.GetRequiredService<ReportPreviewViewModel>();
+            previewViewModel.LoadReport(pdf, "تقرير جرد المخزون");
+            
+            var previewWindow = new ReportPreviewWindow(previewViewModel);
+            previewWindow.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"حدث خطأ أثناء إنشاء تقرير الجرد:\n{ex.Message}", "خطأ", 
+                MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, 
+                MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+        }
     }
 }
 

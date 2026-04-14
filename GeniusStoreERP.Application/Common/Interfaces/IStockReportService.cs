@@ -8,4 +8,5 @@ public interface IStockReportService
 {
     byte[] GenerateLowStockPdf(List<ProductDto> products, GeneralSettingsDto? settings);
     byte[] GenerateInventoryValuePdf(List<ProductDto> products, GeneralSettingsDto? settings);
+    byte[] GenerateProductMovementPdf(ProductDto product, List<ProductTransactionDto> transactions, DateTime? startDate, DateTime? endDate, GeneralSettingsDto? settings);
 }

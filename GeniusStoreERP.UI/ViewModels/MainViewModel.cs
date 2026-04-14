@@ -102,6 +102,9 @@ public class MainViewModel : BaseViewModel
                     case "المنتجات":
                         _navigationService.NavigateTo<ProductListViewModel>();
                         break;
+                    case "تسويات المخزون":
+                        _navigationService.NavigateTo<StockAdjustmentListViewModel>();
+                        break;
                     case "العملاء":
                         _navigationService.NavigateTo<PartnerListViewModel>("Customers");
                         break;
@@ -157,7 +160,8 @@ public class MainViewModel : BaseViewModel
             SubItems =
             {
                 new NavItem { Title = "التصنيفات", IconKey = "IconSettings" },
-                new NavItem { Title = "المنتجات", IconKey = "IconInformation" }
+                new NavItem { Title = "المنتجات", IconKey = "IconInformation" },
+                new NavItem { Title = "تسويات المخزون", IconKey = "IconExchange" }
             }
         });
 

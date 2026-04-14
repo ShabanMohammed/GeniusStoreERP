@@ -41,7 +41,15 @@ public class LowStockReportDocument : IDocument
         {
             column.Item().Row(row =>
             {
-                row.RelativeItem().Column(infoColumn =>
+                if (_settings?.Logo != null && _settings.Logo.Length > 0)
+                {
+                    row.ConstantItem(80).AlignRight().Column(logoColumn =>
+                    {
+                        logoColumn.Item().Width(70).Height(70).Image(_settings.Logo);
+                    });
+                }
+
+                row.RelativeItem().PaddingRight(10).Column(infoColumn =>
                 {
                     var companyName = _settings?.CompanyName ?? "Genius Store ERP";
                     infoColumn.Item().Text(companyName).FontSize(18).SemiBold().FontColor("#1E3A8A");

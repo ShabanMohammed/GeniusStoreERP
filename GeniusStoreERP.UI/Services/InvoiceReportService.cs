@@ -16,9 +16,6 @@ public class InvoiceReportService : IInvoiceReportService
 {
     public InvoiceReportService()
     {
-        // Initializing QuestPDF License (Community is free for certain uses)
-        QuestPDF.Settings.License = LicenseType.Community;
-
         // Calibri is typically a system font; QuestPDF will find it automatically on Windows.
         // If needed in other environments, you would register the .ttf files here.
     }

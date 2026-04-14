@@ -23,6 +23,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3856.49" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.142" />
     <PackageReference Include="QuestPDF" Version="2026.2.4" />
     <PackageReference Include="DocX" Version="3.0.0" />
     <ProjectReference Include="..\GeniusStoreERP.Application\GeniusStoreERP.Application.csproj" />

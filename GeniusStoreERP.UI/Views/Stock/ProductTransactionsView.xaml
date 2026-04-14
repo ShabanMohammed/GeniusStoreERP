@@ -51,7 +51,24 @@
                 <Button Command="{Binding ClearDatesCommand}"
                         Style="{StaticResource UnifiedSecondaryButtonStyle}"
                         Width="100"
+                        Margin="0,0,10,0"
                         Content="مسح الفلتر" />
+                
+                <Button Command="{Binding PrintReportCommand}"
+                        Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                        Width="100"
+                        Content="طباعة التقرير">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Viewbox Width="16" Height="16" Margin="0,0,8,0">
+                                    <Path Data="{StaticResource IconPrint}" Fill="White" Stretch="Uniform"/>
+                                </Viewbox>
+                                <TextBlock Text="طباعة"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
             </StackPanel>
         </Grid>
 

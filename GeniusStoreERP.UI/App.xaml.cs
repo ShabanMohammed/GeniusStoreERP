@@ -11,6 +11,7 @@ using GeniusStoreERP.UI.ViewModels.Stock;
 using GeniusStoreERP.UI.ViewModels.Transactions;
 using GeniusStoreERP.UI.Views;
 using GeniusStoreERP.UI.Views.Partners;
+using GeniusStoreERP.UI.Views.Stock;
 using GeniusStoreERP.UI.Views.Transactions;
 using GeniusStoreERP.UI.Views.Finances;
 using GeniusStoreERP.UI.ViewModels.Finances;
@@ -20,6 +21,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using QuestPDF.Infrastructure;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -38,6 +40,9 @@ namespace GeniusStoreERP.UI
                 // تفعيل وضع التوافق القديم لـ Npgsql للتعامل مع DateTime
                 // هذا يسمح بإرسال قيم DateTime محلية إلى PostgreSQL
                 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+                
+                // تفعيل رخصة QuestPDF بشكل عالمي
+                QuestPDF.Settings.License = LicenseType.Community;
 
                 configuration = new ConfigurationBuilder()
                     .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -92,6 +97,10 @@ namespace GeniusStoreERP.UI
                 services.AddTransient<ProductEditViewModel>();
                 services.AddTransient<ProductTransactionsView>();
                 services.AddTransient<ProductTransactionsViewModel>();
+                services.AddTransient<StockAdjustmentListView>();
+                services.AddTransient<StockAdjustmentListViewModel>();
+                services.AddTransient<StockAdjustmentEditorView>();
+                services.AddTransient<StockAdjustmentEditorViewModel>();
 
                 services.AddTransient<PartnerListView>();
                 services.AddTransient<PartnerListViewModel>();
