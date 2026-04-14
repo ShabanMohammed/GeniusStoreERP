@@ -54,7 +54,7 @@
                 Foreground="White"
                 FontWeight="Bold"
                 FontFamily="{StaticResource MainFontFamily}"
-                FontSize="20"
+                FontSize="24"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
             </Border>
@@ -64,13 +64,13 @@
                 Text="Genius Store"
                 Foreground="White"
                 FontFamily="{StaticResource MainFontFamily}"
-                FontSize="14"
+                FontSize="17"
                 FontWeight="Bold"/>
               <TextBlock
                 Text="ERP System"
                 Foreground="#7986CB"
                 FontFamily="{StaticResource MainFontFamily}"
-                FontSize="10"/>
+                FontSize="12"/>
             </StackPanel>
           </StackPanel>
         </Border>
@@ -110,7 +110,7 @@
                 Foreground="White"
                 FontWeight="Bold"
                 FontFamily="{StaticResource MainFontFamily}"
-                FontSize="16"
+                FontSize="18"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
             </Border>
@@ -122,14 +122,14 @@
                 Text="{Binding FullName}"
                 Foreground="White"
                 FontFamily="{StaticResource MainFontFamily}"
-                FontSize="12"
+                FontSize="14"
                 FontWeight="SemiBold"
                 TextTrimming="CharacterEllipsis"/>
               <TextBlock
                 Text="{Binding UserRole}"
                 Foreground="#7986CB"
                 FontFamily="{StaticResource MainFontFamily}"
-                FontSize="10"/>
+                FontSize="12"/>
             </StackPanel>
             <!-- Logout Button -->
             <Button
@@ -196,7 +196,7 @@
             Grid.Column="0"
             Text="{Binding SelectedNavItem.Title}"
             FontFamily="{StaticResource MainFontFamily}"
-            FontSize="19"
+            FontSize="22"
             FontWeight="Bold"
             Foreground="{StaticResource MainContentTextBrush}"
             VerticalAlignment="Center"/>
@@ -222,7 +222,7 @@
                   Text="{Binding CurrentDate}"
                   FontFamily="{StaticResource MainFontFamily}"
                   Foreground="{StaticResource MainContentTextBrush}"
-                  FontSize="15"
+                  FontSize="17"
                   FontWeight="SemiBold"
                   VerticalAlignment="Center"/>
               </StackPanel>
@@ -244,7 +244,7 @@
                   Text="{Binding CurrentTime}"
                   FontFamily="{StaticResource MainFontFamily}"
                   Foreground="{StaticResource MainContentTextBrush}"
-                  FontSize="15"
+                  FontSize="17"
                   FontWeight="SemiBold"
                   VerticalAlignment="Center"/>
               </StackPanel>

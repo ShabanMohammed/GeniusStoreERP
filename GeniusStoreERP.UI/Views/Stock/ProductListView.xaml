@@ -34,6 +34,7 @@
 
                         <TextBlock Text="إدارة المنتجات"
                                    Style="{StaticResource MainHeaderStyle}"
+                                   FontSize="28"
                                    Grid.Column="0"
                                    VerticalAlignment="Center"/>
 
@@ -228,7 +229,7 @@
                                 <TextBlock Text="عرض"
                                            VerticalAlignment="Center"
                                            Margin="0,0,10,0"
-                                           FontSize="13"
+                                           FontSize="15"
                                            Foreground="#7F8C8D"/>
                                 <Border Style="{StaticResource UnifiedInputContainerStyle}"
                                         Height="35"
@@ -262,7 +263,7 @@
                                 <TextBlock Text="عناصر لكل صفحة"
                                            VerticalAlignment="Center"
                                            Margin="10,0,0,0"
-                                           FontSize="13"
+                                           FontSize="15"
                                            Foreground="#7F8C8D"/>
                         </StackPanel>
 
@@ -270,7 +271,7 @@
                         <TextBlock Grid.Column="1"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
-                                   FontSize="13"
+                                   FontSize="15"
                                    Foreground="#7F8C8D">
                 <Run Text="عرض القيمة "/>
                 <Run Text="{Binding Products.Count, Mode=OneWay}"
@@ -315,15 +316,15 @@
                                         Padding="15,0"
                                         Margin="5,0">
                                         <TextBlock VerticalAlignment="Center"
-                                                   FontSize="13"
+                                                   FontSize="15"
                                                    FontWeight="SemiBold">
-                        <Run Text="صفحة"/>
-                        <Run Text=" "/>
-                        <Run Text="{Binding CurrentPage}"/>
-                        <Run Text=" "/>
-                        <Run Text="من"/>
-                        <Run Text=" "/>
-                        <Run Text="{Binding TotalPages, Mode=OneWay}"/>
+                         <Run Text="صفحة"/>
+                         <Run Text=" "/>
+                         <Run Text="{Binding CurrentPage}"/>
+                         <Run Text=" "/>
+                         <Run Text="من"/>
+                         <Run Text=" "/>
+                         <Run Text="{Binding TotalPages, Mode=OneWay}"/>
                                         </TextBlock>
                                 </Border>
 

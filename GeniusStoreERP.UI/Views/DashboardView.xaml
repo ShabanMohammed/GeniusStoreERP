@@ -18,33 +18,33 @@
             <!-- Sales Card -->
             <Border Margin="10" Style="{StaticResource UnifiedCardStyle}" Padding="20">
                 <StackPanel>
-                    <TextBlock Text="مبيعات اليوم" Foreground="#7F8C8D" FontSize="12" FontWeight="SemiBold"/>
-                    <TextBlock Text="{Binding TodaySales}" Foreground="#2C3E50" FontSize="20" FontWeight="Bold" Margin="0,10,0,0"/>
-                    <TextBlock Text="+15% عن أمس" Foreground="#27AE60" FontSize="10" Margin="0,5,0,0"/>
+                    <TextBlock Text="مبيعات اليوم" Foreground="#7F8C8D" FontSize="14" FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding TodaySales}" Foreground="#2C3E50" FontSize="24" FontWeight="Bold" Margin="0,10,0,0"/>
+                    <TextBlock Text="+15% عن أمس" Foreground="#27AE60" FontSize="12" Margin="0,5,0,0"/>
                 </StackPanel>
             </Border>
 
             <!-- Orders Card -->
             <Border Margin="10" Style="{StaticResource UnifiedCardStyle}" Padding="20">
                 <StackPanel>
-                    <TextBlock Text="الطلبات النشطة" Foreground="#7F8C8D" FontSize="12" FontWeight="SemiBold"/>
-                    <TextBlock Text="{Binding ActiveOrders}" Foreground="#2C3E50" FontSize="20" FontWeight="Bold" Margin="0,10,0,0"/>
+                    <TextBlock Text="الطلبات النشطة" Foreground="#7F8C8D" FontSize="14" FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding ActiveOrders}" Foreground="#2C3E50" FontSize="24" FontWeight="Bold" Margin="0,10,0,0"/>
                 </StackPanel>
             </Border>
 
             <!-- Stock Card -->
             <Border Margin="10" Style="{StaticResource UnifiedCardStyle}" Padding="20">
                 <StackPanel>
-                    <TextBlock Text="نواقص المخزن" Foreground="#7F8C8D" FontSize="12" FontWeight="SemiBold"/>
-                    <TextBlock Text="{Binding LowStockItems}" Foreground="#E74C3C" FontSize="20" FontWeight="Bold" Margin="0,10,0,0"/>
+                    <TextBlock Text="نواقص المخزن" Foreground="#7F8C8D" FontSize="14" FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding LowStockItems}" Foreground="#E74C3C" FontSize="24" FontWeight="Bold" Margin="0,10,0,0"/>
                 </StackPanel>
             </Border>
 
             <!-- Customers Card -->
             <Border Margin="10" Style="{StaticResource UnifiedCardStyle}" Padding="20">
                 <StackPanel>
-                    <TextBlock Text="إجمالي العملاء" Foreground="#7F8C8D" FontSize="12" FontWeight="SemiBold"/>
-                    <TextBlock Text="{Binding TotalCustomers}" Foreground="#2C3E50" FontSize="20" FontWeight="Bold" Margin="0,10,0,0"/>
+                    <TextBlock Text="إجمالي العملاء" Foreground="#7F8C8D" FontSize="14" FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding TotalCustomers}" Foreground="#2C3E50" FontSize="24" FontWeight="Bold" Margin="0,10,0,0"/>
                 </StackPanel>
             </Border>
         </UniformGrid>
@@ -54,8 +54,8 @@
             <Grid>
                 <TextBlock Text="إحصائيات المبيعات الأسبوعية" Style="{StaticResource FieldLabelStyle}" HorizontalAlignment="Right"/>
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="📊" FontSize="50" HorizontalAlignment="Center" Opacity="0.3"/>
-                    <TextBlock Text="سيتم عرض الرسوم البيانية هنا قريباً" Foreground="#BDC3C7" Margin="0,10"/>
+                    <TextBlock Text="📊" FontSize="60" HorizontalAlignment="Center" Opacity="0.3"/>
+                    <TextBlock Text="سيتم عرض الرسوم البيانية هنا قريباً" Foreground="#BDC3C7" FontSize="16" Margin="0,10"/>
                 </StackPanel>
             </Grid>
         </Border>

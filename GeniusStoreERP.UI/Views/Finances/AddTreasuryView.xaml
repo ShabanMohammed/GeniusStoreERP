@@ -13,26 +13,26 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="إضافة خزينة جديدة" FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
+        <TextBlock Text="إضافة خزينة جديدة" FontSize="22" FontWeight="Bold" Margin="0,0,0,20"/>
 
         <StackPanel Grid.Row="1">
             <StackPanel Margin="0,0,0,10">
-                <TextBlock Text="اسم الخزينة" Style="{StaticResource FieldLabelStyle}"/>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Height="35" VerticalContentAlignment="Center"/>
+                <TextBlock Text="اسم الخزينة" Style="{StaticResource FieldLabelStyle}" FontSize="16"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Height="40" VerticalContentAlignment="Center" FontSize="14"/>
             </StackPanel>
             <StackPanel Margin="0,0,0,10">
-                <TextBlock Text="كود الخزينة" Style="{StaticResource FieldLabelStyle}"/>
-                <TextBox Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" Height="35" VerticalContentAlignment="Center"/>
+                <TextBlock Text="كود الخزينة" Style="{StaticResource FieldLabelStyle}" FontSize="16"/>
+                <TextBox Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" Height="40" VerticalContentAlignment="Center" FontSize="14"/>
             </StackPanel>
             <StackPanel Margin="0,0,0,10">
-                <TextBlock Text="وصف" Style="{StaticResource FieldLabelStyle}"/>
-                <TextBox Text="{Binding Description}" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
+                <TextBlock Text="وصف" Style="{StaticResource FieldLabelStyle}" FontSize="16"/>
+                <TextBox Text="{Binding Description}" Height="80" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
             </StackPanel>
         </StackPanel>
         
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Command="{Binding SaveCommand}" Content="حفظ" Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="100" Margin="5"/>
-            <Button Command="{Binding CancelCommand}" Content="إلغاء" Style="{StaticResource UnifiedPrimaryButtonStyle}" Background="#E74C3C" Width="100" Margin="5"/>
+            <Button Command="{Binding SaveCommand}" Content="حفظ" Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="100" Margin="5" FontSize="14"/>
+            <Button Command="{Binding CancelCommand}" Content="إلغاء" Style="{StaticResource UnifiedPrimaryButtonStyle}" Background="#E74C3C" Width="100" Margin="5" FontSize="14"/>
         </StackPanel>
     </Grid>
 </UserControl>

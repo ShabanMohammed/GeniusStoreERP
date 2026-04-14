@@ -22,8 +22,8 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <TextBlock Text="تسويات المخزن" Style="{StaticResource MainHeaderStyle}"/>
-                <TextBlock Text="إدارة وتسجيل حركات تسوية كميات الأصناف بالمستودع" Style="{StaticResource SubHeaderStyle}"/>
+                <TextBlock Text="تسويات المخزن" Style="{StaticResource MainHeaderStyle}" FontSize="28"/>
+                <TextBlock Text="إدارة وتسجيل حركات تسوية كميات الأصناف بالمستودع" Style="{StaticResource SubHeaderStyle}" FontSize="16"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
@@ -48,9 +48,9 @@
 
                 <Button Command="{Binding AddCommand}" Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="160">
                     <StackPanel Orientation="Horizontal">
-                        <Viewbox Width="16" Height="16" Margin="0,0,8,0">
-                            <Path Data="{StaticResource IconPlus}" Fill="White" Stretch="Uniform"/>
-                        </Viewbox>
+                                <Viewbox Width="16" Height="16" Margin="0,0,8,0">
+                                    <Path Data="{StaticResource IconAdd}" Fill="White" Stretch="Uniform"/>
+                                </Viewbox>
                         <TextBlock Text="إضافة تسوية جديدة"/>
                     </StackPanel>
                 </Button>
@@ -90,17 +90,17 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" VerticalAlignment="Center" Foreground="#64748B">
-                <Run Text="إجمالي السجلات: "/>
-                <Run Text="{Binding TotalItems}" FontWeight="Bold"/>
-            </TextBlock>
+                <TextBlock Grid.Column="0" VerticalAlignment="Center" Foreground="#64748B" FontSize="15">
+                    <Run Text="إجمالي السجلات: "/>
+                    <Run Text="{Binding TotalItems}" FontWeight="Bold"/>
+                </TextBlock>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Button Command="{Binding PreviousPageCommand}" Style="{StaticResource UnifiedSecondaryButtonStyle}" Width="40" Margin="0,0,10,0">
                     <Viewbox Width="16" Height="16"><Path Data="{StaticResource IconPreviousPage}" Fill="#1E293B" Stretch="Uniform"/></Viewbox>
                 </Button>
                 <Border Background="#F1F5F9" CornerRadius="8" Padding="15,0" Margin="0,0,10,0">
-                    <TextBlock VerticalAlignment="Center" FontWeight="SemiBold">
+                    <TextBlock VerticalAlignment="Center" FontWeight="SemiBold" FontSize="15">
                         <Run Text="صفحة "/><Run Text="{Binding CurrentPage}"/><Run Text=" من "/><Run Text="{Binding TotalPages}"/>
                     </TextBlock>
                 </Border>

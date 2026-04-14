@@ -17,6 +17,7 @@
         <!-- Header -->
         <TextBlock Text="{Binding Title}"
                    Style="{StaticResource MainHeaderStyle}"
+                   FontSize="28"
                    Margin="30,20,30,20"
                    Grid.Row="0" />
         <!-- Content Grid with 2 Columns -->
@@ -36,12 +37,13 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <!-- Name Field -->
-                <TextBlock Text="اسم الشريك"
-                           Style="{StaticResource FieldLabelStyle}"
-                           Grid.Row="0"
-                           Grid.Column="0"
-                           VerticalAlignment="Center"
-                           Margin="0,15,10,15" />
+                 <TextBlock Text="اسم الشريك"
+                            Style="{StaticResource FieldLabelStyle}"
+                            FontSize="16"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Margin="0,15,10,15" />
                 <Border Style="{StaticResource UnifiedInputContainerStyle}"
                         Grid.Row="0"
                         Grid.Column="1"
@@ -50,12 +52,13 @@
                              Style="{StaticResource UnifiedTextBoxStyle}" />
                 </Border>
                 <!-- Phone Field -->
-                <TextBlock Text="رقم الهاتف"
-                           Style="{StaticResource FieldLabelStyle}"
-                           Grid.Row="1"
-                           Grid.Column="0"
-                           VerticalAlignment="Center"
-                           Margin="0,15,10,15" />
+                 <TextBlock Text="رقم الهاتف"
+                            Style="{StaticResource FieldLabelStyle}"
+                            FontSize="16"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Margin="0,15,10,15" />
                 <Border Style="{StaticResource UnifiedInputContainerStyle}"
                         Grid.Row="1"
                         Grid.Column="1"
@@ -64,12 +67,13 @@
                              Style="{StaticResource UnifiedTextBoxStyle}" />
                 </Border>
                 <!-- Address Field -->
-                <TextBlock Text="العنوان"
-                           Style="{StaticResource FieldLabelStyle}"
-                           Grid.Row="2"
-                           Grid.Column="0"
-                           VerticalAlignment="Top"
-                           Margin="0,15,10,15" />
+                 <TextBlock Text="العنوان"
+                            Style="{StaticResource FieldLabelStyle}"
+                            FontSize="16"
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            VerticalAlignment="Top"
+                            Margin="0,15,10,15" />
                 <Border Style="{StaticResource UnifiedInputContainerStyle}"
                         Grid.Row="2"
                         Grid.Column="1"
@@ -90,18 +94,20 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Command="{Binding SaveCommand}"
-                    Content="حفظ البيانات"
-                    Style="{StaticResource UnifiedPrimaryButtonStyle}"
-                    Grid.Column="0"
-                    Margin="0,0,10,0" />
-            <Button Command="{Binding CancelCommand}"
-                    Content="إلغاء"
-                    Background="#F5F6F7"
-                    Foreground="#7F8C8D"
-                    Style="{StaticResource UnifiedPrimaryButtonStyle}"
-                    Grid.Column="1"
-                    Margin="10,0,0,0">
+             <Button Command="{Binding SaveCommand}"
+                     Content="حفظ البيانات"
+                     Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                     FontSize="16"
+                     Grid.Column="0"
+                     Margin="0,0,10,0" />
+             <Button Command="{Binding CancelCommand}"
+                     Content="إلغاء"
+                     Background="#F5F6F7"
+                     Foreground="#7F8C8D"
+                     Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                     FontSize="16"
+                     Grid.Column="1"
+                     Margin="10,0,0,0">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"

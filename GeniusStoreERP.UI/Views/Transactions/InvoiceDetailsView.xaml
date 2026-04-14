@@ -72,10 +72,10 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0">
-                            <TextBlock Text="{Binding Invoice.InvoiceNumber}" FontSize="28" FontWeight="ExtraBold" Foreground="{StaticResource PrimaryHeaderBrush}"/>
+                            <TextBlock Text="{Binding Invoice.InvoiceNumber}" FontSize="32" FontWeight="ExtraBold" Foreground="{StaticResource PrimaryHeaderBrush}"/>
                             <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
                                 <Border Background="#EEF2FF" CornerRadius="4" Padding="8,4" Margin="0,0,10,0">
-                                    <TextBlock Text="{Binding Invoice.InvoiceDate, StringFormat=dd/MM/yyyy}" FontSize="13" Foreground="{StaticResource AccentActionBrush}" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{Binding Invoice.InvoiceDate, StringFormat=dd/MM/yyyy}" FontSize="15" Foreground="{StaticResource AccentActionBrush}" FontWeight="SemiBold"/>
                                 </Border>
                                 <Border x:Name="StatusBadge" CornerRadius="4" Padding="8,4">
                                     <Border.Style>
@@ -88,7 +88,7 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
-                                    <TextBlock Text="{Binding Invoice.StatusName}" FontSize="13" FontWeight="Bold">
+                                     <TextBlock Text="{Binding Invoice.StatusName}" FontSize="15" FontWeight="Bold">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="Foreground" Value="#2E7D32"/>
@@ -120,13 +120,13 @@
                             </Grid.ColumnDefinitions>
                             
                             <StackPanel Grid.Column="0" Margin="0,0,40,0">
-                                <TextBlock Text="فاتورة إلى:" FontSize="13" Foreground="#7F8C8D" Margin="0,0,0,8"/>
-                                <TextBlock Text="{Binding Invoice.PartnerName}" FontSize="18" FontWeight="Bold" Foreground="{StaticResource MainContentTextBrush}"/>
+                             <TextBlock Text="فاتورة إلى:" FontSize="15" Foreground="#7F8C8D" Margin="0,0,0,8"/>
+                             <TextBlock Text="{Binding Invoice.PartnerName}" FontSize="20" FontWeight="Bold" Foreground="{StaticResource MainContentTextBrush}"/>
                             </StackPanel>
 
                             <StackPanel Grid.Column="1">
-                                <TextBlock Text="ملاحظات:" FontSize="13" Foreground="#7F8C8D" Margin="0,0,0,8"/>
-                                <TextBlock Text="{Binding Invoice.Notes}" FontSize="14" Foreground="{StaticResource MainContentTextBrush}" TextWrapping="Wrap"/>
+                                 <TextBlock Text="ملاحظات:" FontSize="15" Foreground="#7F8C8D" Margin="0,0,0,8"/>
+                                 <TextBlock Text="{Binding Invoice.Notes}" FontSize="16" Foreground="{StaticResource MainContentTextBrush}" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -168,8 +168,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="الإجمالي (قبل الضريبة والخصم)" Foreground="#7F8C8D" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Invoice.TotalItemsAmount, StringFormat={}{0:N2}}" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                             <TextBlock Grid.Column="0" Text="الإجمالي (قبل الضريبة والخصم)" Foreground="#7F8C8D" VerticalAlignment="Center"/>
+                             <TextBlock Grid.Column="1" Text="{Binding Invoice.TotalItemsAmount, StringFormat={}{0:N2}}" FontWeight="SemiBold" VerticalAlignment="Center"/>
                         </Grid>
                         
                         <Grid Margin="0,4">
@@ -177,8 +177,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="إجمالي الضريبة (+)" Foreground="#7F8C8D" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Invoice.TotalItemsTax, StringFormat={}{0:N2}}" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="#2E7D32"/>
+                             <TextBlock Grid.Column="0" Text="إجمالي الضريبة (+)" Foreground="#7F8C8D" VerticalAlignment="Center"/>
+                             <TextBlock Grid.Column="1" Text="{Binding Invoice.TotalItemsTax, StringFormat={}{0:N2}}" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="#2E7D32"/>
                         </Grid>
                         
                         <Grid Margin="0,4">
@@ -186,8 +186,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="إجمالي الخصم (-)" Foreground="#7F8C8D" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Invoice.TotalItemsDiscount, StringFormat={}{0:N2}}" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="#C62828"/>
+                             <TextBlock Grid.Column="0" Text="إجمالي الخصم (-)" Foreground="#7F8C8D" VerticalAlignment="Center"/>
+                             <TextBlock Grid.Column="1" Text="{Binding Invoice.TotalItemsDiscount, StringFormat={}{0:N2}}" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="#C62828"/>
                         </Grid>
                         
                         <Border BorderBrush="#EEEEEE" BorderThickness="0,1,0,0" Margin="0,15,0,10"/>
@@ -197,8 +197,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="صافي الفاتورة النهائي" FontSize="18" FontWeight="Bold" Foreground="{StaticResource PrimaryHeaderBrush}" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Invoice.FinalAmount, StringFormat={}{0:N2}}" FontSize="22" FontWeight="ExtraBold" Foreground="{StaticResource AccentActionBrush}" VerticalAlignment="Center"/>
+                             <TextBlock Grid.Column="0" Text="صافي الفاتورة النهائي" FontSize="20" FontWeight="Bold" Foreground="{StaticResource PrimaryHeaderBrush}" VerticalAlignment="Center"/>
+                             <TextBlock Grid.Column="1" Text="{Binding Invoice.FinalAmount, StringFormat={}{0:N2}}" FontSize="24" FontWeight="ExtraBold" Foreground="{StaticResource AccentActionBrush}" VerticalAlignment="Center"/>
                         </Grid>
                     </StackPanel>
                 </Grid>

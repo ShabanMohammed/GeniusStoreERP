@@ -17,6 +17,7 @@
         <!-- Header -->
         <TextBlock Text="{Binding Title}"
                    Style="{StaticResource MainHeaderStyle}"
+                   FontSize="28"
                    Margin="30,20,30,20"
                    Grid.Row="0"/>
 
@@ -36,6 +37,7 @@
                 <!-- Name Field -->
                 <TextBlock Text="اسم التصنيف"
                            Style="{StaticResource FieldLabelStyle}"
+                           FontSize="16"
                            Grid.Row="0"
                            Grid.Column="0"
                            VerticalAlignment="Center"
@@ -51,6 +53,7 @@
                 <!-- Description Field -->
                 <TextBlock Text="الوصف"
                            Style="{StaticResource FieldLabelStyle}"
+                           FontSize="16"
                            Grid.Row="1"
                            Grid.Column="0"
                            VerticalAlignment="Top"
@@ -79,6 +82,7 @@
             <Button Command="{Binding SaveCommand}"
                     Content="حفظ التصنيف"
                     Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                    FontSize="16"
                     Grid.Column="0"
                     Margin="0,0,10,0"/>
 
@@ -87,6 +91,7 @@
                     Background="#F5F6F7"
                     Foreground="#7F8C8D"
                     Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                    FontSize="16"
                     Grid.Column="1"
                     Margin="10,0,0,0">
                 <Button.Template>

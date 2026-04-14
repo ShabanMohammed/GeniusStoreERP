@@ -24,7 +24,7 @@
                     Background="Transparent"
                     BorderThickness="0"
                     Foreground="{StaticResource MainContentTextBrush}"
-                    FontSize="18"
+                    FontSize="22"
                     Cursor="Hand"
                     IsCancel="True"
                     Click="Close_Click"/>
@@ -38,7 +38,7 @@
                         Margin="0,0,0,20">
                     <TextBlock Text="G" 
                                Foreground="White" 
-                               FontSize="30" 
+                               FontSize="36" 
                                FontWeight="Bold" 
                                HorizontalAlignment="Center" 
                                VerticalAlignment="Center"/>
@@ -82,7 +82,7 @@
                 <TextBlock Text="© 2024 Genius Store ERP - جميع الحقوق محفوظة" 
                            Margin="0,30,0,0"
                            HorizontalAlignment="Center"
-                           FontSize="11"
+                           FontSize="13"
                            Foreground="#BDC3C7"/>
             </StackPanel>
         </Grid>

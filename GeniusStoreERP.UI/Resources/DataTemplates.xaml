@@ -9,6 +9,7 @@
                     xmlns:vt="clr-namespace:GeniusStoreERP.UI.Views.Transactions"
                     xmlns:vf="clr-namespace:GeniusStoreERP.UI.ViewModels.Finances"
                     xmlns:vf2="clr-namespace:GeniusStoreERP.UI.Views.Finances"
+                    xmlns:vs="clr-namespace:GeniusStoreERP.UI.Views.Stock"
                     xmlns:local="clr-namespace:GeniusStoreERP.UI.Views">
     <!-- Dashboard -->
     <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
@@ -66,6 +67,14 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vf:TreasuryTransactionViewModel}">
         <vf2:TreasuryTransactionView/>
+    </DataTemplate>
+
+    <!-- Stock Adjustments -->
+    <DataTemplate DataType="{x:Type vms:StockAdjustmentListViewModel}">
+        <vs:StockAdjustmentListView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vms:StockAdjustmentEditorViewModel}">
+        <vs:StockAdjustmentEditorView/>
     </DataTemplate>
 
     <!-- Reports -->

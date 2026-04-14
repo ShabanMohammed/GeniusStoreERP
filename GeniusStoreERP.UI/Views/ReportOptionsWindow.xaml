@@ -28,9 +28,9 @@
             <!-- Header -->
             <StackPanel Grid.Row="0" Margin="0,0,0,25">
                 <TextBlock Text="إعدادات تصدير التقرير"
-                           Style="{StaticResource MainHeaderStyle}" />
+                           Style="{StaticResource MainHeaderStyle}" FontSize="28"/>
                 <TextBlock Text="حدد الفترة الزمنية ونوع البيانات المطلوبة للتقرير"
-                           Style="{StaticResource SubHeaderStyle}" />
+                           Style="{StaticResource SubHeaderStyle}" FontSize="16"/>
             </StackPanel>
 
             <!-- Content -->
@@ -44,7 +44,7 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0">
-                        <TextBlock Text="من تاريخ" Style="{StaticResource FieldLabelStyle}" />
+                        <TextBlock Text="من تاريخ" Style="{StaticResource FieldLabelStyle}" FontSize="16"/>
                         <Border Style="{StaticResource UnifiedInputContainerStyle}" Margin="0">
                             <DatePicker SelectedDate="{Binding FromDate}" 
                                         BorderThickness="0" 
@@ -55,7 +55,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="2">
-                        <TextBlock Text="إلى تاريخ" Style="{StaticResource FieldLabelStyle}" />
+                        <TextBlock Text="إلى تاريخ" Style="{StaticResource FieldLabelStyle}" FontSize="16"/>
                         <Border Style="{StaticResource UnifiedInputContainerStyle}" Margin="0">
                             <DatePicker SelectedDate="{Binding ToDate}" 
                                         BorderThickness="0" 
@@ -68,7 +68,7 @@
 
                 <!-- Type Selection -->
                 <StackPanel Margin="0,0,0,25">
-                    <TextBlock Text="نطاق البيانات" Style="{StaticResource FieldLabelStyle}" />
+                    <TextBlock Text="نطاق البيانات" Style="{StaticResource FieldLabelStyle}" FontSize="16"/>
                     <Border Style="{StaticResource UnifiedInputContainerStyle}" Margin="0">
                         <ComboBox SelectedIndex="{Binding SelectedTypeIndex}"
                                   Style="{StaticResource UnifiedComboBoxStyle}">
@@ -112,4 +112,4 @@
             </Grid>
         </Grid>
     </Border>
-</Window>
+</Window>

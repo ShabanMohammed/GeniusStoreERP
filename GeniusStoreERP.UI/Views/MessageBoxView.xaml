@@ -41,14 +41,14 @@
                     
                     <TextBlock Grid.Column="1" Text="{Binding Title}" 
                                Style="{StaticResource MainHeaderStyle}" 
-                               Margin="15,0,0,0" VerticalAlignment="Center" FontSize="20"/>
+                               Margin="15,0,0,0" VerticalAlignment="Center" FontSize="24"/>
                 </Grid>
 
                 <!-- Message Content -->
                 <TextBlock Text="{Binding Message}" 
                            Style="{StaticResource SubHeaderStyle}" 
                            Foreground="{StaticResource MainContentTextBrush}"
-                           TextWrapping="Wrap" Margin="0,0,0,25" FontSize="15" LineHeight="22"/>
+                           TextWrapping="Wrap" Margin="0,0,0,25" FontSize="18" LineHeight="25"/>
 
                 <!-- Buttons Section -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

@@ -26,10 +26,10 @@
             <StackPanel Grid.Row="0" Margin="0,0,0,35">
                 <TextBlock Text="الإعدادات العامة" 
                            Style="{StaticResource MainHeaderStyle}"
-                           FontSize="28" FontWeight="ExtraBold"/>
+                           FontSize="32" FontWeight="ExtraBold"/>
                 <TextBlock Text="تخصيص معلومات المنشأة وتصميم الفاتورة والإعدادات المالية" 
                            Style="{StaticResource SubHeaderStyle}"
-                           FontSize="14" Opacity="0.8"/>
+                           FontSize="17" Opacity="0.8"/>
             </StackPanel>
 
             <!-- Main Content Area -->
@@ -45,7 +45,7 @@
                     <Border Style="{StaticResource UnifiedCardStyle}">
                         <StackPanel>
                             <TextBlock Text="شعار المنشأة" 
-                                       FontSize="16" FontWeight="Bold" Foreground="{StaticResource AccentActionBrush}" 
+                                       FontSize="18" FontWeight="Bold" Foreground="{StaticResource AccentActionBrush}" 
                                        Margin="0,0,0,20" HorizontalAlignment="Center"/>
 
                             <!-- Logo Preview Container -->
@@ -63,7 +63,7 @@
                                             <Viewbox Width="64" Height="64" Opacity="0.2">
                                                 <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="#495057"/>
                                             </Viewbox>
-                                            <TextBlock Text="لا يوجد شعار" FontSize="12" Opacity="0.4" Margin="0,10,0,0"/>
+                                            <TextBlock Text="لا يوجد شعار" FontSize="14" Opacity="0.4" Margin="0,10,0,0"/>
                                         </StackPanel>
 
                                         <!-- Actual Logo Image -->
@@ -97,7 +97,7 @@
                     <Border Style="{StaticResource UnifiedCardStyle}" Margin="0,0,0,20">
                         <StackPanel>
                             <TextBlock Text="معلومات الشركة" 
-                                       FontSize="18" FontWeight="Bold" Foreground="{StaticResource AccentActionBrush}" 
+                                       FontSize="20" FontWeight="Bold" Foreground="{StaticResource AccentActionBrush}" 
                                        Margin="0,0,0,25"/>
 
                             <Grid>
@@ -188,7 +188,7 @@
                     <Border Style="{StaticResource UnifiedCardStyle}">
                         <StackPanel>
                             <TextBlock Text="الإعدادات المالية" 
-                                       FontSize="18" FontWeight="Bold" Foreground="{StaticResource AccentActionBrush}" 
+                                       FontSize="20" FontWeight="Bold" Foreground="{StaticResource AccentActionBrush}" 
                                        Margin="0,0,0,25"/>
 
                             <Grid>

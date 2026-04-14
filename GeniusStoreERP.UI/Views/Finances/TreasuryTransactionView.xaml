@@ -16,7 +16,7 @@
 
         <!-- Header -->
         <Border Grid.Row="0" Padding="15" Background="{StaticResource PrimaryHeaderBrush}" CornerRadius="10" Margin="0,0,0,20">
-            <TextBlock Text="إضافة حركة خزينة (سند قبض / صرف)" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <TextBlock Text="إضافة حركة خزينة (سند قبض / صرف)" Foreground="White" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
         </Border>
 
         <!-- Form Card -->
@@ -24,16 +24,16 @@
             <StackPanel>
                 <!-- Treasury Info (ReadOnly) -->
                 <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="الخزينة" Style="{StaticResource FieldLabelStyle}"/>
-                    <TextBox Text="{Binding TreasuryName}" IsReadOnly="True" Background="#F1F3F5" Height="35" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <TextBlock Text="الخزينة" Style="{StaticResource FieldLabelStyle}" FontSize="16"/>
+                    <TextBox Text="{Binding TreasuryName}" IsReadOnly="True" Background="#F1F3F5" Height="40" VerticalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
                 </StackPanel>
 
                 <!-- Transaction Type (Radio Buttons) -->
                 <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="نوع الحركة" Style="{StaticResource FieldLabelStyle}"/>
+                    <TextBlock Text="نوع الحركة" Style="{StaticResource FieldLabelStyle}" FontSize="16"/>
                     <StackPanel Orientation="Horizontal">
-                        <RadioButton Content="إيداع / قبض (+)" IsChecked="{Binding Type, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=CashIn}" Margin="0,0,20,0" FontSize="14" FontWeight="SemiBold" Foreground="#27AE60"/>
-                        <RadioButton Content="سحب / صرف (-)" IsChecked="{Binding Type, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=CashOut}" FontSize="14" FontWeight="SemiBold" Foreground="#E74C3C"/>
+                        <RadioButton Content="إيداع / قبض (+)" IsChecked="{Binding Type, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=CashIn}" Margin="0,0,20,0" FontSize="16" FontWeight="SemiBold" Foreground="#27AE60"/>
+                        <RadioButton Content="سحب / صرف (-)" IsChecked="{Binding Type, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=CashOut}" FontSize="16" FontWeight="SemiBold" Foreground="#E74C3C"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -45,40 +45,41 @@
                     
                     <!-- Amount -->
                     <StackPanel Grid.Column="0" Margin="0,0,10,15">
-                        <TextBlock Text="المبلغ" Style="{StaticResource FieldLabelStyle}"/>
-                        <TextBox Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}" FontSize="18" FontWeight="Bold" Height="40" VerticalContentAlignment="Center"/>
+                        <TextBlock Text="المبلغ" Style="{StaticResource FieldLabelStyle}" FontSize="16"/>
+                        <TextBox Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="Bold" Height="45" VerticalContentAlignment="Center"/>
                     </StackPanel>
 
                     <!-- Date -->
                     <StackPanel Grid.Column="1" Margin="10,0,0,15">
-                        <TextBlock Text="التاريخ" Style="{StaticResource FieldLabelStyle}"/>
-                        <DatePicker SelectedDate="{Binding TransactionDate}" Height="40" VerticalContentAlignment="Center"/>
+                        <TextBlock Text="التاريخ" Style="{StaticResource FieldLabelStyle}" FontSize="16"/>
+                        <DatePicker SelectedDate="{Binding TransactionDate}" Height="45" VerticalContentAlignment="Center" FontSize="14"/>
                     </StackPanel>
                 </Grid>
 
                 <!-- Partner selection -->
                 <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="الشريك (اختياري)" Style="{StaticResource FieldLabelStyle}"/>
+                    <TextBlock Text="الشريك (اختياري)" Style="{StaticResource FieldLabelStyle}" FontSize="16"/>
                     <ComboBox ItemsSource="{Binding Partners}" 
                               SelectedItem="{Binding SelectedPartner}"
                               DisplayMemberPath="Name"
-                              Height="35"
+                              Height="40"
                               IsEditable="True"
                               IsTextSearchEnabled="True"
-                              TextSearch.TextPath="Name"/>
-                    <TextBlock Text="* سيتم تحديث رصيد الشريك تلقائياً عند الحفظ" FontSize="11" Foreground="#7F8C8D" Margin="0,5,0,0"/>
+                              TextSearch.TextPath="Name"
+                              FontSize="14"/>
+                    <TextBlock Text="* سيتم تحديث رصيد الشريك تلقائياً عند الحفظ" FontSize="13" Foreground="#7F8C8D" Margin="0,5,0,0"/>
                 </StackPanel>
 
                 <!-- Reference Number -->
                 <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="رقم المرجع / السند" Style="{StaticResource FieldLabelStyle}"/>
-                    <TextBox Text="{Binding ReferenceNumber}" Height="35" VerticalContentAlignment="Center"/>
+                    <TextBlock Text="رقم المرجع / السند" Style="{StaticResource FieldLabelStyle}" FontSize="16"/>
+                    <TextBox Text="{Binding ReferenceNumber}" Height="40" VerticalContentAlignment="Center" FontSize="14"/>
                 </StackPanel>
 
                 <!-- Notes -->
                 <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="ملاحظات" Style="{StaticResource FieldLabelStyle}"/>
-                    <TextBox Text="{Binding Notes}" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
+                    <TextBlock Text="ملاحظات" Style="{StaticResource FieldLabelStyle}" FontSize="16"/>
+                    <TextBox Text="{Binding Notes}" Height="80" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
                 </StackPanel>
             </StackPanel>
         </Border>
@@ -86,8 +87,8 @@
         <!-- Actions -->
         <Border Grid.Row="2" Padding="10" Background="#F8F9FA" CornerRadius="10">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Command="{Binding SaveCommand}" Content="حفظ العملية" Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="150" Height="40" Margin="10,0" Background="#27AE60"/>
-                <Button Command="{Binding CancelCommand}" Content="إلغاء / رجوع" Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="150" Height="40" Margin="10,0" Background="#E74C3C"/>
+                <Button Command="{Binding SaveCommand}" Content="حفظ العملية" Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="150" Height="45" Margin="10,0" Background="#27AE60" FontSize="16"/>
+                <Button Command="{Binding CancelCommand}" Content="إلغاء / رجوع" Style="{StaticResource UnifiedPrimaryButtonStyle}" Width="150" Height="45" Margin="10,0" Background="#E74C3C" FontSize="16"/>
             </StackPanel>
         </Border>
     </Grid>

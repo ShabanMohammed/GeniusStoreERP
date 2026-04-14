@@ -26,8 +26,8 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <TextBlock Text="حسابات الشركاء" Style="{StaticResource MainHeaderStyle}" FontSize="24"/>
-                <TextBlock Text="عرض موازين أرصدة العملاء والموردين" Style="{StaticResource SubHeaderStyle}"/>
+                <TextBlock Text="حسابات الشركاء" Style="{StaticResource MainHeaderStyle}" FontSize="28"/>
+                <TextBlock Text="عرض موازين أرصدة العملاء والموردين" Style="{StaticResource SubHeaderStyle}" FontSize="16"/>
             </StackPanel>
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
@@ -75,11 +75,11 @@
                                     <StackPanel Orientation="Horizontal">
                                         <Border Visibility="{Binding IsCustomer, Converter={StaticResource BooleanToVisibilityConverter}}" 
                                                 Background="#E8F5E9" CornerRadius="10" Padding="8,2" Margin="0,0,4,0">
-                                            <TextBlock Text="عميل" FontSize="11" Foreground="#2E7D32" FontWeight="Bold"/>
+                                            <TextBlock Text="عميل" FontSize="13" Foreground="#2E7D32" FontWeight="Bold"/>
                                         </Border>
                                         <Border Visibility="{Binding IsSupplier, Converter={StaticResource BooleanToVisibilityConverter}}" 
                                                 Background="#E3F2FD" CornerRadius="10" Padding="8,2">
-                                            <TextBlock Text="مورد" FontSize="11" Foreground="#1565C0" FontWeight="Bold"/>
+                                             <TextBlock Text="مورد" FontSize="13" Foreground="#1565C0" FontWeight="Bold"/>
                                         </Border>
                                     </StackPanel>
                                 </DataTemplate>
@@ -104,36 +104,36 @@
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
 
-                        <DataGridTemplateColumn Header="الرصيد الحالي" Width="150">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Balance, StringFormat=N2}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
-                                                <Setter Property="Foreground" Value="{StaticResource MainContentTextBrush}"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Balance, Converter={StaticResource ResourceKeyToBrushConverter}}" Value="Leh">
-                                                        <Setter Property="Foreground" Value="#2E7D32"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Balance, Converter={StaticResource ResourceKeyToBrushConverter}}" Value="Alaih">
-                                                        <Setter Property="Foreground" Value="#C62828"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBlock.Style>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                         <DataGridTemplateColumn Header="الرصيد الحالي" Width="150">
+                             <DataGridTemplateColumn.CellTemplate>
+                                 <DataTemplate>
+                                     <TextBlock Text="{Binding Balance, StringFormat=N2}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14">
+                                         <TextBlock.Style>
+                                             <Style TargetType="TextBlock">
+                                                 <Setter Property="Foreground" Value="{StaticResource MainContentTextBrush}"/>
+                                                 <Style.Triggers>
+                                                     <DataTrigger Binding="{Binding Balance, Converter={StaticResource ResourceKeyToBrushConverter}}" Value="Leh">
+                                                         <Setter Property="Foreground" Value="#2E7D32"/>
+                                                     </DataTrigger>
+                                                     <DataTrigger Binding="{Binding Balance, Converter={StaticResource ResourceKeyToBrushConverter}}" Value="Alaih">
+                                                         <Setter Property="Foreground" Value="#C62828"/>
+                                                     </DataTrigger>
+                                                 </Style.Triggers>
+                                             </Style>
+                                         </TextBlock.Style>
+                                     </TextBlock>
+                                 </DataTemplate>
+                             </DataGridTemplateColumn.CellTemplate>
+                         </DataGridTemplateColumn>
 
                         <DataGridTemplateColumn Header="الإجراءات" Width="120">
                             <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Command="{Binding DataContext.ViewStatementCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                            CommandParameter="{Binding}"
-                                            Content="كشف حساب" Style="{StaticResource UnifiedSecondaryButtonStyle}" 
-                                            FontSize="11" Height="28" Padding="10,0"/>
-                                </DataTemplate>
+                                 <DataTemplate>
+                                     <Button Command="{Binding DataContext.ViewStatementCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                             CommandParameter="{Binding}"
+                                             Content="كشف حساب" Style="{StaticResource UnifiedSecondaryButtonStyle}" 
+                                             FontSize="13" Height="28" Padding="10,0"/>
+                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
@@ -142,7 +142,7 @@
                 <!-- Loading Overlay -->
                 <Border Background="#80FFFFFF" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Text="جاري التحميل..." FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource AccentActionBrush}"/>
+                         <TextBlock Text="جاري التحميل..." FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource AccentActionBrush}"/>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -151,12 +151,12 @@
         <!-- Pagination -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
             <Button Command="{Binding PreviousPageCommand}" Content="السابق" Style="{StaticResource UnifiedSecondaryButtonStyle}" Width="80" Margin="0,0,10,0"/>
-            <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
-                <Run Text="صفحة "/>
-                <Run Text="{Binding CurrentPage}"/>
-                <Run Text=" من "/>
-                <Run Text="{Binding TotalPages, Mode=OneWay}"/>
-            </TextBlock>
+             <TextBlock VerticalAlignment="Center" FontSize="16" FontWeight="SemiBold">
+                 <Run Text="صفحة "/>
+                 <Run Text="{Binding CurrentPage}"/>
+                 <Run Text=" من "/>
+                 <Run Text="{Binding TotalPages, Mode=OneWay}"/>
+             </TextBlock>
             <Button Command="{Binding NextPageCommand}" Content="التالي" Style="{StaticResource UnifiedSecondaryButtonStyle}" Width="80" Margin="10,0,0,0"/>
         </StackPanel>
     </Grid>

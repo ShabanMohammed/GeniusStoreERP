@@ -24,6 +24,7 @@
                 <!-- Header -->
                 <TextBlock Text="{Binding Title}"
                            Style="{StaticResource MainHeaderStyle}"
+                           FontSize="28"
                            Margin="30,20,30,20"
                            Grid.Row="0"/>
 
@@ -55,6 +56,7 @@
                                 <!-- Name Field -->
                                 <TextBlock Text="اسم المنتج"
                                            Style="{StaticResource FieldLabelStyle}"
+                                           FontSize="16"
                                            Grid.Row="0"
                                            Grid.Column="0"
                                            VerticalAlignment="Center"
@@ -70,6 +72,7 @@
                                 <!-- Category Field -->
                                 <TextBlock Text="التصنيف"
                                            Style="{StaticResource FieldLabelStyle}"
+                                           FontSize="16"
                                            Grid.Row="1"
                                            Grid.Column="0"
                                            VerticalAlignment="Center"
@@ -91,6 +94,7 @@
                                 <!-- Price Field -->
                                 <TextBlock Text="السعر"
                                            Style="{StaticResource FieldLabelStyle}"
+                                           FontSize="16"
                                            Grid.Row="2"
                                            Grid.Column="0"
                                            VerticalAlignment="Center"
@@ -106,6 +110,7 @@
                                 <!-- SKU Field -->
                                 <TextBlock Text="SKU"
                                            Style="{StaticResource FieldLabelStyle}"
+                                           FontSize="16"
                                            Grid.Row="3"
                                            Grid.Column="0"
                                            VerticalAlignment="Center"
@@ -121,6 +126,7 @@
                                 <!-- Barcode Field -->
                                 <TextBlock Text="Barcode"
                                            Style="{StaticResource FieldLabelStyle}"
+                                           FontSize="16"
                                            Grid.Row="4"
                                            Grid.Column="0"
                                            VerticalAlignment="Center"
@@ -158,6 +164,7 @@
                                 <!-- Reorder Level Field -->
                                 <TextBlock Text="حد الطلب"
                                            Style="{StaticResource FieldLabelStyle}"
+                                           FontSize="16"
                                            Grid.Row="5"
                                            Grid.Column="0"
                                            VerticalAlignment="Center"
@@ -173,6 +180,7 @@
                                 <!-- Description Field -->
                                 <TextBlock Text="الوصف"
                                            Style="{StaticResource FieldLabelStyle}"
+                                           FontSize="16"
                                            Grid.Row="6"
                                            Grid.Column="0"
                                            VerticalAlignment="Top"
@@ -201,6 +209,7 @@
                         <Button Command="{Binding SaveCommand}"
                                 Content="حفظ المنتج"
                                 Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                                FontSize="16"
                                 Grid.Column="0"
                                 Margin="0,0,10,0"/>
 
@@ -209,6 +218,7 @@
                                 Background="#F5F6F7"
                                 Foreground="#7F8C8D"
                                 Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                                FontSize="16"
                                 Grid.Column="1"
                                 Margin="10,0,0,0">
                                 <Button.Template>
