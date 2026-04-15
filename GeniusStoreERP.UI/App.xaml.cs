@@ -133,6 +133,7 @@ namespace GeniusStoreERP.UI
                 services.AddSingleton<IInvoiceReportService, InvoiceReportService>();
                 services.AddSingleton<IPartnerReportService, PartnerReportService>();
                 services.AddSingleton<IStockReportService, StockReportService>();
+                services.AddSingleton<IFinanceReportService, FinanceReportService>();
                 
                 services.AddTransient<ReportOptionsWindow>();
                 services.AddTransient<ReportOptionsViewModel>();

@@ -7,7 +7,8 @@
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1000"
-             FlowDirection="RightToLeft">
+             FlowDirection="RightToLeft"
+             x:Name="root">
 
     <Grid Margin="25">
         <Grid.RowDefinitions>
@@ -161,6 +162,21 @@
                             <DataGridTextColumn Header="الشريك" Binding="{Binding PartnerName}" Width="150"/>
                             <DataGridTextColumn Header="رقم المرجع" Binding="{Binding ReferenceNumber}" Width="100"/>
                             <DataGridTextColumn Header="ملاحظات" Binding="{Binding Notes}" Width="*"/>
+                            <DataGridTemplateColumn Width="80">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding DataContext.PrintReceiptCommand, ElementName=root}" 
+                                                CommandParameter="{Binding}"
+                                                Style="{StaticResource UnifiedSecondaryButtonStyle}"
+                                                Padding="5,2" Height="30" Margin="2"
+                                                ToolTip="طباعة إيصال">
+                                            <Viewbox Width="16" Height="16">
+                                                <Path Data="{StaticResource IconPrint}" Fill="{StaticResource AccentActionBrush}" Stretch="Uniform"/>
+                                            </Viewbox>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

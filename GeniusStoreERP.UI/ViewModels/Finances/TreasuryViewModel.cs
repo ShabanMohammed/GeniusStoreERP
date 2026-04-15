@@ -9,6 +9,8 @@ using GeniusStoreERP.UI.Services;
 using MediatR;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using GeniusStoreERP.Application.GeneralSettings.Queries.GetGeneralSettings;
+using GeniusStoreERP.Application.Common.Interfaces;
 
 namespace GeniusStoreERP.UI.ViewModels.Finances;
 
@@ -16,6 +18,7 @@ public class TreasuryViewModel : BaseViewModel
 {
     private readonly IMediator _mediator;
     private readonly INavigationService _navigationService;
+    private readonly IFinanceReportService _reportService;
 
     private ObservableCollection<TreasuryDto> _treasuries = new();
     private TreasuryDto? _selectedTreasury;
@@ -40,15 +43,18 @@ public class TreasuryViewModel : BaseViewModel
     public ICommand LoadDataCommand { get; }
     public ICommand AddTreasuryCommand { get; }
     public ICommand AddTransactionCommand { get; }
+    public ICommand PrintReceiptCommand { get; }
 
-    public TreasuryViewModel(IMediator mediator, INavigationService navigationService)
+    public TreasuryViewModel(IMediator mediator, INavigationService navigationService, IFinanceReportService reportService)
     {
         _mediator = mediator;
         _navigationService = navigationService;
+        _reportService = reportService;
 
         LoadDataCommand = new AsyncRelayCommand(async (p, c) => await LoadData());
         AddTreasuryCommand = new AsyncRelayCommand(async (p, c) => await ShowAddTreasuryDialog());
         AddTransactionCommand = new AsyncRelayCommand(async (p, c) => await ShowAddTransactionDialog());
+        PrintReceiptCommand = new AsyncRelayCommand(async (p, c) => await PrintReceipt((TreasuryTransactionDto)p));
     }
 
     public override async void Initialize(object? parameter)
@@ -104,5 +110,23 @@ public class TreasuryViewModel : BaseViewModel
         // Logic to navigate to or show the Transaction creation window
         // I'll create a dedicated window for this.
         _navigationService.NavigateTo<TreasuryTransactionViewModel>(SelectedTreasury);
+    }
+
+    private async Task PrintReceipt(TreasuryTransactionDto transaction)
+    {
+        if (transaction == null) return;
+
+        try
+        {
+            var settings = await _mediator.Send(new GetGeneralSettingsQuery());
+            var pdfData = _reportService.GenerateTreasuryReceiptPdf(transaction, settings);
+
+            // Navigate to Preview window
+            _navigationService.ShowWindow<ReportPreviewViewModel>(pdfData, "معاينة إيصال الخزينة");
+        }
+        catch (Exception ex)
+        {
+            MessageBoxService.ShowError($"خطأ أثناء طباعة الإيصال: {ex.Message}");
+        }
     }
 }

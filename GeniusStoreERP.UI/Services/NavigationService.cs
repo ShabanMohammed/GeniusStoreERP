@@ -1,4 +1,5 @@
-﻿using GeniusStoreERP.UI.Common;
+using GeniusStoreERP.UI.Common;
+using GeniusStoreERP.UI.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GeniusStoreERP.UI.Services
@@ -40,14 +41,13 @@ namespace GeniusStoreERP.UI.Services
             var vm = _serviceProvider.GetRequiredService<TViewModel>();
             vm.Initialize(parameter);
 
-            //// هذا الجزء يتطلب معرفة النافذة المرتبطة بالـ ViewModel
-            //// كحل سريع وموجه للمهمة، سنقوم بفتح ReportPreviewWindow مباشرة إذا كان الـ ViewModel هو ReportPreviewViewModel
-            //if (vm is ReportPreviewViewModel reportVm)
-            //{
-            //    var window = new GSM.UI.Views.ReportPreviewWindow(reportVm);
-            //    if (!string.IsNullOrEmpty(title)) window.Title = title;
-            //    window.Show();
-            //}
+            // Open window based on ViewModel type
+            if (vm is ReportPreviewViewModel reportVm)
+            {
+                var window = new GeniusStoreERP.UI.Views.ReportPreviewWindow(reportVm);
+                if (!string.IsNullOrEmpty(title)) window.Title = title;
+                window.Show();
+            }
 
             return vm;
         }
