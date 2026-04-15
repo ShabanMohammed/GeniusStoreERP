@@ -19,10 +19,10 @@
         <Border Grid.Row="0" Margin="0,0,0,20">
             <StackPanel>
                 <TextBlock Text="مركز التقارير" 
-                           FontSize="28" FontWeight="Bold" 
+                           FontSize="{StaticResource FontSizeLarge}" FontWeight="Bold" 
                            Foreground="{StaticResource MainContentTextBrush}"/>
                 <TextBlock Text="استعرض التقارير المالية والتشغيلية للنظام مقسمة حسب النوع." 
-                           Foreground="#7986CB" FontSize="14" Margin="0,5,0,0"/>
+                           Foreground="#7986CB" FontSize="{StaticResource FontSizeSmall}" Margin="0,5,0,0"/>
             </StackPanel>
         </Border>
 
@@ -62,14 +62,14 @@
                                         </Viewbox>
                                     </Border>
                                      <TextBlock Text="{Binding Title}" 
-                                                FontSize="20" FontWeight="Bold" 
+                                                FontSize="{StaticResource FontSizeMedium}" FontWeight="Bold" 
                                                 VerticalAlignment="Center" 
                                                 Margin="15,0,0,0"
                                                 Foreground="{StaticResource MainContentTextBrush}"/>
                                 </StackPanel>
 
                                  <TextBlock Grid.Row="1" Text="{Binding Description}" 
-                                            Foreground="#8C9EFF" FontSize="13" 
+                                            Foreground="#8C9EFF" FontSize="{StaticResource FontSizeSmall}" 
                                             TextWrapping="Wrap" Margin="0,0,0,15"/>
 
                                 <Separator Grid.Row="2" Background="#F1F3F9" Margin="0,0,0,15"/>
@@ -89,7 +89,7 @@
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel>
                                                          <TextBlock Text="{Binding Title}" FontWeight="SemiBold"/>
-                                                         <TextBlock Text="{Binding Description}" FontSize="12" Opacity="0.7"/>
+                                                         <TextBlock Text="{Binding Description}" FontSize="{StaticResource FontSizeSmall}" Opacity="0.7"/>
                                                     </StackPanel>
                                                     <Viewbox Grid.Column="1" Width="12" Height="12" Margin="10,0,0,0">
                                                         <Path Data="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" 

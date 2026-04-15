@@ -26,8 +26,8 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <TextBlock Text="حسابات الشركاء" Style="{StaticResource MainHeaderStyle}" FontSize="28"/>
-                <TextBlock Text="عرض موازين أرصدة العملاء والموردين" Style="{StaticResource SubHeaderStyle}" FontSize="16"/>
+                <TextBlock Text="حسابات الشركاء" Style="{StaticResource MainHeaderStyle}" FontSize="{StaticResource FontSizeLarge}"/>
+                <TextBlock Text="عرض موازين أرصدة العملاء والموردين" Style="{StaticResource SubHeaderStyle}" FontSize="{StaticResource FontSizeNormal}"/>
             </StackPanel>
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
@@ -107,7 +107,7 @@
                          <DataGridTemplateColumn Header="الرصيد الحالي" Width="150">
                              <DataGridTemplateColumn.CellTemplate>
                                  <DataTemplate>
-                                     <TextBlock Text="{Binding Balance, StringFormat=N2}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14">
+                                     <TextBlock Text="{Binding Balance, StringFormat=N2}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource FontSizeSmall}">
                                          <TextBlock.Style>
                                              <Style TargetType="TextBlock">
                                                  <Setter Property="Foreground" Value="{StaticResource MainContentTextBrush}"/>
@@ -132,7 +132,7 @@
                                      <Button Command="{Binding DataContext.ViewStatementCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                              CommandParameter="{Binding}"
                                              Content="كشف حساب" Style="{StaticResource UnifiedSecondaryButtonStyle}" 
-                                             FontSize="13" Height="28" Padding="10,0"/>
+                                             FontSize="{StaticResource FontSizeSmall}" Height="28" Padding="10,0"/>
                                  </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -142,7 +142,7 @@
                 <!-- Loading Overlay -->
                 <Border Background="#80FFFFFF" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                         <TextBlock Text="جاري التحميل..." FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource AccentActionBrush}"/>
+                         <TextBlock Text="جاري التحميل..." FontSize="{StaticResource FontSizeNormal}" FontWeight="SemiBold" Foreground="{StaticResource AccentActionBrush}"/>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -151,7 +151,7 @@
         <!-- Pagination -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
             <Button Command="{Binding PreviousPageCommand}" Content="السابق" Style="{StaticResource UnifiedSecondaryButtonStyle}" Width="80" Margin="0,0,10,0"/>
-             <TextBlock VerticalAlignment="Center" FontSize="16" FontWeight="SemiBold">
+             <TextBlock VerticalAlignment="Center" FontSize="{StaticResource FontSizeNormal}" FontWeight="SemiBold">
                  <Run Text="صفحة "/>
                  <Run Text="{Binding CurrentPage}"/>
                  <Run Text=" من "/>

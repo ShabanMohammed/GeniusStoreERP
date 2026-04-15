@@ -56,7 +56,7 @@
                                 <!-- Name Field -->
                                 <TextBlock Text="اسم المنتج"
                                            Style="{StaticResource FieldLabelStyle}"
-                                           FontSize="16"
+                                           FontSize="{StaticResource FontSizeNormal}"
                                            Grid.Row="0"
                                            Grid.Column="0"
                                            VerticalAlignment="Center"
@@ -72,7 +72,7 @@
                                 <!-- Category Field -->
                                 <TextBlock Text="التصنيف"
                                            Style="{StaticResource FieldLabelStyle}"
-                                           FontSize="16"
+                                           FontSize="{StaticResource FontSizeNormal}"
                                            Grid.Row="1"
                                            Grid.Column="0"
                                            VerticalAlignment="Center"
@@ -94,7 +94,7 @@
                                 <!-- Price Field -->
                                 <TextBlock Text="السعر"
                                            Style="{StaticResource FieldLabelStyle}"
-                                           FontSize="16"
+                                           FontSize="{StaticResource FontSizeNormal}"
                                            Grid.Row="2"
                                            Grid.Column="0"
                                            VerticalAlignment="Center"
@@ -110,7 +110,7 @@
                                 <!-- SKU Field -->
                                 <TextBlock Text="SKU"
                                            Style="{StaticResource FieldLabelStyle}"
-                                           FontSize="16"
+                                           FontSize="{StaticResource FontSizeNormal}"
                                            Grid.Row="3"
                                            Grid.Column="0"
                                            VerticalAlignment="Center"
@@ -126,7 +126,7 @@
                                 <!-- Barcode Field -->
                                 <TextBlock Text="Barcode"
                                            Style="{StaticResource FieldLabelStyle}"
-                                           FontSize="16"
+                                           FontSize="{StaticResource FontSizeNormal}"
                                            Grid.Row="4"
                                            Grid.Column="0"
                                            VerticalAlignment="Center"
@@ -164,7 +164,7 @@
                                 <!-- Reorder Level Field -->
                                 <TextBlock Text="حد الطلب"
                                            Style="{StaticResource FieldLabelStyle}"
-                                           FontSize="16"
+                                           FontSize="{StaticResource FontSizeNormal}"
                                            Grid.Row="5"
                                            Grid.Column="0"
                                            VerticalAlignment="Center"
@@ -180,7 +180,7 @@
                                 <!-- Description Field -->
                                 <TextBlock Text="الوصف"
                                            Style="{StaticResource FieldLabelStyle}"
-                                           FontSize="16"
+                                           FontSize="{StaticResource FontSizeNormal}"
                                            Grid.Row="6"
                                            Grid.Column="0"
                                            VerticalAlignment="Top"

@@ -168,7 +168,7 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
-                                    <TextBlock Text="{Binding StatusName}" FontSize="13" FontWeight="SemiBold">
+                                    <TextBlock Text="{Binding StatusName}" FontSize="{StaticResource FontSizeSmall}" FontWeight="SemiBold">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
                                                 <Style.Triggers>
@@ -349,7 +349,7 @@
                         Padding="15,0"
                         Margin="5,0">
                     <TextBlock VerticalAlignment="Center"
-                               FontSize="15"
+                               FontSize="{StaticResource FontSizeSmall}"
                                FontWeight="SemiBold">
                         <Run Text="صفحة"/>
                         <Run Text=" "/>

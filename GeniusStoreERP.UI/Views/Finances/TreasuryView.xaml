@@ -21,13 +21,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="{Binding PageTitle}" Style="{StaticResource MainHeaderStyle}" FontSize="28" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding PageTitle}" Style="{StaticResource MainHeaderStyle}" FontSize="{StaticResource FontSizeLarge}" Grid.Column="0" VerticalAlignment="Center"/>
             <Button Command="{Binding AddTreasuryCommand}" Style="{StaticResource UnifiedPrimaryButtonStyle}" Grid.Column="1" Width="150" ToolTip="إضافة خزينة جديدة">
                 <StackPanel Orientation="Horizontal">
                     <Viewbox Width="16" Height="16" Margin="0,0,8,0">
                         <Path Data="{StaticResource IconAdd}" Fill="White" Stretch="Uniform"/>
                     </Viewbox>
-                    <TextBlock Text="إضافة خزينة" VerticalAlignment="Center" FontSize="14"/>
+                    <TextBlock Text="إضافة خزينة" VerticalAlignment="Center" FontSize="{StaticResource FontSizeSmall}"/>
                 </StackPanel>
             </Button>
         </Grid>
@@ -47,7 +47,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Border Background="#F8F9FA" Padding="15" CornerRadius="12,12,0,0">
-                        <TextBlock Text="الخزائن المتاحة" FontWeight="Bold" Foreground="#2C3E50" FontSize="16"/>
+                        <TextBlock Text="الخزائن المتاحة" FontWeight="Bold" Foreground="#2C3E50" FontSize="{StaticResource FontSizeNormal}"/>
                     </Border>
                     <ListBox Grid.Row="1" ItemsSource="{Binding Treasuries}" SelectedItem="{Binding SelectedTreasury}" BorderThickness="0" Background="Transparent" Padding="5">
                         <ListBox.ItemTemplate>
@@ -59,10 +59,10 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Grid.Column="0">
-                                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16"/>
-                                            <TextBlock Text="{Binding Code}" FontSize="14" Foreground="#7F8C8D"/>
+                                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="{StaticResource FontSizeNormal}"/>
+                                            <TextBlock Text="{Binding Code}" FontSize="{StaticResource FontSizeSmall}" Foreground="#7F8C8D"/>
                                         </StackPanel>
-                                        <TextBlock Grid.Column="1" Text="{Binding Balance, StringFormat=\{0:N2\}}" VerticalAlignment="Center" FontWeight="Bold" Foreground="#27AE60" FontSize="14"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding Balance, StringFormat=\{0:N2\}}" VerticalAlignment="Center" FontWeight="Bold" Foreground="#27AE60" FontSize="{StaticResource FontSizeMedium}"/>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
@@ -97,15 +97,15 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="حركات الخزينة: " FontWeight="Bold" Foreground="#2C3E50" FontSize="16"/>
-                                <TextBlock Text="{Binding SelectedTreasury.Name}" FontWeight="Bold" Foreground="#3498DB" FontSize="16"/>
+                                <TextBlock Text="حركات الخزينة: " FontWeight="Bold" Foreground="#2C3E50" FontSize="{StaticResource FontSizeNormal}"/>
+                                <TextBlock Text="{Binding SelectedTreasury.Name}" FontWeight="Bold" Foreground="#3498DB" FontSize="{StaticResource FontSizeNormal}"/>
                             </StackPanel>
                             <Button Grid.Column="1" Command="{Binding AddTransactionCommand}" Style="{StaticResource UnifiedPrimaryButtonStyle}" Background="#27AE60" BorderBrush="#27AE60" Width="130">
                                 <StackPanel Orientation="Horizontal">
                                     <Viewbox Width="14" Height="14" Margin="0,0,5,0">
                                         <Path Data="{StaticResource IconExchange}" Fill="White" Stretch="Uniform"/>
                                     </Viewbox>
-                                    <TextBlock Text="إضافة حركة" FontSize="14"/>
+                                    <TextBlock Text="إضافة حركة" FontSize="{StaticResource FontSizeSmall}"/>
                                 </StackPanel>
                             </Button>
                         </Grid>

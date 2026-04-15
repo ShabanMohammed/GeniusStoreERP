@@ -67,7 +67,7 @@
                         <Button Command="{Binding ZoomOutCommand}" 
                                 Style="{StaticResource UnifiedPrimaryButtonStyle}"
                                 Background="#F5F5F5" Foreground="#595959"
-                                Content="-" Width="35" Height="35" FontSize="20"/>
+                                Content="-" Width="35" Height="35" FontSize="{StaticResource FontSizeMedium}"/>
                         
                         <Border Background="#F9F9F9" CornerRadius="4" Margin="8,0" Padding="12,0" MinWidth="60">
                             <TextBlock Text="{Binding ZoomLevel, StringFormat={}{0}%}" 
@@ -80,7 +80,7 @@
                         <Button Command="{Binding ZoomInCommand}" 
                                 Style="{StaticResource UnifiedPrimaryButtonStyle}"
                                 Background="#F5F5F5" Foreground="#595959"
-                                Content="+" Width="35" Height="35" FontSize="20"/>
+                                Content="+" Width="35" Height="35" FontSize="{StaticResource FontSizeMedium}"/>
                     </StackPanel>
                 </StackPanel>
             </DockPanel>
@@ -101,7 +101,7 @@
                     <Ellipse Width="8" Height="8" Fill="{StaticResource StatusSuccessBrush}" Margin="0,0,10,0"/>
                     <TextBlock Text="{Binding StatusText}" 
                                Foreground="#595959" 
-                               FontSize="14" 
+                               FontSize="{StaticResource FontSizeSmall}" 
                                VerticalAlignment="Center"/>
                 </StackPanel>
                 

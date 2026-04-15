@@ -8,6 +8,13 @@
         <!-- Typography -->
         <FontFamily x:Key="MainFontFamily">Calibri</FontFamily>
 
+        <!-- Standard Font Sizes (Centralized Control) -->
+        <System:Double x:Key="FontSizeSmall" xmlns:System="clr-namespace:System;assembly=mscorlib">15</System:Double>
+        <System:Double x:Key="FontSizeNormal" xmlns:System="clr-namespace:System;assembly=mscorlib">18</System:Double>
+        <System:Double x:Key="FontSizeMedium" xmlns:System="clr-namespace:System;assembly=mscorlib">22</System:Double>
+        <System:Double x:Key="FontSizeLarge" xmlns:System="clr-namespace:System;assembly=mscorlib">26</System:Double>
+        <System:Double x:Key="FontSizeTitle" xmlns:System="clr-namespace:System;assembly=mscorlib">36</System:Double>
+
         <!-- Global Defaults -->
         <Style TargetType="Window">
                 <Setter Property="FontFamily"
@@ -17,11 +24,15 @@
         <Style TargetType="TextBlock">
                 <Setter Property="FontFamily"
                         Value="{StaticResource MainFontFamily}"/>
+                <Setter Property="FontSize"
+                        Value="{StaticResource FontSizeNormal}"/>
         </Style>
 
         <Style TargetType="Control">
                 <Setter Property="FontFamily"
                         Value="{StaticResource MainFontFamily}"/>
+                <Setter Property="FontSize"
+                        Value="{StaticResource FontSizeNormal}"/>
         </Style>
 
         <Style x:Key="MainHeaderStyle"
@@ -29,7 +40,7 @@
                 <Setter Property="FontFamily"
                         Value="{StaticResource MainFontFamily}"/>
                 <Setter Property="FontSize"
-                        Value="32"/>
+                        Value="{StaticResource FontSizeTitle}"/>
                 <Setter Property="FontWeight"
                         Value="ExtraBold"/>
                 <Setter Property="Foreground"
@@ -41,7 +52,7 @@
         <Style x:Key="SubHeaderStyle"
                TargetType="TextBlock">
                 <Setter Property="FontSize"
-                        Value="20"/>
+                        Value="{StaticResource FontSizeMedium}"/>
                 <Setter Property="Foreground"
                         Value="#7F8C8D"/>
                 <Setter Property="Margin"
@@ -51,7 +62,7 @@
         <Style x:Key="FieldLabelStyle"
                TargetType="TextBlock">
                 <Setter Property="FontSize"
-                        Value="20"/>
+                        Value="{StaticResource FontSizeMedium}"/>
                 <Setter Property="FontWeight"
                         Value="SemiBold"/>
                 <Setter Property="Foreground"
@@ -59,6 +70,7 @@
                 <Setter Property="Margin"
                         Value="0,0,0,8"/>
         </Style>
+
 
         <!-- Global Input Style (Border Container) -->
         <Style x:Key="UnifiedInputContainerStyle"
@@ -92,7 +104,7 @@
                 <Setter Property="Padding"
                         Value="8,10"/>
                 <Setter Property="FontSize"
-                        Value="18"/>
+                        Value="{StaticResource FontSizeNormal}"/>
                 <Setter Property="VerticalContentAlignment"
                         Value="Center"/>
                 <Setter Property="Foreground"
@@ -109,7 +121,7 @@
                 <Setter Property="Padding"
                         Value="8,10"/>
                 <Setter Property="FontSize"
-                        Value="18"/>
+                        Value="{StaticResource FontSizeNormal}"/>
                 <Setter Property="VerticalContentAlignment"
                         Value="Center"/>
                 <Setter Property="Foreground"
@@ -126,11 +138,21 @@
                 <Setter Property="Padding"
                         Value="8,10"/>
                 <Setter Property="FontSize"
-                        Value="18"/>
+                        Value="{StaticResource FontSizeNormal}"/>
                 <Setter Property="VerticalContentAlignment"
                         Value="Center"/>
                 <Setter Property="Foreground"
                         Value="{StaticResource MainContentTextBrush}"/>
+        </Style>
+
+        <!-- Global DatePicker Style -->
+        <Style TargetType="DatePicker">
+                <Setter Property="FontSize"
+                        Value="{StaticResource FontSizeNormal}"/>
+                <Setter Property="VerticalContentAlignment"
+                        Value="Center"/>
+                <Setter Property="Padding"
+                        Value="2"/>
         </Style>
 
         <!-- Global Button Style -->
@@ -141,9 +163,9 @@
                 <Setter Property="Foreground"
                         Value="White"/>
                 <Setter Property="Height"
-                        Value="44"/>
+                        Value="48"/>
                 <Setter Property="FontSize"
-                        Value="18"/>
+                        Value="{StaticResource FontSizeNormal}"/>
                 <Setter Property="FontWeight"
                         Value="SemiBold"/>
                 <Setter Property="BorderThickness"
@@ -183,9 +205,9 @@
                 <Setter Property="Foreground"
                         Value="#191970"/>
                 <Setter Property="Height"
-                        Value="44"/>
+                        Value="48"/>
                 <Setter Property="FontSize"
-                        Value="18"/>
+                        Value="{StaticResource FontSizeNormal}"/>
                 <Setter Property="FontWeight"
                         Value="SemiBold"/>
                 <Setter Property="BorderThickness"
@@ -231,7 +253,7 @@
         <Style x:Key="UnifiedCheckBoxStyle"
                TargetType="CheckBox">
                 <Setter Property="FontSize"
-                        Value="18"/>
+                        Value="{StaticResource FontSizeNormal}"/>
                 <Setter Property="VerticalContentAlignment"
                         Value="Center"/>
                 <Setter Property="Foreground"
@@ -527,7 +549,7 @@
                 <Setter Property="RowHeight"
                         Value="55"/>
                 <Setter Property="FontSize"
-                        Value="18"/>
+                        Value="{StaticResource FontSizeNormal}"/>
                 <Setter Property="FontFamily"
                         Value="{StaticResource MainFontFamily}"/>
         </Style>

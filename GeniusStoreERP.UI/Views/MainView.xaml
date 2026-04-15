@@ -54,7 +54,7 @@
                 Foreground="White"
                 FontWeight="Bold"
                 FontFamily="{StaticResource MainFontFamily}"
-                FontSize="24"
+                FontSize="{StaticResource FontSizeLarge}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
             </Border>
@@ -110,7 +110,7 @@
                 Foreground="White"
                 FontWeight="Bold"
                 FontFamily="{StaticResource MainFontFamily}"
-                FontSize="18"
+                FontSize="{StaticResource FontSizeNormal}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
             </Border>
@@ -122,7 +122,7 @@
                 Text="{Binding FullName}"
                 Foreground="White"
                 FontFamily="{StaticResource MainFontFamily}"
-                FontSize="14"
+                FontSize="{StaticResource FontSizeSmall}"
                 FontWeight="SemiBold"
                 TextTrimming="CharacterEllipsis"/>
               <TextBlock

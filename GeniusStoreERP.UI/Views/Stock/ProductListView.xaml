@@ -34,7 +34,7 @@
 
                         <TextBlock Text="إدارة المنتجات"
                                    Style="{StaticResource MainHeaderStyle}"
-                                   FontSize="28"
+                                   FontSize="{StaticResource FontSizeLarge}"
                                    Grid.Column="0"
                                    VerticalAlignment="Center"/>
 
@@ -316,7 +316,7 @@
                                         Padding="15,0"
                                         Margin="5,0">
                                         <TextBlock VerticalAlignment="Center"
-                                                   FontSize="15"
+                                                   FontSize="{StaticResource FontSizeSmall}"
                                                    FontWeight="SemiBold">
                          <Run Text="صفحة"/>
                          <Run Text=" "/>

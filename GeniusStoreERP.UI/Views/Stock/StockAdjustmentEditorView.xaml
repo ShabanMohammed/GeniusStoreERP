@@ -44,7 +44,7 @@
                 </Button>
                 <TextBlock Text="{Binding Title}"
                         Style="{StaticResource MainHeaderStyle}"
-                        FontSize="28"
+                        FontSize="{StaticResource FontSizeLarge}"
                         VerticalAlignment="Center"/>
             </StackPanel>
         </Grid>
@@ -76,7 +76,7 @@
                     <StackPanel Grid.Column="0">
                         <TextBlock Text="تاريخ التسوية"
                                 Style="{StaticResource FieldLabelStyle}"
-                                FontSize="16"/>
+                                FontSize="{StaticResource FontSizeNormal}"/>
                         <Border Style="{StaticResource UnifiedInputContainerStyle}">
                             <DatePicker SelectedDate="{Binding AdjustmentDate}"
                                     IsEnabled="{Binding IsViewMode, Converter={StaticResource InverseBooleanConverter}}"
@@ -90,7 +90,7 @@
                     <StackPanel Grid.Column="2">
                         <TextBlock Text="رقم المرجع (تلقائي)"
                                 Style="{StaticResource FieldLabelStyle}"
-                                FontSize="16"/>
+                                FontSize="{StaticResource FontSizeNormal}"/>
                         <Border Style="{StaticResource UnifiedInputContainerStyle}"
                                 Background="#F8FAFC">
                             <TextBox Text="{Binding ReferenceNumber}"
@@ -105,7 +105,7 @@
                     <StackPanel Grid.Column="4">
                         <TextBlock Text="ملاحظات"
                                 Style="{StaticResource FieldLabelStyle}"
-                                FontSize="16"/>
+                                FontSize="{StaticResource FontSizeNormal}"/>
                         <Border Style="{StaticResource UnifiedInputContainerStyle}">
                             <TextBox Text="{Binding Remarks, UpdateSourceTrigger=PropertyChanged}"
                                     IsReadOnly="{Binding IsViewMode}"
@@ -179,10 +179,10 @@
                                                 <StackPanel>
                                                     <TextBlock Text="{Binding Name}"
                                                             FontWeight="SemiBold"
-                                                            FontSize="14"
+                                                            FontSize="{StaticResource FontSizeSmall}"
                                                             Foreground="{StaticResource MainContentTextBrush}"/>
                                                     <TextBlock Text="{Binding CategoryName}"
-                                                            FontSize="12"
+                                                            FontSize="{StaticResource FontSizeSmall}"
                                                             Foreground="#64748B"
                                                             Margin="0,2,0,0"/>
                                                 </StackPanel>

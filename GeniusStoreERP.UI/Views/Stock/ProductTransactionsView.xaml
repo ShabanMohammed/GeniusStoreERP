@@ -98,7 +98,7 @@
 
             <!-- Page Size Selector -->
             <StackPanel Orientation="Horizontal" Grid.Column="0">
-                <TextBlock Text="عرض" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="15" Foreground="#7F8C8D"/>
+                <TextBlock Text="عرض" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="{StaticResource FontSizeSmall}" Foreground="#7F8C8D"/>
                 <Border Style="{StaticResource UnifiedInputContainerStyle}" Height="35" Margin="0" Padding="2">
                     <StackPanel Orientation="Horizontal">
                         <Button Command="{Binding DecreasePageSizeCommand}" Content="-" Width="25" Background="Transparent" BorderThickness="0" FontWeight="Bold" Cursor="Hand"/>
@@ -106,11 +106,11 @@
                         <Button Command="{Binding IncreasePageSizeCommand}" Content="+" Width="25" Background="Transparent" BorderThickness="0" FontWeight="Bold" Cursor="Hand"/>
                     </StackPanel>
                 </Border>
-                <TextBlock Text="عناصر لكل صفحة" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="15" Foreground="#7F8C8D"/>
+                <TextBlock Text="عناصر لكل صفحة" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="{StaticResource FontSizeSmall}" Foreground="#7F8C8D"/>
             </StackPanel>
 
             <!-- Summary Text -->
-            <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#7F8C8D">
+            <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource FontSizeSmall}" Foreground="#7F8C8D">
                 <Run Text="عرض القيمة "/>
                 <Run Text="{Binding Transactions.Count, Mode=OneWay}" FontWeight="SemiBold"/>
                 <Run Text=" من إجمالي "/>
@@ -127,7 +127,7 @@
                     <Viewbox Width="18" Height="18"><Path Data="{StaticResource IconPreviousPage}" Fill="White" Stretch="Uniform"/></Viewbox>
                 </Button>
                 <Border Background="#F1F3F5" CornerRadius="5" Padding="15,0" Margin="5,0">
-                    <TextBlock VerticalAlignment="Center" FontSize="15" FontWeight="SemiBold">
+                    <TextBlock VerticalAlignment="Center" FontSize="{StaticResource FontSizeSmall}" FontWeight="SemiBold">
                         <Run Text="صفحة"/><Run Text=" "/><Run Text="{Binding CurrentPage}"/><Run Text=" "/><Run Text="من"/><Run Text=" "/><Run Text="{Binding TotalPages, Mode=OneWay}"/>
                     </TextBlock>
                 </Border>

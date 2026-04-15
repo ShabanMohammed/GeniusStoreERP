@@ -19,7 +19,7 @@
         <Border Grid.Row="0" Padding="15" Background="{StaticResource PrimaryHeaderBrush}" CornerRadius="10" Margin="0,0,0,20">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="تحرير الفاتورة" Foreground="White" FontSize="24" FontWeight="Bold"/>
+                    <TextBlock Text="تحرير الفاتورة" Foreground="White" FontSize="{StaticResource FontSizeLarge}" FontWeight="Bold"/>
                     <Border Margin="15,0,0,0" Padding="10,3" CornerRadius="12" 
                             Visibility="{Binding IsReadOnly, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Border.Style>
@@ -34,7 +34,7 @@
                                 </Style.Triggers>
                             </Style>
                         </Border.Style>
-                        <TextBlock Text="{Binding Status}" FontSize="14" FontWeight="SemiBold">
+                        <TextBlock Text="{Binding Status}" FontSize="{StaticResource FontSizeSmall}" FontWeight="SemiBold">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Style.Triggers>
@@ -121,7 +121,7 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                            <TextBlock Text="المنتج" FontSize="14" Foreground="#7f8c8d" Margin="0,0,0,2"/>
+                            <TextBlock Text="المنتج" FontSize="{StaticResource FontSizeSmall}" Foreground="#7f8c8d" Margin="0,0,0,2"/>
                             <ComboBox ItemsSource="{Binding Products}"
                                       SelectedItem="{Binding SelectedProduct}"
                                       DisplayMemberPath="Name"
@@ -132,37 +132,37 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="1" Margin="5,0">
-                            <TextBlock Text="الكمية" FontSize="14" Foreground="#7f8c8d" Margin="0,0,0,2"/>
+                            <TextBlock Text="الكمية" FontSize="{StaticResource FontSizeSmall}" Foreground="#7f8c8d" Margin="0,0,0,2"/>
                             <TextBox Text="{Binding CurrentItem.Quantity, UpdateSourceTrigger=LostFocus}" Height="30" VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2" Margin="5,0">
-                            <TextBlock Text="السعر" FontSize="14" Foreground="#7f8c8d" Margin="0,0,0,2"/>
+                            <TextBlock Text="السعر" FontSize="{StaticResource FontSizeSmall}" Foreground="#7f8c8d" Margin="0,0,0,2"/>
                             <TextBox Text="{Binding CurrentItem.UnitPrice, UpdateSourceTrigger=LostFocus}" Height="30" VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="3" Margin="5,0">
-                            <TextBlock Text="خصم %" FontSize="14" Foreground="#7f8c8d" Margin="0,0,0,2"/>
+                            <TextBlock Text="خصم %" FontSize="{StaticResource FontSizeSmall}" Foreground="#7f8c8d" Margin="0,0,0,2"/>
                             <TextBox Text="{Binding CurrentItem.DiscountPercentage, UpdateSourceTrigger=LostFocus}" Height="30" VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="4" Margin="5,0">
-                            <TextBlock Text="خصم مبلغ" FontSize="14" Foreground="#7f8c8d" Margin="0,0,0,2"/>
+                            <TextBlock Text="خصم مبلغ" FontSize="{StaticResource FontSizeSmall}" Foreground="#7f8c8d" Margin="0,0,0,2"/>
                             <TextBox Text="{Binding CurrentItem.DiscountAmount, UpdateSourceTrigger=LostFocus}" Height="30" VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="5" Margin="5,0">
-                            <TextBlock Text="ضريبة %" FontSize="14" Foreground="#7f8c8d" Margin="0,0,0,2"/>
+                            <TextBlock Text="ضريبة %" FontSize="{StaticResource FontSizeSmall}" Foreground="#7f8c8d" Margin="0,0,0,2"/>
                             <TextBox Text="{Binding CurrentItem.TaxPercentage, UpdateSourceTrigger=LostFocus}" Height="30" VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="6" Margin="5,0">
-                            <TextBlock Text="ضريبة مبلغ" FontSize="14" Foreground="#7f8c8d" Margin="0,0,0,2"/>
+                            <TextBlock Text="ضريبة مبلغ" FontSize="{StaticResource FontSizeSmall}" Foreground="#7f8c8d" Margin="0,0,0,2"/>
                             <TextBox Text="{Binding CurrentItem.TaxAmount, UpdateSourceTrigger=LostFocus}" Height="30" VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="7" Margin="5,0">
-                            <TextBlock Text="احمالى مبلغ" FontSize="14" Foreground="#7f8c8d" Margin="0,0,0,2"/>
+                            <TextBlock Text="احمالى مبلغ" FontSize="{StaticResource FontSizeSmall}" Foreground="#7f8c8d" Margin="0,0,0,2"/>
                             <TextBox Text="{Binding CurrentItem.LineTotal, Mode=OneWay}" IsReadOnly="True" Height="30" VerticalContentAlignment="Center"/>
                         </StackPanel>
                         <Button Grid.Column="8" Command="{Binding AddItemCommand}" Content="إضافة" 
@@ -192,7 +192,7 @@
                                 <DataTemplate>
                                     <Button Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                             CommandParameter="{Binding}"
-                                            Content="🗑" Background="Transparent" BorderThickness="0" Foreground="Red" FontSize="18"/>
+                                            Content="🗑" Background="Transparent" BorderThickness="0" Foreground="Red" FontSize="{StaticResource FontSizeNormal}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -205,20 +205,20 @@
         <Border Grid.Row="3" Margin="0,20,0,0" Padding="15" Background="#f8f9fa" CornerRadius="10">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <StackPanel Margin="20,0">
-                    <TextBlock Text="الإجمالي قبل الخصم" FontSize="14" Foreground="#7f8c8d"/>
-                    <TextBlock Text="{Binding TotalAmount, StringFormat={}{0:N2}}" FontSize="20" FontWeight="Bold"/>
+                    <TextBlock Text="الإجمالي قبل الخصم" FontSize="{StaticResource FontSizeSmall}" Foreground="#7f8c8d"/>
+                    <TextBlock Text="{Binding TotalAmount, StringFormat={}{0:N2}}" FontSize="{StaticResource FontSizeMedium}" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel Margin="20,0">
-                    <TextBlock Text="إجمالي الخصم" FontSize="14" Foreground="#e74c3c"/>
-                    <TextBlock Text="{Binding TotalDiscount, StringFormat={}{0:N2}}" FontSize="20" FontWeight="Bold" Foreground="#e74c3c"/>
+                    <TextBlock Text="إجمالي الخصم" FontSize="{StaticResource FontSizeSmall}" Foreground="#e74c3c"/>
+                    <TextBlock Text="{Binding TotalDiscount, StringFormat={}{0:N2}}" FontSize="{StaticResource FontSizeMedium}" FontWeight="Bold" Foreground="#e74c3c"/>
                 </StackPanel>
                 <StackPanel Margin="20,0">
-                    <TextBlock Text="إجمالي الضريبة" FontSize="14" Foreground="#2980b9"/>
-                    <TextBlock Text="{Binding TotalTax, StringFormat={}{0:N2}}" FontSize="20" FontWeight="Bold" Foreground="#2980b9"/>
+                    <TextBlock Text="إجمالي الضريبة" FontSize="{StaticResource FontSizeSmall}" Foreground="#2980b9"/>
+                    <TextBlock Text="{Binding TotalTax, StringFormat={}{0:N2}}" FontSize="{StaticResource FontSizeMedium}" FontWeight="Bold" Foreground="#2980b9"/>
                 </StackPanel>
                 <StackPanel Margin="20,0">
-                    <TextBlock Text="الصافي النهائي" FontSize="14" Foreground="#7f8c8d"/>
-                    <TextBlock Text="{Binding FinalAmount, StringFormat={}{0:N2}}" FontSize="24" FontWeight="Bold" Foreground="{StaticResource PrimaryHeaderBrush}"/>
+                    <TextBlock Text="الصافي النهائي" FontSize="{StaticResource FontSizeSmall}" Foreground="#7f8c8d"/>
+                    <TextBlock Text="{Binding FinalAmount, StringFormat={}{0:N2}}" FontSize="{StaticResource FontSizeLarge}" FontWeight="Bold" Foreground="{StaticResource PrimaryHeaderBrush}"/>
                 </StackPanel>
             </StackPanel>
         </Border>
