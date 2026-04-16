@@ -37,10 +37,6 @@ namespace GeniusStoreERP.UI
         {
             try
             {
-                // تفعيل وضع التوافق القديم لـ Npgsql للتعامل مع DateTime
-                // هذا يسمح بإرسال قيم DateTime محلية إلى PostgreSQL
-                AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-                
                 // تفعيل رخصة QuestPDF بشكل عالمي
                 QuestPDF.Settings.License = LicenseType.Community;
 
@@ -55,7 +51,7 @@ namespace GeniusStoreERP.UI
 
                 services.AddDbContext<ApplicationDbContext>(options =>
                 {
-                    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+                    options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
                     options.ConfigureWarnings(warnings => warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
                 });
 

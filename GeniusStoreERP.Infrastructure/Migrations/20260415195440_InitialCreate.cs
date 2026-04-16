@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,10 +17,10 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -32,22 +31,22 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    FullName = table.Column<string>(type: "text", nullable: false),
-                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false),
-                    PasswordHash = table.Column<string>(type: "text", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    FullName = table.Column<string>(type: "TEXT", nullable: false),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,15 +57,15 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,24 +76,24 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "GeneralSettings",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CompanyName = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    LegalName = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: true),
-                    Address = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-                    Phone1 = table.Column<string>(type: "text", nullable: true),
-                    Phone2 = table.Column<string>(type: "text", nullable: true),
-                    Email = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: true),
-                    Website = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: true),
-                    TaxNumber = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    Logo = table.Column<byte[]>(type: "bytea", nullable: true),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CompanyName = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    LegalName = table.Column<string>(type: "TEXT", maxLength: 250, nullable: true),
+                    Address = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    Phone1 = table.Column<string>(type: "TEXT", nullable: true),
+                    Phone2 = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 150, nullable: true),
+                    Website = table.Column<string>(type: "TEXT", maxLength: 150, nullable: true),
+                    TaxNumber = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    Logo = table.Column<byte[]>(type: "BLOB", nullable: true),
                     TaxPercentage = table.Column<decimal>(type: "numeric(5,2)", nullable: false, defaultValue: 14m),
-                    CurrencySymbol = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false, defaultValue: "EGP"),
-                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    CurrencySymbol = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false, defaultValue: "EGP"),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,9 +104,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "InvoiceStatuses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -118,9 +117,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "InvoiceTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,20 +130,20 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "Partners",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Address = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "character varying(20)", unicode: false, maxLength: 20, nullable: false),
-                    IsCustomer = table.Column<bool>(type: "boolean", nullable: false),
-                    IsSupplier = table.Column<bool>(type: "boolean", nullable: false),
-                    IsShareholder = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    Address = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "TEXT", unicode: false, maxLength: 20, nullable: false),
+                    IsCustomer = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsSupplier = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsShareholder = table.Column<bool>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -155,9 +154,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "PartnerTransactionTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -165,12 +164,32 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StockAdjustments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AdjustmentDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ReferenceNumber = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    Remarks = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StockAdjustments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "StockTransactionTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -181,17 +200,17 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "Treasuries",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Code = table.Column<string>(type: "text", nullable: false),
-                    Balance = table.Column<decimal>(type: "numeric", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Code = table.Column<string>(type: "TEXT", nullable: false),
+                    Balance = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -202,11 +221,11 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RoleId = table.Column<string>(type: "text", nullable: false),
-                    ClaimType = table.Column<string>(type: "text", nullable: true),
-                    ClaimValue = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RoleId = table.Column<string>(type: "TEXT", nullable: false),
+                    ClaimType = table.Column<string>(type: "TEXT", nullable: true),
+                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -223,11 +242,11 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<string>(type: "text", nullable: false),
-                    ClaimType = table.Column<string>(type: "text", nullable: true),
-                    ClaimValue = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    ClaimType = table.Column<string>(type: "TEXT", nullable: true),
+                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -244,10 +263,10 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "text", nullable: false),
-                    ProviderKey = table.Column<string>(type: "text", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
-                    UserId = table.Column<string>(type: "text", nullable: false)
+                    LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
+                    ProviderKey = table.Column<string>(type: "TEXT", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -264,8 +283,8 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "text", nullable: false),
-                    RoleId = table.Column<string>(type: "text", nullable: false)
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    RoleId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -288,10 +307,10 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "text", nullable: false),
-                    LoginProvider = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Value = table.Column<string>(type: "text", nullable: true)
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Value = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -308,21 +327,21 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    Price = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    StockQuantity = table.Column<decimal>(type: "numeric(18,4)", precision: 18, scale: 4, nullable: false),
-                    ReorderLevel = table.Column<decimal>(type: "numeric(18,4)", precision: 18, scale: 4, nullable: false),
-                    SKU = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    Barcode = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    CategoryId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Price = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    StockQuantity = table.Column<decimal>(type: "TEXT", precision: 18, scale: 4, nullable: false),
+                    ReorderLevel = table.Column<decimal>(type: "TEXT", precision: 18, scale: 4, nullable: false),
+                    SKU = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    Barcode = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -339,23 +358,23 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "Invoices",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    InvoiceNumber = table.Column<int>(type: "integer", nullable: false),
-                    InvoiceDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    TotalItemsAmount = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    TotalItemsDiscount = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    TotalItemsTax = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    FinalAmount = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    Notes = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-                    PartnerId = table.Column<int>(type: "integer", nullable: false),
-                    InvoiceStatusId = table.Column<int>(type: "integer", nullable: false),
-                    InvoiceTypeId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    InvoiceNumber = table.Column<int>(type: "INTEGER", nullable: false),
+                    InvoiceDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    TotalItemsAmount = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    TotalItemsDiscount = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    TotalItemsTax = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    FinalAmount = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    Notes = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    PartnerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    InvoiceStatusId = table.Column<int>(type: "INTEGER", nullable: false),
+                    InvoiceTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -381,25 +400,66 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StockAdjustmentItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    StockAdjustmentId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
+                    PreviousQuantity = table.Column<decimal>(type: "TEXT", nullable: false),
+                    QuantityChange = table.Column<decimal>(type: "TEXT", nullable: false),
+                    NewQuantity = table.Column<decimal>(type: "TEXT", nullable: false),
+                    StockTransactionTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StockAdjustmentItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StockAdjustmentItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StockAdjustmentItems_StockAdjustments_StockAdjustmentId",
+                        column: x => x.StockAdjustmentId,
+                        principalTable: "StockAdjustments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StockAdjustmentItems_StockTransactionTypes_StockTransactionTypeId",
+                        column: x => x.StockTransactionTypeId,
+                        principalTable: "StockTransactionTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "InvoiceItems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    InvoiceId = table.Column<int>(type: "integer", nullable: false),
-                    ProductId = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<int>(type: "integer", precision: 18, scale: 4, nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    DiscountRate = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    DisCountAmount = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    TaxRate = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    TaxAmount = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    NetLineTotal = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    InvoiceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Quantity = table.Column<int>(type: "INTEGER", precision: 18, scale: 4, nullable: false),
+                    UnitPrice = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    DiscountRate = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    DisCountAmount = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    TaxRate = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    TaxAmount = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    NetLineTotal = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -422,22 +482,22 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "PartnerTransactions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PartnerId = table.Column<int>(type: "integer", nullable: false),
-                    InvoiceId = table.Column<int>(type: "integer", nullable: true),
-                    PaymentId = table.Column<int>(type: "integer", nullable: true),
-                    TransactionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    TransactionTypeId = table.Column<int>(type: "integer", nullable: false),
-                    Debit = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    Credit = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    ReferenceNumber = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    Remarks = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PartnerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    InvoiceId = table.Column<int>(type: "INTEGER", nullable: true),
+                    PaymentId = table.Column<int>(type: "INTEGER", nullable: true),
+                    TransactionDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    TransactionTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Debit = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    Credit = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    ReferenceNumber = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    Remarks = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -449,7 +509,7 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PartnerTransactions_PartnerTransactionTypes_TransactionType~",
+                        name: "FK_PartnerTransactions_PartnerTransactionTypes_TransactionTypeId",
                         column: x => x.TransactionTypeId,
                         principalTable: "PartnerTransactionTypes",
                         principalColumn: "Id",
@@ -466,22 +526,22 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "StockTransactions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ProductId = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<decimal>(type: "numeric(18,4)", precision: 18, scale: 4, nullable: false),
-                    StockTransactionTypeId = table.Column<int>(type: "integer", nullable: false),
-                    TransactionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    InvoiceId = table.Column<int>(type: "integer", nullable: true),
-                    InvoiceReference = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    AdjustmentId = table.Column<int>(type: "integer", nullable: true),
-                    AdjustmentReference = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    Remarks = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Quantity = table.Column<decimal>(type: "TEXT", precision: 18, scale: 4, nullable: false),
+                    StockTransactionTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    TransactionDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    InvoiceId = table.Column<int>(type: "INTEGER", nullable: true),
+                    InvoiceReference = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    AdjustmentId = table.Column<int>(type: "INTEGER", nullable: true),
+                    AdjustmentReference = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    Remarks = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -499,7 +559,13 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_StockTransactions_StockTransactionTypes_StockTransactionTyp~",
+                        name: "FK_StockTransactions_StockAdjustments_AdjustmentId",
+                        column: x => x.AdjustmentId,
+                        principalTable: "StockAdjustments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_StockTransactions_StockTransactionTypes_StockTransactionTypeId",
                         column: x => x.StockTransactionTypeId,
                         principalTable: "StockTransactionTypes",
                         principalColumn: "Id",
@@ -510,21 +576,21 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "TreasuryTransactions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TreasuryId = table.Column<int>(type: "integer", nullable: false),
-                    Amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    TransactionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Type = table.Column<int>(type: "integer", nullable: false),
-                    PartnerId = table.Column<int>(type: "integer", nullable: true),
-                    InvoiceId = table.Column<int>(type: "integer", nullable: true),
-                    ReferenceNumber = table.Column<string>(type: "text", nullable: true),
-                    Notes = table.Column<string>(type: "text", nullable: true),
-                    CreatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TreasuryId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Amount = table.Column<decimal>(type: "TEXT", nullable: false),
+                    TransactionDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Type = table.Column<int>(type: "INTEGER", nullable: false),
+                    PartnerId = table.Column<int>(type: "INTEGER", nullable: true),
+                    InvoiceId = table.Column<int>(type: "INTEGER", nullable: true),
+                    ReferenceNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    Notes = table.Column<string>(type: "TEXT", nullable: true),
+                    CreatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -744,6 +810,26 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 filter: "\"SKU\" IS NOT NUll AND \"SKU\" != ''");
 
             migrationBuilder.CreateIndex(
+                name: "IX_StockAdjustmentItems_ProductId",
+                table: "StockAdjustmentItems",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StockAdjustmentItems_StockAdjustmentId",
+                table: "StockAdjustmentItems",
+                column: "StockAdjustmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StockAdjustmentItems_StockTransactionTypeId",
+                table: "StockAdjustmentItems",
+                column: "StockTransactionTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StockTransactions_AdjustmentId",
+                table: "StockTransactions",
+                column: "AdjustmentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_StockTransactions_InvoiceId",
                 table: "StockTransactions",
                 column: "InvoiceId");
@@ -813,6 +899,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
                 name: "PartnerTransactions");
 
             migrationBuilder.DropTable(
+                name: "StockAdjustmentItems");
+
+            migrationBuilder.DropTable(
                 name: "StockTransactions");
 
             migrationBuilder.DropTable(
@@ -829,6 +918,9 @@ namespace GeniusStoreERP.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "StockAdjustments");
 
             migrationBuilder.DropTable(
                 name: "StockTransactionTypes");
