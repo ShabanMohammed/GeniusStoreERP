@@ -10,5 +10,8 @@
     <common:NullToVisibilityConverter x:Key="NullToVisibilityConverter" Invert="False" />
     <common:NullToVisibilityConverter x:Key="NotNullToVisibilityConverter" Invert="True" />
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <common:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    <common:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+    <common:GreaterThanZeroToBooleanConverter x:Key="GreaterThanZeroToBooleanConverter" />
     
 </ResourceDictionary>

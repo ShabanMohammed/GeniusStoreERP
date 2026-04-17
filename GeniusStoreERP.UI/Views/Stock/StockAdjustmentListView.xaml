@@ -92,7 +92,7 @@
 
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Foreground="#64748B" FontSize="{StaticResource FontSizeSmall}">
                     <Run Text="إجمالي السجلات: "/>
-                    <Run Text="{Binding TotalItems}" FontWeight="Bold"/>
+                    <Run Text="{Binding TotalItems, Mode=OneWay}" FontWeight="Bold"/>
                 </TextBlock>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal">
@@ -101,7 +101,7 @@
                 </Button>
                 <Border Background="#F1F5F9" CornerRadius="8" Padding="15,0" Margin="0,0,10,0">
                     <TextBlock VerticalAlignment="Center" FontWeight="SemiBold" FontSize="{StaticResource FontSizeSmall}">
-                        <Run Text="صفحة "/><Run Text="{Binding CurrentPage}"/><Run Text=" من "/><Run Text="{Binding TotalPages}"/>
+                        <Run Text="صفحة "/><Run Text="{Binding CurrentPage}"/><Run Text=" من "/><Run Text="{Binding TotalPages, Mode=OneWay}"/>
                     </TextBlock>
                 </Border>
                 <Button Command="{Binding NextPageCommand}" Style="{StaticResource UnifiedSecondaryButtonStyle}" Width="40">

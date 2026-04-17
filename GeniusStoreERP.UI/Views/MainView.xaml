@@ -15,6 +15,7 @@
   WindowStartupLocation="CenterScreen"
   FlowDirection="RightToLeft"
   Background="{StaticResource MainBackgroundBrush}"
+  Icon="pack://application:,,,/GeniusStoreERP.UI;component/Resources/app_icon.png"
   FontFamily="{StaticResource MainFontFamily}">
   <Window.Resources>
     <ResourceDictionary>
@@ -45,18 +46,11 @@
           <StackPanel Orientation="Horizontal"
               VerticalAlignment="Center">
             <Border
-              Width="38"
-              Height="38"
-              Background="{StaticResource AccentActionBrush}"
-              CornerRadius="10">
-              <TextBlock
-                Text="G"
-                Foreground="White"
-                FontWeight="Bold"
-                FontFamily="{StaticResource MainFontFamily}"
-                FontSize="{StaticResource FontSizeLarge}"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"/>
+              Width="32"
+              Height="32"
+              CornerRadius="8">
+              <Image Source="pack://application:,,,/GeniusStoreERP.UI;component/Resources/app_icon.png"
+                     RenderOptions.BitmapScalingMode="HighQuality"/>
             </Border>
             <StackPanel Margin="10,0,0,0"
                 VerticalAlignment="Center">

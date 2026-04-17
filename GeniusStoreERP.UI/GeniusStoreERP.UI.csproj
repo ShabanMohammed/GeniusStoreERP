@@ -8,6 +8,7 @@
     <UseWPF>true</UseWPF>
     <RootNamespace>GeniusStoreERP.UI</RootNamespace>
     <AssemblyName>GeniusStoreERP.UI</AssemblyName>
+    <ApplicationIcon>app_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,6 +36,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Resource Include="Resources\Fonts\*.ttf" />
+    <Resource Include="Resources\app_icon.png" />
   </ItemGroup>
 
 </Project>

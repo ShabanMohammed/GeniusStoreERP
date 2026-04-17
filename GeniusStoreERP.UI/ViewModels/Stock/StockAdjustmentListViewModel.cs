@@ -62,6 +62,13 @@ public class StockAdjustmentListViewModel : BaseViewModel
 
     public ObservableCollection<StockAdjustmentDto> Adjustments { get; } = new();
 
+    private StockAdjustmentDto? _selectedAdjustment;
+    public StockAdjustmentDto? SelectedAdjustment
+    {
+        get => _selectedAdjustment;
+        set => SetProperty(ref _selectedAdjustment, value);
+    }
+
     public ICommand AddCommand { get; }
     public ICommand ViewDetailsCommand { get; }
     public ICommand ReloadCommand { get; }

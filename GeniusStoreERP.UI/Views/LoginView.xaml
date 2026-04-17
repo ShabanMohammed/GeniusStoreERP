@@ -10,6 +10,7 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         FlowDirection="RightToLeft"
+        Icon="pack://application:,,,/GeniusStoreERP.UI;component/Resources/app_icon.png"
         FontFamily="{StaticResource MainFontFamily}"
         AllowsTransparency="True"
         Background="Transparent">
@@ -33,15 +34,10 @@
                 
                 <!-- Logo/Header Area -->
                 <Border Width="60" Height="60" 
-                        Background="{StaticResource PrimaryHeaderBrush}" 
                         CornerRadius="15"
                         Margin="0,0,0,20">
-                    <TextBlock Text="G" 
-                               Foreground="White" 
-                               FontSize="{StaticResource FontSizeTitle}" 
-                               FontWeight="Bold" 
-                               HorizontalAlignment="Center" 
-                               VerticalAlignment="Center"/>
+                    <Image Source="pack://application:,,,/GeniusStoreERP.UI;component/Resources/app_icon.png"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Border>
                 
                 <TextBlock Text="مرحباً بك مجدداً" 

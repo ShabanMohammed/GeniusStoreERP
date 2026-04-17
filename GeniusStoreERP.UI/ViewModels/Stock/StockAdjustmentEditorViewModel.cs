@@ -1,8 +1,9 @@
 using GeniusStoreERP.Application.Dtos;
-using GeniusStoreERP.Application.Products.Queries.GetProductById;
+using GeniusStoreERP.Application.Dtos.ListItemDto;
 using GeniusStoreERP.Application.Stock.Adjustments.Commands.CreateStockAdjustment;
 using GeniusStoreERP.Application.Stock.Adjustments.Queries.GetStockAdjustmentById;
-using GeniusStoreERP.Application.Stock.Products.Queries.GetProducts;
+using GeniusStoreERP.Application.Stock.Products.Queries.GetProductById;
+using GeniusStoreERP.Application.Stock.Products.Queries.GetProductItems;
 using GeniusStoreERP.UI.Common;
 using GeniusStoreERP.UI.Services;
 using MediatR;
@@ -56,33 +57,47 @@ public class StockAdjustmentEditorViewModel : BaseViewModel
         set => SetProperty(ref _remarks, value);
     }
 
-    // Product selection
-    private string _productSearchText = string.Empty;
-    public string ProductSearchText
+    // Product selection & Entry
+    public ObservableCollection<ProductListItemDto> Products { get; } = new();
+
+    private StockAdjustmentItemViewModel _currentItem = new();
+    public StockAdjustmentItemViewModel CurrentItem
     {
-        get => _productSearchText;
-        set => SetProperty(ref _productSearchText, value);
+        get => _currentItem;
+        set => SetProperty(ref _currentItem, value);
     }
 
-    private ObservableCollection<ProductDto> _searchResults = new();
-    public ObservableCollection<ProductDto> SearchResults
-    {
-        get => _searchResults;
-        set => SetProperty(ref _searchResults, value);
-    }
 
-    private ProductDto? _selectedProduct;
-    public ProductDto? SelectedProduct
+    private ProductListItemDto? _selectedProduct;
+    public ProductListItemDto? SelectedProduct
     {
         get => _selectedProduct;
         set
         {
             if (SetProperty(ref _selectedProduct, value) && value != null)
             {
-                AddProductToAdjustment(value);
-                ProductSearchText = string.Empty;
-                SearchResults.Clear();
+                _ = PopulateEntryFromProductAsync(value.Id);
             }
+        }
+    }
+
+    private async Task PopulateEntryFromProductAsync(int productId)
+    {
+        try
+        {
+            var product = await _mediator.Send(new GetProductByIdQuery(productId));
+            if (product != null)
+            {
+                CurrentItem.ProductId = product.Id;
+                CurrentItem.ProductName = product.Name;
+                CurrentItem.PreviousQuantity = product.StockQuantity ?? 0;
+                CurrentItem.QuantityChange = 0;
+                CurrentItem.SelectedTransactionType = TransactionTypes.First();
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBoxService.ShowError($"خطأ في جلب بيانات الصنف: {ex.Message}");
         }
     }
 
@@ -98,8 +113,8 @@ public class StockAdjustmentEditorViewModel : BaseViewModel
 
     public ICommand BackCommand { get; }
     public ICommand SaveCommand { get; }
-    public ICommand SearchProductCommand { get; }
     public ICommand RemoveItemCommand { get; }
+    public ICommand AddItemCommand { get; }
 
     public StockAdjustmentEditorViewModel(IMediator mediator, INavigationService navigationService)
     {
@@ -108,14 +123,15 @@ public class StockAdjustmentEditorViewModel : BaseViewModel
 
         BackCommand = new RelayCommand(_ => _navigationService.NavigateTo<StockAdjustmentListViewModel>());
         SaveCommand = new AsyncRelayCommand(async (_, _) => await SaveAsync(), _ => CanSave());
-        SearchProductCommand = new AsyncRelayCommand(async (_, _) => await SearchProductsAsync());
         RemoveItemCommand = new RelayCommand(p => {
             if (p is StockAdjustmentItemViewModel item && !IsViewMode)
             {
                 Items.Remove(item);
                 (SaveCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+                OnPropertyChanged(nameof(TotalQuantityChange));
             }
         });
+        AddItemCommand = new RelayCommand(_ => AddCurrentItem(), _ => CanAddItem());
     }
 
     public override async void Initialize(object? parameter)
@@ -134,6 +150,24 @@ public class StockAdjustmentEditorViewModel : BaseViewModel
             ReferenceNumber = "<تلقائي>";
             Remarks = string.Empty;
             Items.Clear();
+            CurrentItem = new StockAdjustmentItemViewModel();
+            SelectedProduct = null;
+            _ = LoadDataAsync();
+            OnPropertyChanged(nameof(TotalQuantityChange));
+        }
+    }
+
+    private async Task LoadDataAsync()
+    {
+        try
+        {
+            var productsResult = await _mediator.Send(new GetProductItemsCommand());
+            Products.Clear();
+            foreach (var p in productsResult) Products.Add(p);
+        }
+        catch (Exception ex)
+        {
+            MessageBoxService.ShowError($"خطأ في تحميل الأصناف: {ex.Message}");
         }
     }
 
@@ -166,55 +200,56 @@ public class StockAdjustmentEditorViewModel : BaseViewModel
         {
             MessageBoxService.ShowError($"خطأ في تحميل بيانات التسوية: {ex.Message}");
         }
+        finally
+        {
+            OnPropertyChanged(nameof(TotalQuantityChange));
+        }
     }
 
-    private async Task SearchProductsAsync()
-    {
-        if (string.IsNullOrWhiteSpace(ProductSearchText) || ProductSearchText.Length < 2)
-        {
-            SearchResults.Clear();
-            return;
-        }
 
-        try
-        {
-            var result = await _mediator.Send(new GetProductsQuery(ProductSearchText, null, 1, 10));
-            SearchResults.Clear();
-            if (result?.Items != null)
-            {
-                foreach (var p in result.Items) SearchResults.Add(p);
-            }
-        }
-        catch { } // Ignore search errors
+    private bool CanAddItem()
+    {
+        return !IsViewMode && SelectedProduct != null && CurrentItem.QuantityChange != 0;
     }
 
-    private void AddProductToAdjustment(ProductDto product)
+    private void AddCurrentItem()
     {
-        if (Items.Any(i => i.ProductId == product.Id))
+        if (SelectedProduct == null) return;
+
+        if (Items.Any(i => i.ProductId == SelectedProduct.Id))
         {
             MessageBoxService.ShowWarning("هذا الصنف مضاف مسبقاً في القائمة.");
             return;
         }
 
-        var item = new StockAdjustmentItemViewModel
+        var newItem = new StockAdjustmentItemViewModel
         {
-            ProductId = product.Id,
-            ProductName = product.Name,
-            PreviousQuantity = product.StockQuantity ?? 0,
-            QuantityChange = 0,
-            SelectedTransactionType = TransactionTypes.First() // Default to تسوية
+            ProductId = CurrentItem.ProductId,
+            ProductName = CurrentItem.ProductName,
+            PreviousQuantity = CurrentItem.PreviousQuantity,
+            QuantityChange = CurrentItem.QuantityChange,
+            SelectedTransactionType = CurrentItem.SelectedTransactionType
         };
-        
-        item.PropertyChanged += (s, e) => {
+
+        newItem.PropertyChanged += (s, e) => {
             if (e.PropertyName == nameof(StockAdjustmentItemViewModel.QuantityChange))
             {
                 (SaveCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+                OnPropertyChanged(nameof(TotalQuantityChange));
             }
         };
 
-        Items.Add(item);
+        Items.Add(newItem);
+        
+        // Reset entry
+        CurrentItem = new StockAdjustmentItemViewModel();
+        SelectedProduct = null;
+        
         (SaveCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+        OnPropertyChanged(nameof(TotalQuantityChange));
     }
+
+    public decimal TotalQuantityChange => Items.Sum(i => i.QuantityChange);
 
     private bool CanSave()
     {
