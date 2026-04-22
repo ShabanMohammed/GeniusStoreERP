@@ -18,10 +18,16 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, bool>
         var user = new ApplicationUser
         {
             UserName = request.UserName,
-            FullName = request.FullName
+            FullName = request.FullName,
+            Email = request.Email
         };
 
         var result = await _userManager.CreateAsync(user, request.Password);
+
+        if (result.Succeeded && !string.IsNullOrWhiteSpace(request.Role))
+        {
+            await _userManager.AddToRoleAsync(user, request.Role);
+        }
 
         return result.Succeeded;
     }

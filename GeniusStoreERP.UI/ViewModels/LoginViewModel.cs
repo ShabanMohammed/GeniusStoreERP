@@ -40,20 +40,23 @@ public class LoginViewModel : BaseViewModel
         {
             var command = new LoginCommand(UserName, Password);
             var result = await _mediator.Send(command, token);
-            
+
             // نجاح تسجيل الدخول
-            var mainView = App.ServiceProvider.GetRequiredService<Views.MainView>();
+            var mainView = ActivatorUtilities.CreateInstance<Views.MainView>(App.ServiceProvider);
             if (mainView.DataContext is MainViewModel mainVm)
             {
                 mainVm.FullName = result.FullName;
                 mainVm.UserRole = result.Role;
             }
-            
-            mainView.Show();
-            
-            // إغلاق شاشة تسجيل الدخول
-            System.Windows.Application.Current.MainWindow.Close();
+
+            // أولاً نحدد النافذة الجديدة كنافذة رئيسية قبل إغلاق القديمة
             System.Windows.Application.Current.MainWindow = mainView;
+
+            // ثم نعرض النافذة الجديدة
+            mainView.Show();
+
+            // وأخيراً نغلق النافذة القديمة
+            System.Windows.Application.Current.Windows.OfType<GeniusStoreERP.UI.Views.LoginView>().FirstOrDefault()?.Close();
         }
         catch (UnauthorizedAccessException ex)
         {
@@ -64,10 +67,10 @@ public class LoginViewModel : BaseViewModel
             var errors = string.Join(Environment.NewLine, ex.Errors.Select(e => e.ErrorMessage));
             MessageBoxService.ShowWarning(errors, "تنبيه");
         }
-        catch (Exception )
+        catch (Exception)
         {
             MessageBoxService.ShowError("حدث خطأ غير متوقع أثناء محاولة تسجيل الدخول. يرجى المحاولة مرة أخرى.", "خطأ");
-            
+
         }
 
 

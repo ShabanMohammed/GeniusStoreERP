@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using GeniusStoreERP.UI.ViewModels.Finances;
+using System.Windows;
+using GeniusStoreERP.UI.ViewModels.Users;
 
 namespace GeniusStoreERP.UI.ViewModels;
 
@@ -60,13 +62,21 @@ public class MainViewModel : BaseViewModel
 
         LogoutCommand = new RelayCommand(_ =>
         {
-            var loginView = App.ServiceProvider.GetRequiredService<LoginView>();
-            loginView.Show();
+            if (MessageBoxService.ShowConfirmation("هل أنت متأكد من رغبتك في تسجيل الخروج؟", "تأكيد تسجيل الخروج") == System.Windows.MessageBoxResult.Yes)
+            {
+                // ✅ حل المشكلة الحقيقية: لا نستخدم نفس النسخة المنتهية الصلاحية
+                // نقوم بإنشاء نسخة جديدة من نافذة تسجيل الدخول كل مرة
+                var loginView = ActivatorUtilities.CreateInstance<LoginView>(App.ServiceProvider);
 
-            var currentWindow = System.Windows.Application.Current.MainWindow;
-            System.Windows.Application.Current.MainWindow = loginView;
-
-            currentWindow?.Close();
+                // أولاً نحدد النافذة الجديدة كنافذة رئيسية قبل إغلاق القديمة
+                System.Windows.Application.Current.MainWindow = loginView;
+                
+                // ثم نعرض النافذة الجديدة
+                loginView.Show();
+                
+                // وأخيراً نغلق النافذة القديمة (النافذة الرئيسية)
+                System.Windows.Application.Current.Windows.OfType<GeniusStoreERP.UI.Views.MainView>().FirstOrDefault()?.Close();
+            }
         });
 
         SelectNavItemCommand = new RelayCommand(p =>
@@ -135,6 +145,9 @@ public class MainViewModel : BaseViewModel
                     case "التقارير":
                         _navigationService.NavigateTo<ReportsMainViewModel>();
                         break;
+                    case "إدارة المستخدمين":
+                        _navigationService.NavigateTo<UserManagementListViewModel>();
+                        break;
                 }
 
             }
@@ -186,11 +199,11 @@ public class MainViewModel : BaseViewModel
                 new NavItem { Title = "مرتجع المشتريات", IconKey = "IconExchange" }
             }
         });
-        NavItems.Add(new NavItem 
-        { 
-            Title = "الشركاء", 
+        NavItems.Add(new NavItem
+        {
+            Title = "الشركاء",
             IconKey = "IconUsers",
-            SubItems = 
+            SubItems =
             {
                 new NavItem { Title = "العملاء", IconKey = "IconUsers" },
                 new NavItem { Title = "الموردين", IconKey = "IconUsers" }
@@ -213,13 +226,14 @@ public class MainViewModel : BaseViewModel
             TargetViewModel = null
         });
 
-        NavItems.Add(new NavItem 
-        { 
-            Title = "الإعدادات", 
+        NavItems.Add(new NavItem
+        {
+            Title = "الإعدادات",
             IconKey = "IconSettings",
             SubItems =
             {
-                new NavItem { Title = "الإعدادات العامة", IconKey = "IconSettings" }
+                new NavItem { Title = "الإعدادات العامة", IconKey = "IconSettings" },
+                new NavItem { Title = "إدارة المستخدمين", IconKey = "IconUsers" }
             }
         });
 

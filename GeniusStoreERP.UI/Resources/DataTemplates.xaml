@@ -10,6 +10,8 @@
                     xmlns:vf="clr-namespace:GeniusStoreERP.UI.ViewModels.Finances"
                     xmlns:vf2="clr-namespace:GeniusStoreERP.UI.Views.Finances"
                     xmlns:vs="clr-namespace:GeniusStoreERP.UI.Views.Stock"
+                    xmlns:vmu="clr-namespace:GeniusStoreERP.UI.ViewModels.Users"
+                    xmlns:vu="clr-namespace:GeniusStoreERP.UI.Views.Users"
                     xmlns:local="clr-namespace:GeniusStoreERP.UI.Views">
     <!-- Dashboard -->
     <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
@@ -82,5 +84,12 @@
         <local:ReportsMainView/>
     </DataTemplate>
 
+    <!-- User Management -->
+    <DataTemplate DataType="{x:Type vmu:UserManagementListViewModel}">
+        <vu:UserManagementListView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmu:UserManagementEditorViewModel}">
+        <vu:UserManagementEditorView/>
+    </DataTemplate>
 
 </ResourceDictionary>

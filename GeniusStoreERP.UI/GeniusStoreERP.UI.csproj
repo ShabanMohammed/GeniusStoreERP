@@ -9,8 +9,9 @@
     <RootNamespace>GeniusStoreERP.UI</RootNamespace>
     <AssemblyName>GeniusStoreERP.UI</AssemblyName>
     <ApplicationIcon>app_icon.ico</ApplicationIcon>
+    <StartupObject>GeniusStoreERP.UI.App</StartupObject>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="ClosedXML" Version="0.105.0" />
     <PackageReference Include="MediatR" Version="14.1.0" />

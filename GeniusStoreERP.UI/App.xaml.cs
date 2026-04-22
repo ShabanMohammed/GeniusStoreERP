@@ -25,6 +25,8 @@ using QuestPDF.Infrastructure;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using GeniusStoreERP.UI.Views.Users;
+using GeniusStoreERP.UI.ViewModels.Users;
 
 namespace GeniusStoreERP.UI
 {
@@ -59,7 +61,16 @@ namespace GeniusStoreERP.UI
 
                 // Identity registration
                 services
-                    .AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddIdentity<ApplicationUser, IdentityRole>(options =>
+                    {
+                        // Password settings
+                        options.Password.RequireDigit = false;
+                        options.Password.RequireLowercase = false;
+                        options.Password.RequireNonAlphanumeric = false;
+                        options.Password.RequireUppercase = false;
+                        options.Password.RequiredLength = 3;
+                        options.Password.RequiredUniqueChars = 0;
+                    })
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
@@ -130,7 +141,7 @@ namespace GeniusStoreERP.UI
                 services.AddSingleton<IPartnerReportService, PartnerReportService>();
                 services.AddSingleton<IStockReportService, StockReportService>();
                 services.AddSingleton<IFinanceReportService, FinanceReportService>();
-                
+
                 services.AddTransient<ReportOptionsWindow>();
                 services.AddTransient<ReportOptionsViewModel>();
                 services.AddTransient<ReportPreviewWindow>();
@@ -139,6 +150,12 @@ namespace GeniusStoreERP.UI
                 // Reports Hub
                 services.AddTransient<ReportsMainView>();
                 services.AddTransient<ReportsMainViewModel>();
+
+                // User Management
+                services.AddTransient<UserManagementListView>();
+                services.AddTransient<UserManagementListViewModel>();
+                services.AddTransient<UserManagementEditorView>();
+                services.AddTransient<UserManagementEditorViewModel>();
 
                 // 7. بناء الـ ServiceProvider النهائي
                 ServiceProvider = services.BuildServiceProvider();
@@ -172,9 +189,13 @@ namespace GeniusStoreERP.UI
             var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
-            if (!await roleManager.RoleExistsAsync("Admin"))
+            string[] roles = { "Admin", "Sales", "Warehouse", "Accountant" };
+            foreach (var roleName in roles)
             {
-                await roleManager.CreateAsync(new IdentityRole("Admin"));
+                if (!await roleManager.RoleExistsAsync(roleName))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(roleName));
+                }
             }
 
             if (await userManager.FindByNameAsync("admin") == null)
@@ -185,7 +206,7 @@ namespace GeniusStoreERP.UI
                     FullName = "Administrator",
                 };
 
-                var result = await userManager.CreateAsync(adminUser, "Admin@123");
+                var result = await userManager.CreateAsync(adminUser, "123");
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(adminUser, "Admin");

@@ -121,7 +121,7 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                            <TextBlock Text="المنتج" FontSize="{StaticResource FontSizeSmall}" Foreground="#7f8c8d" Margin="0,0,0,2"/>
+                            <TextBlock Text="المنتج" FontSize="{StaticResource FontSizeNormal}" Foreground="#7f8c8d" Margin="0,0,0,2"/>
                             <ComboBox ItemsSource="{Binding Products}"
                                       SelectedItem="{Binding SelectedProduct}"
                                       DisplayMemberPath="Name"
