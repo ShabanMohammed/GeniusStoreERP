@@ -7,5 +7,6 @@ namespace GeniusStoreERP.Application.Common.Interfaces
     {
         byte[] GeneratePartnerSummaryPdf(List<PartnerAccountDto> accounts, GeneralSettingsDto? settings);
         byte[] GeneratePartnerStatementPdf(PartnerStatementDto statement, GeneralSettingsDto? settings);
+        byte[] GenerateDebtAgingPdf(List<DebtAgingDto> agingData, GeneralSettingsDto? settings);
     }
 }

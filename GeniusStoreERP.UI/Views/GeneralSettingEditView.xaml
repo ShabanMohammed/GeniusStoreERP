@@ -218,6 +218,29 @@
                     </Border>
 
                     <!-- Submit Actions -->
+                    <Border Style="{StaticResource UnifiedCardStyle}" Margin="0,20,0,0">
+                        <StackPanel>
+                            <TextBlock Text="النسخ الاحتياطي" 
+                                       FontSize="20" FontWeight="Bold" Foreground="{StaticResource AccentActionBrush}" 
+                                       Margin="0,0,0,20"/>
+
+                            <TextBlock Text="يمكنك حفظ نسخة احتياطية من قاعدة البيانات أو استرجاع نسخة سابقة."
+                                       Style="{StaticResource SubHeaderStyle}" Margin="0,0,0,15"/>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="استرجاع نسخة احتياطية" 
+                                        Command="{Binding RestoreDatabaseCommand}" 
+                                        Style="{StaticResource UnifiedSecondaryButtonStyle}"
+                                        Width="190" Margin="0,0,12,0"/>
+
+                                <Button Content="حفظ نسخة احتياطية" 
+                                        Command="{Binding BackupDatabaseCommand}" 
+                                        Style="{StaticResource UnifiedPrimaryButtonStyle}"
+                                        Width="170"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
                     <StackPanel x:Name="Footer" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,30,0,20">
                         <Button Content="إلغاء الأمر" 
                                 Command="{Binding CancelCommand}" 

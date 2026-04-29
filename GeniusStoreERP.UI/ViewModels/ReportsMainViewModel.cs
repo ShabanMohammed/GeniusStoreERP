@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 using System;
 using GeniusStoreERP.UI.Views;
 using System.Windows;
+using GeniusStoreERP.Application.Partners.Queries.GetDebtAging;
+using GeniusStoreERP.Application.Partners.Queries.GetPartnerAccounts;
 
 namespace GeniusStoreERP.UI.ViewModels;
 
@@ -22,6 +24,7 @@ public class ReportsMainViewModel : BaseViewModel
     private readonly INavigationService _navigationService;
     private readonly IMediator _mediator;
     private readonly IStockReportService _stockReportService;
+    private readonly IPartnerReportService _partnerReportService;
 
     public ObservableCollection<ReportCategory> Categories { get; } = new();
 
@@ -29,18 +32,21 @@ public class ReportsMainViewModel : BaseViewModel
         : this(
             App.ServiceProvider.GetRequiredService<INavigationService>(),
             App.ServiceProvider.GetRequiredService<IMediator>(),
-            App.ServiceProvider.GetRequiredService<IStockReportService>())
+            App.ServiceProvider.GetRequiredService<IStockReportService>(),
+            App.ServiceProvider.GetRequiredService<IPartnerReportService>())
     {
     }
 
     public ReportsMainViewModel(
         INavigationService navigationService, 
         IMediator mediator,
-        IStockReportService stockReportService)
+        IStockReportService stockReportService,
+        IPartnerReportService partnerReportService)
     {
         _navigationService = navigationService;
         _mediator = mediator;
         _stockReportService = stockReportService;
+        _partnerReportService = partnerReportService;
         InitializeCategories();
     }
 
@@ -81,10 +87,11 @@ public class ReportsMainViewModel : BaseViewModel
             Description = "كشوف حسابات العملاء والموردين وأرصدة الديون."
         };
         partnerCategory.Reports.Add(new ReportItem { Title = "أرصدة الشركاء (إجمالي)", Description = "قائمة بكل الشركاء وأرصدتهم الحالية.", 
-            OpenCommand = new RelayCommand(_ => _navigationService.NavigateTo<PartnerAccountsViewModel>()) });
+            OpenCommand = new AsyncRelayCommand(async (p, ct) => await GeneratePartnerSummaryReport()) });
         partnerCategory.Reports.Add(new ReportItem { Title = "كشف حساب شريك", Description = "عرض حركات شريك محدد خلال فترة.",
             OpenCommand = new RelayCommand(_ => _navigationService.NavigateTo<PartnerAccountsViewModel>()) }); // Shortcut to accounts where statement is triggered
-        partnerCategory.Reports.Add(new ReportItem { Title = "أعمار الديون", Description = "تحليل المبالغ المتأخرة حسب المدة." });
+        partnerCategory.Reports.Add(new ReportItem { Title = "أعمار الديون", Description = "تحليل المبالغ المتأخرة حسب المدة.",
+            OpenCommand = new AsyncRelayCommand(async (p, ct) => await GenerateDebtAgingReport()) });
         Categories.Add(partnerCategory);
 
         // 3. التقارير المالية
@@ -141,6 +148,53 @@ public class ReportsMainViewModel : BaseViewModel
         catch (Exception ex)
         {
             MessageBox.Show($"حدث خطأ أثناء إنشاء تقرير الجرد:\n{ex.Message}", "خطأ", 
+                MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, 
+                MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+        }
+    }
+
+    private async Task GeneratePartnerSummaryReport()
+    {
+        try
+        {
+            // Get all accounts (no search, no filter, large page size to get all)
+            var response = await _mediator.Send(new GetPartnerAccountsQuery(null, null, null, 1, 1000));
+            var settings = await _mediator.Send(new GetGeneralSettingsQuery());
+            
+            var pdf = _partnerReportService.GeneratePartnerSummaryPdf(response.Items, settings);
+            
+            var previewViewModel = App.ServiceProvider.GetRequiredService<ReportPreviewViewModel>();
+            previewViewModel.LoadReport(pdf, "تقرير أرصدة الشركاء");
+            
+            var previewWindow = new ReportPreviewWindow(previewViewModel);
+            previewWindow.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"حدث خطأ أثناء إنشاء تقرير الأرصدة:\n{ex.Message}", "خطأ", 
+                MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, 
+                MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+        }
+    }
+
+    private async Task GenerateDebtAgingReport()
+    {
+        try
+        {
+            var agingData = await _mediator.Send(new GetDebtAgingQuery());
+            var settings = await _mediator.Send(new GetGeneralSettingsQuery());
+            
+            var pdf = _partnerReportService.GenerateDebtAgingPdf(agingData, settings);
+            
+            var previewViewModel = App.ServiceProvider.GetRequiredService<ReportPreviewViewModel>();
+            previewViewModel.LoadReport(pdf, "تقرير أعمار الديون");
+            
+            var previewWindow = new ReportPreviewWindow(previewViewModel);
+            previewWindow.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"حدث خطأ أثناء إنشاء تقرير أعمار الديون:\n{ex.Message}", "خطأ", 
                 MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, 
                 MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
         }
